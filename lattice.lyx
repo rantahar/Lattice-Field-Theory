@@ -92,5 +92,56 @@ Motivation
 Objectives
 \end_layout
 
+\begin_layout Itemize
+Spin models
+\end_layout
+
+\begin_layout Itemize
+The lattice regularization
+\end_layout
+
+\begin_layout Itemize
+Thermal lattice field theory
+\end_layout
+
+\begin_layout Itemize
+Condensed matter lattice models
+\end_layout
+
+\begin_layout Itemize
+Scalar fields
+\end_layout
+
+\begin_layout Itemize
+Gauge fields
+\end_layout
+
+\begin_layout Itemize
+Fermions
+\end_layout
+
+\begin_layout Itemize
+Montecarlo simulation
+\end_layout
+
+\begin_layout Itemize
+Expectation values
+\end_layout
+
+\begin_layout Itemize
+Lattice perturbation theory?
+\end_layout
+
+\begin_layout Description
+\begin_inset Formula 
+\[
+<O>
+\]
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
