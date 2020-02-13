@@ -134,9 +134,9 @@ Lattice perturbation theory?
 
 \begin_layout Description
 \begin_inset Formula 
-\[
-<O>
-\]
+\begin{equation}
+<O>=\frac{\int_{U}Z(U)O}{\int_{U}Z(U)}
+\end{equation}
 
 \end_inset
 
