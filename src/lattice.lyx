@@ -93,27 +93,27 @@ Learning Objectives
 \end_layout
 
 \begin_layout Itemize
-osaa kirjoittaa kvanttikenttäreoriaa diskreetissä avaruudessa simuloivan
+osaa kirjoittaa kvanttikenttareoriaa diskreetissa avaruudessa simuloivan
  tietokoneohjelman
 \end_layout
 
 \begin_layout Itemize
-osaa analysoida ohjelman tuottamia tuloksia ja kuvailla niiden yhteyttä
+osaa analysoida ohjelman tuottamia tuloksia ja kuvailla niiden yhteytta
  itse teoriaan
 \end_layout
 
 \begin_layout Itemize
-tunnistaa yleisimmät kenttäteorioiden diskreetit esitykset ja kykenee syventymää
-n niihin itsenäisesti
+tunnistaa yleisimmat kenttateorioiden diskreetit esitykset ja kykenee syventymaa
+n niihin itsenaisesti
 \end_layout
 
 \begin_layout Itemize
-tuntee diskreetteihin esityksiin liittyvät mitattavat suureet ja kykenee
- syventymään niihin itsenäisesti
+tuntee diskreetteihin esityksiin liittyvat mitattavat suureet ja kykenee
+ syventymaan niihin itsenaisesti
 \end_layout
 
 \begin_layout Itemize
-osaa soveltaa häiriöteoriaa diskreetissä avaruudessa
+osaa soveltaa hairioteoriaa diskreetissa avaruudessa
 \end_layout
 
 \begin_layout Section
@@ -160,7 +160,11 @@ Expectation values
 Lattice perturbation theory?
 \end_layout
 
-\begin_layout Description
+\begin_layout Section
+An Equation to Check They Work
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
 <O>=\frac{\int_{U}Z(U)O}{\int_{U}Z(U)}
