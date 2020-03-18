@@ -89,7 +89,35 @@ Motivation
 \end_layout
 
 \begin_layout Section
-Objectives
+Learning Objectives
+\end_layout
+
+\begin_layout Itemize
+osaa kirjoittaa kvanttikenttäreoriaa diskreetissä avaruudessa simuloivan
+ tietokoneohjelman
+\end_layout
+
+\begin_layout Itemize
+osaa analysoida ohjelman tuottamia tuloksia ja kuvailla niiden yhteyttä
+ itse teoriaan
+\end_layout
+
+\begin_layout Itemize
+tunnistaa yleisimmät kenttäteorioiden diskreetit esitykset ja kykenee syventymää
+n niihin itsenäisesti
+\end_layout
+
+\begin_layout Itemize
+tuntee diskreetteihin esityksiin liittyvät mitattavat suureet ja kykenee
+ syventymään niihin itsenäisesti
+\end_layout
+
+\begin_layout Itemize
+osaa soveltaa häiriöteoriaa diskreetissä avaruudessa
+\end_layout
+
+\begin_layout Section
+Course Contents
 \end_layout
 
 \begin_layout Itemize
