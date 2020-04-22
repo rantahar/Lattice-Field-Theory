@@ -93,27 +93,27 @@ Learning Objectives
 \end_layout
 
 \begin_layout Itemize
-osaa kirjoittaa kvanttikenttareoriaa diskreetissa avaruudessa simuloivan
- tietokoneohjelman
+Can implement a Montecarlo simulation of a quantum field theory in discrete
+ space
 \end_layout
 
 \begin_layout Itemize
-osaa analysoida ohjelman tuottamia tuloksia ja kuvailla niiden yhteytta
- itse teoriaan
+Can analyse the output of the calculation and describe it's connection to
+ the theory
 \end_layout
 
 \begin_layout Itemize
-tunnistaa yleisimmat kenttateorioiden diskreetit esitykset ja kykenee syventymaa
-n niihin itsenaisesti
+Recognizes the most common discrete representations of field theories and
+ is able to find information on them
 \end_layout
 
 \begin_layout Itemize
-tuntee diskreetteihin esityksiin liittyvat mitattavat suureet ja kykenee
- syventymaan niihin itsenaisesti
+Recognizes observables in the discrete representations and is able to find
+ information on them
 \end_layout
 
 \begin_layout Itemize
-osaa soveltaa hairioteoriaa diskreetissa avaruudessa
+Can apply perturbation theory in a discrete space
 \end_layout
 
 \begin_layout Section
