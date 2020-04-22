@@ -14,8 +14,8 @@ spin = np.ones([L,L], dtype=int)
 
 
 
-################################################
-# Assing the increase T and decrease T buttons #
+###########################################
+# Assing the increase temperature buttons #
 def tup(event):
    global T
    print("up")
@@ -27,7 +27,7 @@ def tdn(event):
    T = T-0.1
 
 draw_ising.setup(spin, tup, tdn)
-################################################
+###########################################
 
 
 
