@@ -121,7 +121,23 @@ Course Contents
 \end_layout
 
 \begin_layout Itemize
+Montecarlo simulation
+\end_layout
+
+\begin_layout Itemize
 Spin models
+\end_layout
+
+\begin_layout Itemize
+Phase Transitions, Criticality
+\end_layout
+
+\begin_layout Itemize
+Thermodynamics of lattice models
+\end_layout
+
+\begin_layout Itemize
+Condensed matter lattice models
 \end_layout
 
 \begin_layout Itemize
@@ -130,10 +146,6 @@ The lattice regularization
 
 \begin_layout Itemize
 Thermal lattice field theory
-\end_layout
-
-\begin_layout Itemize
-Condensed matter lattice models
 \end_layout
 
 \begin_layout Itemize
@@ -149,15 +161,7 @@ Fermions
 \end_layout
 
 \begin_layout Itemize
-Montecarlo simulation
-\end_layout
-
-\begin_layout Itemize
-Expectation values
-\end_layout
-
-\begin_layout Itemize
-Lattice perturbation theory?
+Lattice perturbation theory
 \end_layout
 
 \begin_layout Section
