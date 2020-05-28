@@ -1,4 +1,12 @@
 
-lyx -e latex src/lattice.lyx
-pandoc -s --mathjax="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" -f latex -t html < src/lattice.tex > index.html
+# Course material for teaching Lattice Field Theory
+
+To edit and build, it is best to get the [lyx editor](https://www.lyx.org/).
+
+Source files for the chapters can be found in src/
+
+Example programs are in example/
+
+To build the HTML file, run `make html`
+To build a pdf, run `make pdf`
 
