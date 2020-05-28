@@ -7,7 +7,7 @@ import draw_ising
 ### Set up parameters
 L = 128
 T = 1.0
-updates_per_frame = 10000
+updates_per_frame = 100
 
 # Start with all spins 1
 spin = np.ones([L,L], dtype=int) 
@@ -15,15 +15,13 @@ spin = np.ones([L,L], dtype=int)
 
 
 ###########################################
-# Assing the increase temperature buttons #
+# Assing the increase temperature buttons 
 def tup(event):
    global T
-   print("up")
    T = T+0.1
 
 def tdn(event):
    global T
-   print("down")
    T = T-0.1
 
 draw_ising.setup(spin, tup, tdn)
@@ -45,13 +43,16 @@ while True :
       # propability from the distributions
       p = np.exp( -energy_difference/T )
 
-      print("site ", x, y, p, energy_difference)
-
       rand = np.random.random()
       if rand < p:
          spin[x][y] = - spin[x][y]
 
 
+   ################################
    # Draw the current configuration
    draw_ising.draw(spin, T)
+   ################################
+
+   ## Add measurements here
+  
    
