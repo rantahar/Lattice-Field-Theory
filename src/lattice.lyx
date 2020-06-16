@@ -93,19 +93,6 @@ LatexCommand tableofcontents
 
 \end_layout
 
-\begin_layout Standard
-To improve this page and make suggestions, check out the 
-\begin_inset CommandInset href
-LatexCommand href
-name "GitHub page"
-target "https://github.com/rantahar/Lattice-Field-Theory"
-literal "false"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Motivation
 \end_layout
