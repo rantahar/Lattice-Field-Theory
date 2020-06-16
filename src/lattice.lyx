@@ -97,66 +97,328 @@ LatexCommand tableofcontents
 Motivation
 \end_layout
 
+\begin_layout Standard
+These lecture notes give an introduction to lattice field theory, a powerful
+ framework for solving quantum field theries from first principles.
+\end_layout
+
+\begin_layout Standard
+We approach the topic mainly from the point of view of QCD, going through
+ the building blocks necessary to simulate a model with fermions with a
+ gauge interaction.
+\end_layout
+
 \begin_layout Section
 Learning Objectives
 \end_layout
 
+\begin_layout Standard
+The course has two main objectives.
+ First, to learn about most significant techniques necessary to implement
+ a lattice model and to understand their limitations.
+ Second to become familiar with all the pieces of a lattice QCD simulation
+ program.
+\end_layout
+
+\begin_layout Standard
+After succesfully completing the course, the student
+\end_layout
+
 \begin_layout Itemize
-Can implement a Montecarlo simulation of a quantum field theory in discrete
+can implement a Montecarlo simulation of a quantum field theory in discrete
  space
 \end_layout
 
 \begin_layout Itemize
-Can analyse the output of the calculation and describe it's connection to
+can analyse the output of the calculation and describe it's connection to
  the theory
 \end_layout
 
 \begin_layout Itemize
-Recognizes the most common discrete representations of field theories and
+recognizes the most common discrete representations of field theories and
  is able to find information on them
 \end_layout
 
 \begin_layout Itemize
-Recognizes observables in the discrete representations and is able to find
+recognizes observables in the discrete representations and is able to find
  information on them
 \end_layout
 
 \begin_layout Itemize
-Can apply perturbation theory in a discrete space
+can apply perturbation theory in a discrete space
 \end_layout
 
 \begin_layout Section
 Spin models
 \end_layout
 
-\begin_layout Section
-Thermodynamics of lattice models
+\begin_layout Standard
+We start with spin models as a simple example of a lattice model and to
+ get started with programming exercises.
 \end_layout
 
-\begin_layout Section
-The lattice regularization
+\begin_layout Subsection
+The Ising Model
 \end_layout
 
-\begin_layout Section
-Thermal lattice field theory
+\begin_layout Standard
+The Ising model describes, in a rather simplified way, how a ferromagnet
+ works.
+ We think of a clump of iron as a bunch of 
+\begin_inset Quotes eld
+\end_inset
+
+atoms
+\begin_inset Quotes erd
+\end_inset
+
+ sitting unmoving on a structured lattice.
 \end_layout
 
+\begin_layout Standard
+[Image]
+\end_layout
+
+\begin_layout Standard
+Each atom has a spin, which creates a small magnetic field.
+ When the spins point to different random directions (as above), they cancel
+ each other and the iron is not magnetized.
+ But if for some reason they point to the same direction, the small magnetic
+ fields add up into a macroscopic value.
+\end_layout
+
+\begin_layout Standard
+Why would this happen?
+\end_layout
+
+\begin_layout Standard
+A spin pointing against a magnetic field has a slightly higher energy than
+ a spin pointing to agaist it.
+ So atoms close to each other would prefer to align.
+ At zero temperature, they would eventually all point to the same direction
+ and create a magnet.
+ At higher temperatures, thermal fluctuations will occationally cause a
+ spin to flip.
+\end_layout
+
+\begin_layout Standard
+Let's only consider the spins closes to each other (nearest neighbours.)
+ The energy of two spins is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E=-j\boldsymbol{s}_{1}\cdot\boldsymbol{s}_{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and the energy of the whole system is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E=-j\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}.
+\end{equation}
+
+\end_inset
+
+The sum over 
+\begin_inset Formula $<ij>$
+\end_inset
+
+ here counts pairs of neighbours.
+ If the spins are coupled to a magnetic field 
+\begin_inset Formula $\boldsymbol{H}$
+\end_inset
+
+, with the magnetic momentum 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, the energy is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+E=-j\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\gamma\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}.
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Ising model
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Heath bath, Boltzmann distribution
+\end_layout
+
+\begin_layout Itemize
+Magnetisation
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Other spin models: Potts, U(1)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Locally symmetric U(1) gauge model
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Thermodynamics:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Measurables as partial derivatives of a sourced distribution
+\end_layout
+
+\begin_layout Itemize
+Susceptibilities
+\end_layout
+
+\begin_layout Itemize
+Phase transitions, 1st and 2nd order, cross-over
+\end_layout
+
+\end_deeper
 \begin_layout Section
-Scalar fields
+Universality, Field theories
+\end_layout
+
+\begin_layout Itemize
+Field theories, scalar field theory as an example
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Quantum field theory with a scalar field - derivation of discretized system
+\end_layout
+
+\begin_layout Itemize
+Universality, critical points
+\end_layout
+
+\begin_layout Itemize
+Thermal field theory
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Quantum Monte Carlo,
 \end_layout
 
 \begin_layout Section
 Gauge fields
 \end_layout
 
+\begin_layout Itemize
+Representing gauge symmetry, back to U(1)
+\end_layout
+
+\begin_layout Itemize
+Updating a gauge field
+\end_layout
+
+\begin_layout Itemize
+Wilson loops
+\end_layout
+
+\begin_layout Itemize
+Perturbation theory, large and small coupling
+\end_layout
+
 \begin_layout Section
 Fermions
 \end_layout
 
-\begin_layout Section
-Lattice perturbation theory
+\begin_layout Itemize
+Fermion doubling, naive fermions
 \end_layout
 
+\begin_layout Itemize
+Wilson
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Symmetries
+\end_layout
+
+\begin_layout Itemize
+O(a) improvement?
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Staggered
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Symmetries, benefits and limitations
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Measuring propagators
+\end_layout
+
+\begin_layout Section
+Hybrid Monte-Carlo
+\end_layout
+
+\begin_layout Itemize
+The other problem with fermions, updating the gauge field
+\end_layout
+
+\begin_layout Itemize
+Molecular dynamics
+\end_layout
+
+\begin_layout Itemize
+Conjugate gradient
+\end_layout
+
+\begin_layout Section
+Project suggestions:
+\end_layout
+
+\begin_layout Itemize
+Transition type and temperature in the U(N) model
+\end_layout
+
+\begin_layout Itemize
+Higgs model, transition
+\end_layout
+
+\begin_layout Itemize
+String tension in SU(3)
+\end_layout
+
+\begin_layout Itemize
+Counting naive fermions?
+\end_layout
+
+\begin_layout Itemize
+3D Thirring model (2D?)
+\end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
