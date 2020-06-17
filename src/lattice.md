@@ -1,5 +1,7 @@
-% Lattice Field Theory
-
+---
+title: Lattice Field Theory
+papersize: A4
+---
 
 Motivation
 ==========
@@ -90,6 +92,10 @@ $$\begin{aligned}
 Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
  & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}\end{aligned}$$
 
+$$\begin{aligned}
+Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
+ & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}\end{aligned}$$
+ 
 At high temperatures the spins become essentially random and the
 magnetisation dissappears.
 
@@ -105,12 +111,12 @@ $h=\frac{\gamma H}{kT}$.
 The Ising model has been solved in 1 and 2 dimensions **(citation
 onsager).**
 
-<div class="card bg-info" >
 
+::::: {.card .bg-light}
 **Example**
 
 Let's implement the Ising model.
-</div>
+:::::
 
 ### Magnetisation
 
