@@ -158,7 +158,7 @@ We start with spin models as a simple example of a lattice model and to
 \end_layout
 
 \begin_layout Subsection
-The Ising Model
+Spin Models
 \end_layout
 
 \begin_layout Standard
@@ -224,7 +224,7 @@ and the energy of the whole system is
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-E=-j\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}.
+E=-J\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}.
 \end{equation}
 
 \end_inset
@@ -248,12 +248,136 @@ The sum over
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-E=-j\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\gamma\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}.
+E=-J\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}-\gamma\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}.
 \end{equation}
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+At small temperatures the energy will tend to a minimum and the spins will
+ align.
+ If there is a magnetic field, they will align to the direction of the field.
+ Otherwise they will pick a random direction.
+\end_layout
+
+\begin_layout Standard
+At a non-zero temperature 
+\begin_inset Formula $T$
+\end_inset
+
+ the 
+\emph on
+configurations
+\emph default
+ of spins will follow the Boltzmann distribution,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
+ & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At high temperatures the spins become essentially random and the magnetisation
+ dissappears.
+\end_layout
+
+\begin_layout Subsubsection
+The Ising Model
+\end_layout
+
+\begin_layout Standard
+The Ising model is a further simplification of the above.
+ All the spins are either 
+\begin_inset Formula $+1$
+\end_inset
+
+ or 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+ The paritition function then is
+\begin_inset Formula 
+\begin{align*}
+Z & =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
+\end{align*}
+
+\end_inset
+
+Here we use dimensionless couplings, 
+\begin_inset Formula $\beta=\frac{1}{kT}$
+\end_inset
+
+ and 
+\begin_inset Formula $h=\frac{\gamma H}{kT}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Ising model has been solved in 1 and 2 dimensions 
+\series bold
+(citation onsager).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+Hi
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Magnetisation
+\end_layout
+
+\begin_layout Standard
+We can measure the amount of magnetisation through the sum of the spins.
+ For an individual configuration
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+M=\sum_{i}s_{i}.
+\]
+
+\end_inset
+
+The
 \end_layout
 
 \begin_layout Itemize
@@ -262,7 +386,7 @@ Ising model
 
 \begin_deeper
 \begin_layout Itemize
-Heath bath, Boltzmann distribution
+Heath bath, Boltzmann distributionls
 \end_layout
 
 \begin_layout Itemize
