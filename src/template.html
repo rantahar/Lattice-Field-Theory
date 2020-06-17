@@ -43,24 +43,26 @@ $for(header-includes)$
 $endfor$
 </head>
 <body>
-  <nav class="navbar navbar-light sticky-top bg-light">
-    <div class="navbar-brand col-3 col-lg-2" ></div>
-    <div class="navbar-brand col-9 " >
-      <p class="text-right"> <small>
-      To improve this page and make suggestions, check out the <a href="https://github.com/rantahar/Lattice-Field-Theory">GitHub page</a> </small></p>
-    </div>
-  </nav>
   <div class="container-fluid">
+    <div class="row py-3">
+      <div class="navbar-brand col-3 col-lg-2" ></div>
+      <div class="navbar-brand col-9 " >
+        <p class="text-right"> <small>
+        To improve this page and make suggestions, check out the <a href="https://github.com/rantahar/Lattice-Field-Theory">GitHub page</a> </small></p>
+      </div>
+    </div>
     <div class="row">
-      <nav id="sidebarMenu" class="col-sm-3 col-lg-2 d-md-block bg-light">
-        $if(toc)$
-        <div class="sidebar-sticky pt-3">
+      $if(toc)$
+      <div class="col-sm-3 col-lg-2" >
+        <div class=" sticky-top ">
+        <nav class="card navbar navbar-light pt-3 bg-light" style="top: 10px">
           <ul class="nav flex-column">
             <div class="nav-header">Table of Contents</li>
           </ul>
+          $toc$
+        </nav>
         </div>
-        $toc$
-      </nav>
+      </div>
       $endif$
       <div class="col-sm-9 content">
         $if(title)$
