@@ -9,7 +9,6 @@ Motivation
 These lecture notes give an introduction to lattice field theory, a
 powerful framework for solving quantum field theries from first
 principles.
-
 We approach the topic mainly from the point of view of QCD, going
 through the building blocks necessary to simulate a model with fermions
 with a gauge interaction.
@@ -17,10 +16,7 @@ with a gauge interaction.
 Learning Objectives
 ===================
 
-The course has two main objectives. First, to learn about most
-significant techniques necessary to implement a lattice model and to
-understand their limitations. Second to become familiar with all the
-pieces of a lattice QCD simulation program.
+The course has two main objectives: to learn enough about lattice methods to put the into practical use and to become familiar with common methods used in studies of Standard Model physics.
 
 After succesfully completing the course, the student
 
@@ -38,17 +34,16 @@ After succesfully completing the course, the student
 
 -   can apply perturbation theory in a discrete space
 
+
 Spin models
 ===========
 
 We start with spin models as a simple example of a lattice model and to
 get started with programming exercises.
+This lesson introduces fundamental lattice simulation methods as well as important concepts from thermodynamics.
 
-Spin Models
------------
-
-The Ising model describes, in a rather simplified way, how a ferromagnet
-works. We think of a clump of iron as a bunch of "atoms" sitting
+Spin models describe, in a rather simplified way, how a ferromagnet works.
+We think of a clump of iron as a bunch of "atoms" sitting
 unmoving on a structured lattice.
 
 \[Image\]
@@ -90,11 +85,13 @@ the Boltzmann distribution,
 
 $$\begin{aligned}
 Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
- & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}\end{aligned}$$
+ & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}
+\end{aligned}$$
 
+The thermal expectation value of an observable \(O\) is then
 $$\begin{aligned}
-Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
- & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}\end{aligned}$$
+<O> &= \frac 1Z \int[\prod_{i}ds_{i}] \, O(s) \, e^{-\frac{1}{kT}E(s)}
+\end{aligned}$$
  
 At high temperatures the spins become essentially random and the
 magnetisation dissappears.
@@ -118,16 +115,60 @@ onsager).**
 Let's implement the Ising model.
 :::::
 
-### Magnetisation
+### Observables
 
 We can measure the amount of magnetisation through the sum of the spins.
 For an individual configuration
 
-$$M=\sum_{i}s_{i}.$$ The
+$$M=\frac{1}{V}\sum_{i}s_{i},$$
+
+where V is the number of points on the lattice, the volume. We get the thermal average by integrating over the Boltzmann distribution:
+
+$$\begin{aligned}
+<M> &=\frac{1}{V} \frac 1Z \int[\prod_{i}ds_{i}]  e^{-\frac{1}{kT}E(s)} ( \sum_{i}s_{i}) 
+\end{aligned}$$
+
+This can also be expressed as a derivative of the partition function with respect to the external field $h$ 
+$$\begin{aligned}
+<M> &= \frac{\partial}{\partial h} \log(Z).
+\end{aligned}$$
+So the field \(h\) functions as a source for the magnetisation.
+
+Similarly the energy is 
+$$\begin{aligned}
+<E> & = \frac 1Z \int[\prod_{i}ds_{i}] \, E(s) \, e^{-\beta E(s)} \\
+&= -\frac{\partial}{\partial \beta} \log(Z)
+\end{aligned}$$
+
+Other intersting observables include
+- the specific heat (heat capacity)
+$$\begin{aligned}
+\chi & = -\frac 1V \frac{\partial}{\partial \beta} <E> \\
+& = \frac 1V \frac{\partial^2}{\partial^2 \beta} \log(Z) \\
+& = -\frac 1V \frac{\partial}{\partial \beta} \frac 1Z \int[\prod_{i}ds_{i}] E(s) e^{-\beta E(s)} \\
+& = \frac 1V \frac 1Z \int[\prod_{i}ds_{i}] E^2(s) e^{-\beta E(s)} - \frac 1V \frac 1{Z^2} \left(\int[\prod_{i}ds_{i}] E(s) e^{-\beta E(s)}\right)^2\\
+&=\frac 1V \left( <E^2> - <E>^2 \right)
+\end{aligned}$$
+
+- The magnetic susceptibility
+$$\begin{aligned}
+\chi & = \frac 1V \frac{\partial}{\partial h} <M> = \frac 1V \frac{\partial^2}{\partial^2 h} \log(Z) \\
+&= \frac 1V\left( <M^2> - <M>^2 \right)
+\end{aligned}$$
+
+- Correlation functions
+$$\begin{aligned}
+&C(\bold x-\bold y) = <s_{\bold x} s_{\bold y}> - <s_{\bold x}><s_{\bold y}>, \\
+&\lim_{\to\infty} C(\bold x-\bold y) = e^{-|\bold x - \bold y|/\xi},
+\end{aligned}$$
+where $\xi$ is the correlation length.
+
+###Phase transitions
+
 
 -   Ising model
 
-    -   Heath bath, Boltzmann distributionls
+    -   Heath bath, Boltzmann distribution
 
     -   Magnetisation
 
@@ -136,10 +177,6 @@ $$M=\sum_{i}s_{i}.$$ The
     -   Locally symmetric U(1) gauge model
 
 -   Thermodynamics:
-
-    -   Measurables as partial derivatives of a sourced distribution
-
-    -   Susceptibilities
 
     -   Phase transitions, 1st and 2nd order, cross-over
 
