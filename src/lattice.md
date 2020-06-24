@@ -158,8 +158,8 @@ $$\begin{aligned}
 
 - Correlation functions
 $$\begin{aligned}
-&C(\bold x-\bold y) = <s_{\bold x} s_{\bold y}> - <s_{\bold x}><s_{\bold y}>, \\
-&\lim_{\to\infty} C(\bold x-\bold y) = e^{-|\bold x - \bold y|/\xi},
+&C(\boldsymbol{x}-\boldsymbol{y}) = <s_{\boldsymbol{x}} s_{\boldsymbol{y}}> - <s_{\boldsymbol{x}}><s_{\boldsymbol{y}}>, \\
+&\lim_{\to\infty} C(\boldsymbol{x}-\boldsymbol{y}) = e^{-|\boldsymbol{x} - \boldsymbol{y}|/\xi},
 \end{aligned}$$
 where $\xi$ is the correlation length.
 
