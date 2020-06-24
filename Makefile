@@ -1,12 +1,13 @@
 
 
 html: Makefile src/lattice.md
+	mkdir -p public
 	pandoc --toc --toc-depth=2 --mathjax --template src/html-template.html -f markdown -t html -i src/lattice.md -o public/index.html
 
 
 pdf: Makefile src/lattice.md
-	mkdir -p public
 	pandoc --toc --toc-depth=2 --mathjax --template src/pdf-template.html -f markdown -t html -i src/lattice.md -o lattice.pdf
+
 
 html-lyx: Makefile build/lattice.tex src/lattice.lyx
 	pandoc --toc --toc-depth=2 --mathjax --template src/html-template.html -f markdown -t html -i src/lattice.md -o lattice.pdf
