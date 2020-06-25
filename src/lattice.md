@@ -3,8 +3,7 @@ title: Lattice Field Theory
 papersize: A4
 ---
 
-Motivation
-==========
+# Motivation
 
 These lecture notes give an introduction to lattice field theory, a
 powerful framework for solving quantum field theries from first
@@ -13,8 +12,7 @@ We approach the topic mainly from the point of view of QCD, going
 through the building blocks necessary to simulate a model with fermions
 with a gauge interaction.
 
-Learning Objectives
-===================
+# Learning Objectives
 
 The course has two main objectives: to learn enough about lattice methods to put the into practical use and to become familiar with common methods used in studies of Standard Model physics.
 
@@ -35,8 +33,7 @@ After succesfully completing the course, the student
 -   can apply perturbation theory in a discrete space
 
 
-Spin models
-===========
+# Spin models
 
 We start with spin models as a simple example of a lattice model and to
 get started with programming exercises.
@@ -83,25 +80,26 @@ direction of the field. Otherwise they will pick a random direction.
 At a non-zero temperature $T$ the *configurations* of spins will follow
 the Boltzmann distribution,
 
-$$\begin{aligned}
+$$\begin{align}
 Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
  & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}
-\end{aligned}$$
+\end{align}$$
 
 The thermal expectation value of an observable \(O\) is then
-$$\begin{aligned}
+$$\begin{align}
 <O> &= \frac 1Z \int[\prod_{i}ds_{i}] \, O(s) \, e^{-\frac{1}{kT}E(s)}
-\end{aligned}$$
+\end{align}$$
  
 At high temperatures the spins become essentially random and the
 magnetisation dissappears.
 
-### The Ising Model
+## The Ising Model
 
 The Ising model is a further simplification of the above. All the spins
 are either $+1$ or $-1$. The paritition function then is
-$$\begin{aligned}
-Z & =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.\end{aligned}$$
+$$\begin{align}
+Z & =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
+\end{align}$$
 Here we use dimensionless couplings, $\beta=\frac{1}{kT}$ and
 $h=\frac{\gamma H}{kT}$.
 
@@ -115,7 +113,7 @@ onsager).**
 Let's implement the Ising model.
 :::::
 
-### Observables
+## Observables
 
 We can measure the amount of magnetisation through the sum of the spins.
 For an individual configuration
@@ -124,46 +122,139 @@ $$M=\frac{1}{V}\sum_{i}s_{i},$$
 
 where V is the number of points on the lattice, the volume. We get the thermal average by integrating over the Boltzmann distribution:
 
-$$\begin{aligned}
+$$\begin{align}
 <M> &=\frac{1}{V} \frac 1Z \int[\prod_{i}ds_{i}]  e^{-\frac{1}{kT}E(s)} ( \sum_{i}s_{i}) 
-\end{aligned}$$
+\end{align}$$
 
 This can also be expressed as a derivative of the partition function with respect to the external field $h$ 
-$$\begin{aligned}
+$$\begin{align}
 <M> &= \frac{\partial}{\partial h} \log(Z).
-\end{aligned}$$
+\end{align}$$
 So the field \(h\) functions as a source for the magnetisation.
 
 Similarly the energy is 
-$$\begin{aligned}
+$$\begin{align}
 <E> & = \frac 1Z \int[\prod_{i}ds_{i}] \, E(s) \, e^{-\beta E(s)} \\
 &= -\frac{\partial}{\partial \beta} \log(Z)
-\end{aligned}$$
+\end{align}$$
 
 Other intersting observables include
 - the specific heat (heat capacity)
-$$\begin{aligned}
+$$\begin{align}
 \chi & = -\frac 1V \frac{\partial}{\partial \beta} <E> \\
 & = \frac 1V \frac{\partial^2}{\partial^2 \beta} \log(Z) \\
 & = -\frac 1V \frac{\partial}{\partial \beta} \frac 1Z \int[\prod_{i}ds_{i}] E(s) e^{-\beta E(s)} \\
 & = \frac 1V \frac 1Z \int[\prod_{i}ds_{i}] E^2(s) e^{-\beta E(s)} - \frac 1V \frac 1{Z^2} \left(\int[\prod_{i}ds_{i}] E(s) e^{-\beta E(s)}\right)^2\\
 &=\frac 1V \left( <E^2> - <E>^2 \right)
-\end{aligned}$$
+\end{align}$$
 
 - The magnetic susceptibility
-$$\begin{aligned}
-\chi & = \frac 1V \frac{\partial}{\partial h} <M> = \frac 1V \frac{\partial^2}{\partial^2 h} \log(Z) \\
+$$\begin{align}
+\chi_M & = \frac 1V \frac{\partial}{\partial h} <M> = \frac 1V \frac{\partial^2}{\partial^2 h} \log(Z) \\
 &= \frac 1V\left( <M^2> - <M>^2 \right)
-\end{aligned}$$
+\end{align}$$
 
 - Correlation functions
-$$\begin{aligned}
+$$\begin{align}
 &C(\boldsymbol{x}-\boldsymbol{y}) = <s_{\boldsymbol{x}} s_{\boldsymbol{y}}> - <s_{\boldsymbol{x}}><s_{\boldsymbol{y}}>, \\
-&\lim_{\to\infty} C(\boldsymbol{x}-\boldsymbol{y}) = e^{-|\boldsymbol{x} - \boldsymbol{y}|/\xi},
-\end{aligned}$$
+&\lim_{|\boldsymbol{x} - \boldsymbol{y}|\to\infty} C(\boldsymbol{x}-\boldsymbol{y}) = e^{-|\boldsymbol{x} - \boldsymbol{y}|/\xi},
+\end{align}$$
 where $\xi$ is the correlation length.
 
-###Phase transitions
+Deriving this from the partition function requires introducing an \(\boldsymbol{x}\)-dependent source \(h_\boldsymbol{x}\)
+$$\begin{align}
+Z & =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+\sum_{i} h_i s_{i}}.
+\end{align}$$
+$$\begin{align}
+&C(\boldsymbol{x}-\boldsymbol{y}) = \partial_\boldsymbol{x} \partial_\boldsymbol{y}
+ \left . \log(Z) \right |_{h=0}
+\end{align}$$
+
+
+
+## Transfer matrices (Example of an exact solution)
+
+Consider the 1D Ising model:
+[image]
+and assume periodic boundary conditions
+$$\begin{align}
+s_{x+L}=s_x
+\end{align}$$
+
+First we'll write the energy in a symmetric way between the neighbouring sites
+$$\begin{align}
+E &= \beta\sum_{x=1}^L s_x s_{x+1} +h\sum_{x=1}^L s_x\\
+ &=\sum_{x=1}^L \left( \beta s_x s_x+1 + \frac 12 h s_x + s_{x+1} \right)
+\end{align}$$
+
+We'll define the \(2\times2\) transfer matrix
+$$\begin{align}
+T_{s,s'} = e^{\beta s s' + \frac 12 h(s+s')}.
+\end{align}$$
+Now the partition function can be written as
+$$\begin{align}
+z &= \sum_{\{s_x\}} T_{s_1,s_2} T_{s_2,s_3} \dots T_{s_{L-1},s_L} T_{s_L,s_1}\\
+  &= \sum_{s_1} \left( T^L \right)_{s_1,s_1}\\
+  &= Tr (T^L)
+\end{align}$$
+
+Writing the transfer matrix explicitly,
+$$\begin{align}
+T_{s,s'} = 
+\left (\begin{matrix}
+e^{\beta+h} & e^{-\beta} \\
+e^{-\beta} & e^{\beta-h} 
+\end{matrix} \right )
+\end{align}$$
+We can evaluate the trace by diagonalizing \(T\):
+$$\begin{align}
+& \det \left (\begin{matrix}
+e^{\beta+h} -\lambda & e^{-\beta} \\
+e^{-\beta} & e^{\beta-h} -\lambda
+\end{matrix} \right )
+= \left(e^{\beta+h}-\lambda\right) \left(e^{\beta-h}-\lambda\right) - e^{-2\beta}\\
+& \lambda_{\pm} = e^\beta \left ( \cosh(h) \pm \sqrt{ \sinh^2(h)+e^{-4\beta} }\right )
+\end{align}$$
+
+$$\begin{align}
+\log(Z) &= \log \left( \left (\begin{matrix}
+\lambda_+ & 0 \\
+0& \lambda_-
+\end{matrix} \right )^L\right) 
+= \log\left( \lambda_+^L + \lambda_-^L \right)\\
+&= \log\left( \lambda_+^L \left(1+\left(\frac{\lambda_-}{\lambda_+}\right)^L \right ) \right)\\
+&= \log\left( \lambda_+^L \right ) + \log\left ( 1+\left(\frac{\lambda_-}{\lambda_+}\right)^L \right)\\
+\end{align}$$
+
+In the thermodynamic limit, \(L\to\infty\),
+$$\begin{equation}
+\left(\frac{\lambda_-}{\lambda_+}\right)^L \to 0
+\end{equation}$$
+and 
+$$\begin{align}
+\log(Z) &= L\log \left( \cosh(h) + \sqrt{\sinh^2(h)+e^{-4\beta}} \right )
+\end{align}$$
+
+From here we can calculate the magnetisation as a function of \(h\)
+$$\begin{align}
+<M> &= \frac 1L \frac \partial {\partial h} \log(Z)
+= \frac{\sinh(h) + \frac{\cosh(h) \sinh(h)}{\sqrt{\sinh^2(h)+e^{-4\beta}} }}{\cosh(h)+\sqrt{\sinh^2(h)+e^{-4\beta}} }\\
+&= \frac{\sinh(h)}{\sqrt{\sinh(h)+e^{-4\beta}} }
+\end{align}$$
+
+So at \(h=0\) the magnetisation is zero, which is what we expect. At large \(\beta\), small temperature, it approaches one, which is also expected. Here is a schetch of its behaviour in general:
+
+[Image]
+
+
+## Phase transitions
+
+### Symmetries
+
+ - First order
+
+ - Second order
+
 
 
 -   Ising model
