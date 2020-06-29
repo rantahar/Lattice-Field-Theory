@@ -62,16 +62,23 @@ fluctuations will occationally cause a spin to flip.
 Let's only consider the spins closes to each other (nearest neighbours.)
 The energy of two spins is
 
-$$E=-j\boldsymbol{s}_{1}\cdot\boldsymbol{s}_{2}$$
+$$\begin{align}
+E=-j\boldsymbol{s}_{1}\cdot\boldsymbol{s}_{2}
+\end{align}$$
 
 and the energy of the whole system is
 
-$$E=-J\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}.$$ The sum over
+$$\begin{align}
+E=-J\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}.
+\end{align}$$
+The sum over
 $<ij>$ here counts pairs of neighbours. If the spins are coupled to a
 magnetic field $\boldsymbol{H}$, with the magnetic momentum $\gamma$,
 the energy is
 
-$$E=-J\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}-\gamma\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}.$$
+$$\begin{align}
+E=-J\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}-\gamma\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}.
+\end{align}$$
 
 At small temperatures the energy will tend to a minimum and the spins
 will align. If there is a magnetic field, they will align to the
@@ -85,7 +92,7 @@ Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
  & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\boldsymbol{s}_{i}\boldsymbol{s}_{j}+\frac{\gamma}{kT}\boldsymbol{H}\cdot\sum_{i}\boldsymbol{s}_{i}}
 \end{align}$$
 
-The thermal expectation value of an observable \(O\) is then
+The thermal expectation value of an observable $O$ is then
 $$\begin{align}
 <O> &= \frac 1Z \int[\prod_{i}ds_{i}] \, O(s) \, e^{-\frac{1}{kT}E(s)}
 \end{align}$$
@@ -118,7 +125,9 @@ Let's implement the Ising model.
 We can measure the amount of magnetisation through the sum of the spins.
 For an individual configuration
 
-$$M=\frac{1}{V}\sum_{i}s_{i},$$
+$$\begin{align}
+M=\frac{1}{V}\sum_{i}s_{i},
+\end{align}$$
 
 where V is the number of points on the lattice, the volume. We get the thermal average by integrating over the Boltzmann distribution:
 
@@ -128,9 +137,9 @@ $$\begin{align}
 
 This can also be expressed as a derivative of the partition function with respect to the external field $h$ 
 $$\begin{align}
-<M> &= \frac{\partial}{\partial h} \log(Z).
+<M> &= \frac{1}{V} \frac{\partial}{\partial h} \log(Z).
 \end{align}$$
-So the field \(h\) functions as a source for the magnetisation.
+So the field $h$ functions as a source for the magnetisation.
 
 Similarly the energy is 
 $$\begin{align}
@@ -161,7 +170,7 @@ $$\begin{align}
 \end{align}$$
 where $\xi$ is the correlation length.
 
-Deriving this from the partition function requires introducing an \(\boldsymbol{x}\)-dependent source \(h_\boldsymbol{x}\)
+Deriving this from the partition function requires introducing an $\boldsymbol{x}$-dependent source $h_\boldsymbol{x}$
 $$\begin{align}
 Z & =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+\sum_{i} h_i s_{i}}.
 \end{align}$$
@@ -187,7 +196,7 @@ E &= \beta\sum_{x=1}^L s_x s_{x+1} +h\sum_{x=1}^L s_x\\
  &=\sum_{x=1}^L \left( \beta s_x s_x+1 + \frac 12 h s_x + s_{x+1} \right)
 \end{align}$$
 
-We'll define the \(2\times2\) transfer matrix
+We'll define the $2\times2$ transfer matrix
 $$\begin{align}
 T_{s,s'} = e^{\beta s s' + \frac 12 h(s+s')}.
 \end{align}$$
@@ -206,7 +215,7 @@ e^{\beta+h} & e^{-\beta} \\
 e^{-\beta} & e^{\beta-h} 
 \end{matrix} \right )
 \end{align}$$
-We can evaluate the trace by diagonalizing \(T\):
+We can evaluate the trace by diagonalizing $T$:
 $$\begin{align}
 & \det \left (\begin{matrix}
 e^{\beta+h} -\lambda & e^{-\beta} \\
@@ -226,7 +235,7 @@ $$\begin{align}
 &= \log\left( \lambda_+^L \right ) + \log\left ( 1+\left(\frac{\lambda_-}{\lambda_+}\right)^L \right)\\
 \end{align}$$
 
-In the thermodynamic limit, \(L\to\infty\),
+In the thermodynamic limit, $L\to\infty$,
 $$\begin{equation}
 \left(\frac{\lambda_-}{\lambda_+}\right)^L \to 0
 \end{equation}$$
@@ -235,41 +244,192 @@ $$\begin{align}
 \log(Z) &= L\log \left( \cosh(h) + \sqrt{\sinh^2(h)+e^{-4\beta}} \right )
 \end{align}$$
 
-From here we can calculate the magnetisation as a function of \(h\)
+From here we can calculate the magnetisation as a function of $h$
 $$\begin{align}
 <M> &= \frac 1L \frac \partial {\partial h} \log(Z)
 = \frac{\sinh(h) + \frac{\cosh(h) \sinh(h)}{\sqrt{\sinh^2(h)+e^{-4\beta}} }}{\cosh(h)+\sqrt{\sinh^2(h)+e^{-4\beta}} }\\
 &= \frac{\sinh(h)}{\sqrt{\sinh(h)+e^{-4\beta}} }
 \end{align}$$
 
-So at \(h=0\) the magnetisation is zero, which is what we expect. At large \(\beta\), small temperature, it approaches one, which is also expected. Here is a schetch of its behaviour in general:
+So at $h=0$ the magnetisation is zero, which is what we expect. At large $\beta$, small temperature, it approaches one, which is also expected. Here is a schetch of its behaviour in general:
 
 [Image]
 
 
+
+
 ## Phase transitions
 
-### Symmetries
+### Global symmetries
 
- - First order
+The action
+$$\begin{align}
+S = -\beta \sum_{<ij>} s_i \cdot s_j - h\cdot \sum_i s_i
+\end{align}$$
+has global symmetries when $h=0$. There are transformations $M$ that can be applied to all spins without changing the action. More precisely, $S(s)$ and $ds$ remain constant when
+$$\begin{align}
+s_i \to s_i' = Ms_i, \textrm{ for all } i.
+\end{align}$$
 
- - Second order
+- **Ising:**
+
+$$\begin{align}
+s_i\to -s_i
+\end{align}$$
+
+- **Pots Model:**
+
+$$\begin{align}
+s_i\to (s_i+1)\bmod N_s
+\end{align}$$
+(and other permutations)
+
+
+- **O(N) Model:**
+
+$$\begin{align}
+s_i\to Ms_i,
+\end{align}$$
+where $M$ is a $N\times N$ matrix with
+$$\begin{align}
+M^T M = \dsone.
+\end{align}$$
+So M is an orthogonal matrix: $M^{-1} = M^T$. It belongs to the group of $N\times N$ orthogonal matrices, $M\in O(N)$
+
+The interaction term is invariant since
+$$\begin{align}
+s_i \cdot s_j = (s_i)_\alpha (s_j)\alpha = \to M_{\alpha,\beta} (s_i)_\beta  M_{\beta,\gamma} (s_j)\gamma \\
+= s_i M^T M s_j = s_i s_j
+\end{align}$$
+
+If $h\neq 0$, the symmetry is "broken":
+$$\begin{align}
+h \cdot s_i \to (h)_\alpha M_{\alpha,\beta} (s_i)_\beta \neq h \cdot s_i
+\end{align}$$
+
+We also need to check the integration measure $ds$:
+$$\begin{align}
+&\int_{|s_i|=1} d^Vs_i = \int d^Vs_i \delta(|s_i|-1)\\
+&\to \int d^Vs'_i \delta(|s'_i|-1) =
+\int d^Vs_i \left \| \frac{ds'}{ds} \right \| \delta(|Ms'_i|-1)
+\\
+&= \int d^Vs_i | \det(M) | \delta(|Ms'_i|-1)\\
+&= \int d^Vs_i \delta(|Ms'_i|-1)
+\end{align}$$
+
+So the measure is also invariant, and the model is invariant at $h\neq 0$.
+
+
+### Symmetry breaking
+
+Consider the model at $h=0$ and finite $V$. Since the model has a global $O(N)$ symmetry, it is symmetric under
+$$\begin{align}
+s_i \to M s_i = -s_i (-\dsone \in O(N)).
+\end{align}$$
+However the magnetization
+$$\begin{align}
+<M> = \frac{\int [ds] \sum_i s_i e^{-S}}{Z}
+\end{align}$$
+is not symmetric,
+$$\begin{align}
+<M> \to -<M>.
+\end{align}$$
+Therefore we always have
+$$\begin{align}
+<M> =0.
+\end{align}$$
+
+- On a finite lattice the symmetry is *restored* and the model is in a *disordered phase*.
+
+- If $h\neq$ the symmetry is explicitly broken and $<M>\neq 0$
+
+Non-trivial symmetry breaking happens in the thermodynamic limit, $V\to 0$. 
+The symmetry is spontaneously broken if
+$$\begin{align}
+\lim_{h\to 0} \left[ \lim_{V\to\infty} <M> \right ]
+\end{align}$$
+The order of the limits is important here. If the limit $h\to0$ is taken too quickly the magnetisation will approach $0$.
+
+- The 1D Ising model the symmetry is *not* spontaneously broken. 
+$$\begin{align}
+\lim_{N\to\infty} <M> = \sinh(h) \times \frac{\sinh(h)}{\sqrt{\sinh^2 + e^{-4\beta}}}
+\end{align}$$
+
+- At $D>1$ the symmetry is broken at $T>T_c$, or $\beta < \beta_c$.
+
+
+### Phase transitions
+
+In many models we have a broken symmetry at $\beta > \beta_c$ and a restored symmetry at $\beta < \beta_c$. This means there is a phase transition at $\beta=\beta_c$
+
+ - **First order**
+ One or more of the first derivatives of the gree energy $F=-\log(Z)$ os discontinuous:
+$$\begin{align}
+<E> = \frac{\partial}{\partial\beta} F
+\end{align}$$
+$$\begin{align}
+<M> = \frac{\partial}{\partial h} F
+\end{align}$$
+
+[sketch]
+
+The jump in energy is known as the latent heat
+$$\begin{align}
+\frac 1V \Delta E = \lim_{\beta\to_-\beta_c}<E> - \lim_{\beta\to_+\beta_c}<E> = \frac{E_- - E_+}{V}
+\end{align}$$
+
+How does this work on the lattice? The transition is not instantaneous,
+but get's smoothed over a small span of temperatures.
+The derivative of the energy in fact grow with the volume.
+$$\begin{align}
+\chi = \frac 1V \left<(E-<E>)^2\right> 
+\end{align}$$
+At $\beta=\beta_c$, $<E>\approx \frac 12 (E_+ + E_-)$, so
+$$\begin{align}
+\chi \approx \frac 1V \frac{\Delta E^2}{4}
+= V \frac 14 \left( \frac{\Delta E}{V} \right) \sim V
+\end{align}$$
+
+In a first order transition the two phases can coexist, such as ice and water. The average energy density in this state is between the two phases.
+
+
+ - **Second order**
+
+No discontinuity in the first derivative of the free energy, 
+but there is a discontinuity in the second derivative.
+This is the case in spin models.
+$$\begin{align}
+\frac{\partial}{\partial_h}<M> \neq 0
+\end{align}$$
+
+[scketch]
+
+#####Critical Phenomena:
+
+The correlation length $\xi$ diverges exponentially at $\beta_c$.
+Structures scale to all distances:
+
+Writing $\tau = \beta-\beta_c$:
+$$\begin{align}
+\chi &\sim |\tau |^{-\alpha} \\
+\chi_M &\sim |\tau |^{-\gamma} \\
+\xi &\sim |\tau |^{-\nu} 
+\end{align}$$
+
+$$\begin{align}
+\frac{<M>}{V} &= 0 \textrm{ at } \beta \leq \beta_c \textrm{ and }\\
+\frac{<M>}{V} &\sim |\tau|^\delta \textrm{ at } \beta > \beta_c
+\end{align}$$
+
+The critical exponents are characteristic to the symmetries and dimensionality of the model.
+This is an important property of higher order transitions known as universality.
+It allows us to construct lattice models of continuous systems.
+More on this later.
 
 
 
--   Ising model
+-  **cross-over**
 
-    -   Heath bath, Boltzmann distribution
-
-    -   Magnetisation
-
--   Other spin models: Potts, U(1)
-
-    -   Locally symmetric U(1) gauge model
-
--   Thermodynamics:
-
-    -   Phase transitions, 1st and 2nd order, cross-over
 
 Universality, Field theories
 ============================
@@ -335,4 +495,3 @@ Project suggestions:
 
 -   3D Thirring model (2D?)
 
-$$<O>=\frac{\int_{U}Z(U)O}{\int_{U}Z(U)}$$
