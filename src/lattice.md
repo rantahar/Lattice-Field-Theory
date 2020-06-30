@@ -404,7 +404,7 @@ $$\begin{align}
 
 [scketch]
 
-#####Critical Phenomena:
+##### Critical Phenomena:
 
 The correlation length $\xi$ diverges exponentially at $\beta_c$.
 Structures scale to all distances:
@@ -426,9 +426,37 @@ This is an important property of higher order transitions known as universality.
 It allows us to construct lattice models of continuous systems.
 More on this later.
 
+ - Potts model in 2D (Including Ising)
+  Has a phase transition at $\beta=\log(1+\sqrt(q))$. 
+  It is second order when $q\leq 4$ and first order otherwise.
+  This is a discrete symmetry, in 2D continuous symmetries do not break (Mermin-Wagner-Coleman theorem).
+
+ - O(N) model in 2D
+  No symmetry breaking transition due to Mermin-Wagner-Coleman. 
+
+ - XY model in 2D
+  Has a special Berezinskii–Kosterlitz–Thouless transition, $\infty$ order with symmetry restored on both sides.
+
+ - O(N) in 3D
+   Has a 2nd order transition. The critical exponents have been determined numerically.
+
+ - Potts model in 3D
+   First order when $q\geq 3$, otherwise second.
+
+ - O(N) in 4 or more dimensions
+   Second order transition with *mean field* exponents. These can be calculated analytically.
 
 
--  **cross-over**
+In the O(N), Ising and Potts models, there is also a second order transition
+when $\beta > \beta_c$ $h\neq 0$, if we change $h$ continuously accross $0$.
+
+-  **Crossover**
+  
+Crossover is a term for a transition, where no symmetry is broken and / or 
+there is no discontinuity in the derivative of the free energy.
+The transition is continuous and there is no well defined critical
+temperature, but the two phases are nevertheless distinct.
+
 
 
 Universality, Field theories
