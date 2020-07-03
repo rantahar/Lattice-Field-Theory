@@ -459,8 +459,34 @@ temperature, but the two phases are nevertheless distinct.
 
 
 
-Universality, Field theories
+Field theories
 ============================
+
+Now we will approach quantum field theories using *Feynman's path integral*. [Phys. Rev. Mod. Phys. 20, 1948].
+In this representation, expecation values are calculated as
+
+$$\begin{aligned}
+&<O> = \frac{1}{Z} \int \left [ \prod_x d\phi(x) \right ] O(\phi) e^{\frac{i}{\hbar} S(\phi)}\\
+& \textrm{ where } Z= \int \left [ \prod_x d\phi(x) \right ]e^{\frac{i}{\hbar} S(\phi)}\\
+& \textrm{ and } S=\int d^4x \mathcal L (\phi, \partial_t \phi)
+\end{aligned}$$
+
+Or using natural units ($\hbar = 1$)
+$$\begin{aligned}
+Z = \left [ \prod_x d\phi(x) \right ] e^{i S(\phi)}
+\end{aligned}$$
+
+This is similar to the representation of thermodynamics used above. 
+We can write observables using source fields,
+$$\begin{aligned}
+Z(J) &= \left [ \prod_x d\phi(x) \right ] e^{i \left (S(\phi) + J(x) \phi(x) \right ) }\\
+<\phi(x)> &= \left . \frac{\partial}{i\partial J(x)}\right |_{J=0} \log( Z(J) ) \\
+<\phi(x) \phi(y)> &= \left . \frac{\partial}{i\partial J(x)} \frac{\partial}{i\partial J(y)}\right |_{J=0} \log( Z(J) ) \\
+&= \frac 1Z \int \left [ d\phi \right ] \phi(x) \phi(y) e^{iS} - <\phi(x)>^2
+\end{aligned}$$
+
+
+
 
 -   Field theories, scalar field theory as an example
 
