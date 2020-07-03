@@ -447,7 +447,7 @@ More on this later.
    Second order transition with *mean field* exponents. These can be calculated analytically.
 
 
-In the O(N), Ising and Potts models, there is also a second order transition
+In the O(N), Ising and Potts models, there is also a first order transition
 when $\beta > \beta_c$ $h\neq 0$, if we change $h$ continuously accross $0$.
 
 -  **Crossover**
