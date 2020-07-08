@@ -514,8 +514,31 @@ Z = \textrm{Tr} e^{-\hat H/T} = \int \left[d\phi \right] \left<\phi\left| e^{-\h
 \end{aligned}$$
 This looks a lot better, but we still need to write it in the form of an integral.
 
+
 ### The imaginary time path integral
 
+Let's consider a scalar field theory is Minkowsky spacetime (the field $\phi$ could also represent a more complicated set of fields). Given the action
+$$\begin{aligned}
+S = \int d^3 dt \mathcal L(\phi,\partial_t \phi) = \int d^3 dt \left [ \frac 12 \partial_\mu \phi \partial^\mu\phi - V(\phi) \right ]
+\end{aligned}$$
+The classical Hamiltonian is obtained by a Legendre transformation
+$$\begin{aligned}
+H &= \int d^3xdt\left [ \pi\dot\phi-\mathcal L \right ],
+\end{aligned}$$
+where $\pi = \delta \mathcal L/\delta\dot\phi$ is the canonical momentum, and
+$$\begin{aligned}
+H &= \int d^3xdt\left [ \pi^2 +\frac 12 (\partial_i\phi)^2 + V(\phi) \right ].
+\end{aligned}$$
+
+In quantum field theory, we consider the Hilbert space of states $|\phi>$, $|\pi>$
+and the Hamiltonian operator
+$$\begin{aligned}
+\hat H |\phi,\pi> = H |\phi,\pi>.
+\end{aligned}$$
+Let's also define the usual field operators
+$$\begin{aligned}
+\hat \phi(\bf x) |\phi> = \phi(\bf x) |\phi>.
+\end{aligned}$$
 
 
 -   Field theories, scalar field theory as an example
