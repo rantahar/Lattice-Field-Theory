@@ -465,26 +465,56 @@ Field theories
 Now we will approach quantum field theories using *Feynman's path integral*. [Phys. Rev. Mod. Phys. 20, 1948].
 In this representation, expecation values are calculated as
 
-$$\begin{aligned}
+$$\begin{align}
 &<O> = \frac{1}{Z} \int \left [ \prod_x d\phi(x) \right ] O(\phi) e^{\frac{i}{\hbar} S(\phi)}\\
 & \textrm{ where } Z= \int \left [ \prod_x d\phi(x) \right ]e^{\frac{i}{\hbar} S(\phi)}\\
 & \textrm{ and } S=\int d^4x \mathcal L (\phi, \partial_t \phi)
-\end{aligned}$$
+\end{align}$$
 
 Or using natural units ($\hbar = 1$)
-$$\begin{aligned}
+$$\begin{align}
 Z = \left [ \prod_x d\phi(x) \right ] e^{i S(\phi)}
-\end{aligned}$$
+\end{align}$$
 
 This is similar to the representation of thermodynamics used above. 
 We can write observables using source fields,
-$$\begin{aligned}
+$$\begin{align}
 Z(J) &= \left [ \prod_x d\phi(x) \right ] e^{i \left (S(\phi) + J(x) \phi(x) \right ) }\\
 <\phi(x)> &= \left . \frac{\partial}{i\partial J(x)}\right |_{J=0} \log( Z(J) ) \\
 <\phi(x) \phi(y)> &= \left . \frac{\partial}{i\partial J(x)} \frac{\partial}{i\partial J(y)}\right |_{J=0} \log( Z(J) ) \\
 &= \frac 1Z \int \left [ d\phi \right ] \phi(x) \phi(y) e^{iS} - <\phi(x)>^2
-\end{aligned}$$
+\end{align}$$
 
+
+Now, since the fields are defined at all space-time locations, the integral measure
+$$\begin{align}
+\prod_x d\phi(x) 
+\end{align}$$
+is not well defined and needs to be regularized. This is a general problem with functional integrals.
+Lattice field theory is a conceptually simple renormalization method:
+we divide the volume into a lattice of discrete points ($x\in aZ^4$) and study a system with
+a finite volume $V$. 
+Since the intgeral is now finite, we can in principle calculate is directly (brute force, with supercomputers,)
+and get fully non-perturbative results.
+
+The full theory is recovered by taking the infinite volume and continuum limit ($v\to \infty, a\to0$).
+The order of the limits is important here, just like for the spin models.
+
+In practice the dimensionality of the integral grows quickly when increasing the volume and decreasing the lattice spacing.
+In most cases the integral can be calculated directly only for lattice sizes that are practically useless.
+
+Instead, we should use Montecarlo methods.
+The problem here is the complex, unimodular weight, $exp(iS)$.
+Every configuration $\{\phi\}$ contributes with the same magnitude and result depends on cancellations between configurations.
+However, this is (mostly) solved in the imaginary time formalism of thermal field theory.
+
+In equilibrium at a finite temperature $T$, a quantum field theory follows the Gibbs ensemble:
+$$\begin{aligned}
+Z = \textrm{Tr} e^{-\hat H/T} = \int \left[d\phi \right] \left<\phi\left| e^{-\hat H/T} \right|\phi\right>
+\end{aligned}$$
+This looks a lot better, but we still need to write it in the form of an integral.
+
+### The imaginary time path integral
 
 
 
