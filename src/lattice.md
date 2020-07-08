@@ -466,9 +466,9 @@ Now we will approach quantum field theories using *Feynman's path integral*. [Ph
 In this representation, expecation values are calculated as
 
 $$\begin{align}
-&<O> = \frac{1}{Z} \int \left [ \prod_x d\phi(x) \right ] O(\phi) e^{\frac{i}{\hbar} S(\phi)}\\
+&<O> = \frac{1}{Z} \int \left [ \prod_x d\phi(x) \right ] O(\phi) e^{\frac{i}{\hbar} S(\phi)} \label{pathintegral}\\
 & \textrm{ where } Z= \int \left [ \prod_x d\phi(x) \right ]e^{\frac{i}{\hbar} S(\phi)}\\
-& \textrm{ and } S=\int d^4x \mathcal L (\phi, \partial_t \phi)
+& \textrm{ and } S=\int d^4x \mathcal L (\phi, \partial_t \phi) 
 \end{align}$$
 
 Or using natural units ($\hbar = 1$)
@@ -504,23 +504,17 @@ In practice the dimensionality of the integral grows quickly when increasing the
 In most cases the integral can be calculated directly only for lattice sizes that are practically useless.
 
 Instead, we should use Montecarlo methods.
-The problem here is the complex, unimodular weight, $exp(iS)$.
+The problem here is the complex, unimodular weight, $\exp(iS)$.
 Every configuration $\{\phi\}$ contributes with the same magnitude and result depends on cancellations between configurations.
 However, this is (mostly) solved in the imaginary time formalism of thermal field theory.
-
-In equilibrium at a finite temperature $T$, a quantum field theory follows the Gibbs ensemble:
-$$\begin{aligned}
-Z = \textrm{Tr} e^{-\hat H/T} = \int \left[d\phi \right] \left<\phi\left| e^{-\hat H/T} \right|\phi\right>
-\end{aligned}$$
-This looks a lot better, but we still need to write it in the form of an integral.
 
 
 ### The imaginary time path integral
 
 Let's consider a scalar field theory is Minkowsky spacetime (the field $\phi$ could also represent a more complicated set of fields). Given the action
-$$\begin{aligned}
+$$\begin{align}
 S = \int d^3 dt \mathcal L(\phi,\partial_t \phi) = \int d^3 dt \left [ \frac 12 \partial_\mu \phi \partial^\mu\phi - V(\phi) \right ]
-\end{aligned}$$
+\end{align}$$
 The classical Hamiltonian is obtained by a Legendre transformation
 $$\begin{aligned}
 H &= \int d^3xdt\left [ \pi\dot\phi-\mathcal L \right ],
@@ -535,10 +529,52 @@ and the Hamiltonian operator
 $$\begin{aligned}
 \hat H |\phi,\pi> = H |\phi,\pi>.
 \end{aligned}$$
-Let's also define the usual field operators
+Let's also define the field operators
 $$\begin{aligned}
-\hat \phi(\bf x) |\phi> = \phi(\bf x) |\phi>.
+&\hat \phi({\bf x}) |\phi> = \phi({\bf x}) |\phi>\\
+&\hat \pi({\bf x}) |\pi> = \pi({\bf x}) |\pi>\\
+&\int \left[\prod_x d\phi({\bf x})\right] |\phi><\phi| = 1\\
+&\int \left[\prod_x \frac {d\pi({\bf x})}{2\pi} \right] |\pi><\pi| = 1\\
+&[\hat\phi({\bf x}),\hat\phi({\bf x}')] = -i\delta^3({\bf x} - {\bf x}') \\
+&<\phi|\pi> = e^{i\int d^3xdt \pi({\bf x})\phi({\bf x})}
 \end{aligned}$$
+In this representation the time evolution operator is 
+$$\begin{aligned}
+U(t)=e^{i\hat H t}
+\end{aligned}$$
+
+In this representation, we can write expectation values in using the
+partition function,
+$$\begin{aligned}
+Z = \textrm{Tr} e^{i\hat H t} = \int \left[d\phi \right] \left<\phi\left| e^{i \hat H t} \right|\phi\right>.
+\end{aligned}$$
+From here we could derive the Feynman path integral representation $\ref{pathintegral}$.
+Here we will follow the derivation,
+evolving the a field configuration $<\phi|$ by small time steps $\delta t$ and 
+taking the limit $\delta t\to 0$,
+but in the imaginary time formalism.
+
+In equilibrium at a finite temperature $T$, a quantum field theory follows the Gibbs ensemble:
+$$\begin{aligned}
+Z = \textrm{Tr} e^{-\hat H/T} = \int \left[d\phi \right] \left<\phi\left| e^{-\hat H/T} \right|\phi\right>.
+\end{aligned}$$
+This is formally similar to the real time partition function above, with the replacement
+$$\begin{aligned}
+\tau = it = 1/T
+\end{aligned}$$
+and is equaivalent to quantum field theory in *Euclidean* spacetime.
+The Hamiltonian and the Hilbert space remain unchanged.
+
+It is convenient to start by discretizing the space.
+We will do this in any case, since we want to end up with discrete spacetime, but could be done later.
+$$\begin{aligned}
+&{\bf x} = a {\bf n}, n_i = 0...N_s,\\
+&\int d^3x \to a^3 \sum_x\\
+&\partial_i\phi \to \frac 1a \left[ \phi({\bf x}+{\bf e}_ia) -\phi(x) \right] = \Delta_i\phi({\bf x})
+\end{aligned}$$
+
+
+
 
 
 -   Field theories, scalar field theory as an example
