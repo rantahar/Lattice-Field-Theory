@@ -1,26 +1,19 @@
+# Minimal makefile for Sphinx documentation
+#
 
+# You can set these variables from the command line.
+SPHINXOPTS    =
+SPHINXBUILD   = sphinx-build
+SOURCEDIR     = source
+BUILDDIR      = build
 
-html: Makefile src/lattice.md
-	mkdir -p public
-	pandoc --toc --toc-depth=2 --mathjax --template src/html-template.html -f markdown -t html -i src/lattice.md -o public/index.html
+# Put it first so that "make" without argument is like "make help".
+help:
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
+.PHONY: help Makefile
 
-pdf: Makefile src/lattice.md
-	pandoc --toc --toc-depth=2 --mathjax --template src/pdf-template.html -f markdown -t html -i src/lattice.md -o lattice.pdf
-
-
-html-lyx: Makefile build/lattice.tex src/lattice.lyx
-	pandoc --toc --toc-depth=2 --mathjax --template src/html-template.html -f markdown -t html -i src/lattice.md -o lattice.pdf
-
-pdf-lyx: Makefile src/lattice.lyx
-	lyx -e pdf src/lattice.lyx
-	mv src/lattice.pdf lattice.pdf
-
-build/lattice.tex: Makefile src/lattice.lyx
-	mkdir -p build
-	lyx -e latex src/lattice.lyx
-	mv src/lattice.tex build/lattice.tex
-
-clean:
-	rm -fr build
-
+# Catch-all target: route all unknown targets to Sphinx using the new
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+%: Makefile
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
