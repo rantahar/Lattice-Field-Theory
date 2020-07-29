@@ -131,8 +131,6 @@ magnetisation dissappears.
 The Ising Model
 -----------
 
-The Ising Model
-==================
 
 The Ising model is a further simplification of the above. All the spins
 are either :math:`+1` or :math:`-1`. The paritition function then is
@@ -304,6 +302,7 @@ We can evaluate the trace by diagonalizing :math:`T`:
    \end{align}
 
 In the thermodynamic limit, :math:`L\to\infty`,
+
 .. math::
    \begin{align}
    \left(\frac{\lambda_-}{\lambda_+}\right)^L \to 0
@@ -334,7 +333,9 @@ So at :math:`h=0` the magnetisation is zero, which is what we expect. At large :
 Phase transitions
 -----------
 
-### Global symmetries
+
+**Global symmetries**
+
 
 The action
 
@@ -412,7 +413,8 @@ We also need to check the integration measure :math:`ds`:
 So the measure is also invariant, and the model is invariant at :math:`h\neq 0`.
 
 
-### Symmetry breaking
+**Symmetry breaking**
+
 
 Consider the model at :math:`h=0` and finite :math:`V`. Since the model has a global :math:`O(N)` symmetry, it is symmetric under
 
@@ -462,7 +464,8 @@ The order of the limits is important here. If the limit :math:`h\to0` is taken t
 - At :math:`D>1` the symmetry is broken at :math:`T>T_c`, or :math:`\beta < \beta_c`.
 
 
-### Phase transitions
+**Phase transitions**
+
 
 In many models we have a broken symmetry at :math:`\beta > \beta_c` and a restored symmetry at :math:`\beta < \beta_c`. This means there is a phase transition at :math:`\beta=\beta_c`
 
@@ -520,7 +523,8 @@ This is the case in spin models.
 
 [scketch]
 
-##### Critical Phenomena:
+Critical Phenomena:
+""""""""""""""
 
 The correlation length :math:`\xi` diverges exponentially at :math:`\beta_c`.
 Structures scale to all distances:
@@ -637,7 +641,8 @@ Every configuration :math:`\{\phi\}` contributes with the same magnitude and res
 However, this is (mostly) solved in the imaginary time formalism of thermal field theory.
 
 
-### The imaginary time path integral
+**The imaginary time path integral**
+
 
 Let's consider a scalar field theory is Minkowsky spacetime (the field :math:`\phi` could also represent a more complicated set of fields). Given the action
 
@@ -708,11 +713,11 @@ This is formally similar to the real time partition function above, with the rep
    \begin{align}
    \tau = it = 1/T
    \end{align}
-and is equaivalent to quantum field theory in *Euclidean* spacetime.
+and is equivalent to quantum field theory in *Euclidean* spacetime.
 The Hamiltonian and the Hilbert space remain unchanged.
 
 It is convenient to start by discretizing the space.
-We will do this in any case, since we want to end up with discrete spacetime, but could be done later.
+We will do this in any case, since we want to end up with discrete spacetime, but this could be done later.
 
 .. math::
    \begin{align}
@@ -721,6 +726,77 @@ We will do this in any case, since we want to end up with discrete spacetime, bu
    &\partial_i\phi \to \frac 1a \left[ \phi({\bf x}+{\bf e}_ia) -\phi(x) \right] = \Delta_i\phi({\bf x})
    \end{align}
 
+The Hamiltonian in discrete space is
+
+.. math::
+   \begin{align}
+   &\hat H = a^3 \sum_x \left [ \frac 12 [\hat pi(x)]^2 + \frac 12 [\hat pi(x)]^2  \right ]
+   \end{align}
+
+Now let's consider the amplitude of the fields :math:`\phi_A` and :math:`\phi_B` in equilibrium at inverse temperature :math:`\tau = 1/T` and split the time interval into N small sections
+
+.. math::
+   \begin{align}
+   &\left<\phi_B \left|e^{-\tau \hat H}\right|\phi_A \right> = 
+    \left<\phi_B \left| \left(e^{-\tau/N \hat H}\right)^N\right|\phi_A \right>\\
+   &= \left<\phi_B \left| \left(e^{-a_\tau \hat H}\right)^N\right|\phi_A \right>
+   \end{align}
+
+In order to evaluate this, we insert the identity operators :math:`1 = \int\left[\Pi_x\right]|\phi_x><\phi_x|` and :math:`\int\left[\Pi_x\right]|\pi_x><\pi_x|`.
+
+.. math::
+   \begin{align}
+   &\left<\phi_B \left|e^{-\tau \hat H}\right|\phi_A \right> = \\
+   &\int\left[\prod_{i=2}^N\prod_x d\phi_x\right]\left[\prod_{i=1}^N\prod_x d\pi_x \right]
+   \left<\phi_B |\pi_N\right > \left<\pi_N |e^{-a_\tau \hat H}|\phi_N\right > \\
+   &\left<\phi_N |\pi_{N-1}\right > \left<\pi_{N-1} |e^{-a_\tau \hat H}|\phi_{N-1}\right >\dots 
+   \left<\phi_2 |\pi_{1}\right > \left<\pi_1 |e^{-a_\tau \hat H}|\phi_A\right >
+   \end{align}
+
+Now the matrix in each exponential is small, we can expand the first few two and conclude that
+
+.. math::
+   \begin{align}
+   &\left<\pi_n |e^{-a_\tau \hat H}|\phi_n\right > = 
+   e^{-a^3 a_\tau \sum_x \left( \frac 12 \pi_x^2 + \frac 12 (\Delta_i\phi_n)^2 + V[\phi_i]\right )} \left< \pi_n |\phi_n \right> + O(a_\tau^2)
+   \end{align}
+
+and that
+
+.. math::
+   \begin{align}
+   \left<\phi_{n+1} | \pi_n\right >\left<\pi_n | \phi_n\right > &= 
+   e^{ia^3 \sum_x \pi_n({\bf x})\phi_{n+1}({\bf x}) } e^{-ia^3 \sum_x \phi_n({\bf x})\pi_n({\bf x}) } \\
+   &= e^{-ia^3 a_\tau \sum_x \pi_n({\bf x})\Delta_0\phi_n({\bf x}) }
+   \end{align}
+
+where :math:`\Delta_0 = \frac {1}{a_\tau} \left( \phi_{n+1} - \phi_n \right)`.
+
+Repeating this we can write the entire expression in terms of the field values :math:`\phi_n` and :math:`\pi_n` in discrete time.
+Further, the intergral over the field :math:`\pi_n({\bf x})` is gaussian and 
+after performing that integral we are only left with :math:`\phi_n`.
+
+.. math::
+   \begin{align}
+   &\int\left[\prod_x d\pi_n({\bf x}) \right]
+   e^{a^3 a_\tau \sum_x \left(-\frac 12 \pi_n({\bf x})^2 + (i\Delta_0\phi_n({\bf x})  \pi_n({\bf x})^2 \right) } \\
+   &= \left(\frac{2\pi}{a^2a_\tau}\right)^{N_S^3/2} 
+   e^{-a^3 a_\tau \sum_x \left(\Delta_0\phi_n({\bf x})\right)^2 }
+   \end{align}
+
+Now, after running through the same logic for all other :math:`n`, we find the path integral
+
+.. math::
+   \begin{align}
+   &\left<\phi_B \left|e^{-\tau \hat H}\right|\phi_A \right> = \frac 1Z  \int\left[\prod_x d\phi_n({\bf x}) \right] \phi_A(\tau_A) \phi_B(\tau_B) e^{ -S_E } 
+   \end{align}
+
+and
+
+.. math::
+   \begin{align}
+   S_E = a^3 a_\tau \sum_x \frac 12 (\Delta_\mu \phi)^2 + V[\phi] 
+   \end{align}
 
 
 
