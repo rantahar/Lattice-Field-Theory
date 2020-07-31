@@ -726,7 +726,7 @@ Now, after running through the same logic for all other :math:`n`, we find the p
 and
 
 
-.. note:: 
+.. container:: note
 
    .. math::
        S_E = a^3 a_\tau \sum_x \left (\frac 12 \Delta_\mu \phi \right )^2 + V[\phi] 
