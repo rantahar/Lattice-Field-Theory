@@ -109,6 +109,8 @@ htmlhelp_basename = 'LatticeFieldTheoriesdoc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
+latex_engine = 'pdflatex'
+
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
@@ -120,7 +122,13 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #
-    # 'preamble': '',
+    'preamble': r'''\newcommand{\bra}[1]{\langle #1 |}
+                 \newcommand{\ket}[1]{|{#1}\rangle}
+                 \newcommand{\ev}[1]{\langle{#1}\rangle|}
+                 \newcommand{\braket}[1]{\langle{#1}\rangle|}
+                 \newcommand{\Braket}[2]{\left\langle {#1} \,\middle|\, {#2} \right\rangle}
+                 \newcommand{\Braketmid}[3]{\left\langle {#1} \,\middle|\, {#2} \,\middle|\, {#3} \right\rangle}
+                ''',
 
     # Latex figure (float) alignment
     #
@@ -180,12 +188,17 @@ epub_exclude_files = ['search.html']
 
 #mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 mathjax_config = {
-    'TeX': { 'equationNumbers': { 'autoNumber': "AMS" } }
+    'TeX': { 'equationNumbers': { 'autoNumber': "AMS" },
+             'Macros': { 'bra': ["\\langle{#1}|", '1'],
+                         'ket': ["|{#1}\\rangle", '1'],
+                         'ev': ["\\langle{#1}\\rangle", '1'],
+                         'braket': ["\\langle{#1}\\rangle", '1'],
+                         'Braket': ['\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle','2'], 
+                         'Braketmid': ['\\left\\langle {#1} \\,\\middle|\\, {#2} \\,\\middle|\\, {#3} \\right\\rangle','3'] }
+    }
 }
 
 
-html_js_files = [
-    'js/mathjaxoptions.js',
-]
+
 
 

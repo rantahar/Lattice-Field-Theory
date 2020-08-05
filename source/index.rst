@@ -117,7 +117,7 @@ the Boltzmann distribution,
 The thermal expectation value of an observable :math:`O` is then
 
 .. math::
-   <O> &= \frac 1Z \int[\prod_{i}ds_{i}] \, O(s) \, e^{-\frac{1}{kT}E(s)}
+   <O> = \frac 1Z \int[\prod_{i}ds_{i}] \, O(s) \, e^{-\frac{1}{kT}E(s)}
    :label:
  
 At high temperatures the spins become essentially random and the
@@ -131,7 +131,7 @@ The Ising model is a further simplification of the above. All the spins
 are either :math:`+1` or :math:`-1`. The paritition function then is
 
 .. math::
-   Z & =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
+   Z =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
    :label:
 Here we use dimensionless couplings, :math:`\beta=\frac{1}{kT}` and
 :math:`h=\frac{\gamma H}{kT}`.
@@ -140,11 +140,12 @@ The Ising model has been solved in 1 and 2 dimensions **(citation
 onsager).**
 
 
-::::: {.card .bg-light}
-**Example**
+.. container:: note
 
-Let's implement the Ising model.
-:::::
+   **Example**
+
+   Let's implement the Ising model.
+
 
 Observables
 -----------
@@ -161,20 +162,20 @@ where V is the number of points on the lattice, the volume. We get the thermal a
 
 
 .. math::
-   <M> &=\frac{1}{V} \frac 1Z \int[\prod_{i}ds_{i}]  e^{-\frac{1}{kT}E(s)} ( \sum_{i}s_{i}) 
+   <M> =\frac{1}{V} \frac 1Z \int[\prod_{i}ds_{i}]  e^{-\frac{1}{kT}E(s)} ( \sum_{i}s_{i}) 
    :label:
 
 This can also be expressed as a derivative of the partition function with respect to the external field :math:`h` 
 
 .. math::
-   <M> &= \frac{1}{V} \frac{\partial}{\partial h} \log(Z).
+   <M> = \frac{1}{V} \frac{\partial}{\partial h} \log(Z).
    :label:
 So the field :math:`h` functions as a source for the magnetisation.
 
 Similarly the energy is 
 
 .. math::
-   <E> & = \frac 1Z \int[\prod_{i}ds_{i}] \, E(s) \, e^{-\beta E(s)} \\
+   <E> &= \frac 1Z \int[\prod_{i}ds_{i}] \, E(s) \, e^{-\beta E(s)} \\
    &= -\frac{\partial}{\partial \beta} \log(Z)
    :label:
 
@@ -207,11 +208,11 @@ where :math:`\xi` is the correlation length.
 Deriving this from the partition function requires introducing an :math:`\mathbf{x}`-dependent source :math:`h_\mathbf{x}`
 
 .. math::
-   Z & =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+\sum_{i} h_i s_{i}}.
+   Z =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+\sum_{i} h_i s_{i}}.
    :label:
 
 .. math::
-   &C(\mathbf{x}-\mathbf{y}) = \partial_\mathbf{x} \partial_\mathbf{y}
+   C(\mathbf{x}-\mathbf{y}) = \partial_\mathbf{x} \partial_\mathbf{y}
      \left . \log(Z) \right |_{h=0}
    :label:
 
@@ -287,7 +288,7 @@ In the thermodynamic limit, :math:`L\to\infty`,
 and 
 
 .. math::
-   \log(Z) &= L\log \left( \cosh(h) + \sqrt{\sinh^2(h)+e^{-4\beta}} \right )
+   \log(Z) = L\log \left( \cosh(h) + \sqrt{\sinh^2(h)+e^{-4\beta}} \right )
    :label:
 
 From here we can calculate the magnetisation as a function of :math:`h`
@@ -600,12 +601,12 @@ Let's consider a scalar field theory is Minkowsky spacetime (the field :math:`\p
 The classical Hamiltonian is obtained by a Legendre transformation
 
 .. math::
-   H &= \int d^3xdt\left [ \pi\dot\phi-\mathcal L \right ],
+   H = \int d^3xdt\left [ \pi\dot\phi-\mathcal L \right ],
    :label:
 where :math:`\pi = \delta \mathcal L/\delta\dot\phi` is the canonical momentum, and
 
 .. math::
-   H &= \int d^3xdt\left [ \pi^2 +\frac 12 (\partial_i\phi)^2 + V(\phi) \right ].
+   H = \int d^3xdt\left [ \pi^2 +\frac 12 (\partial_i\phi)^2 + V(\phi) \right ].
    :label:
 
 In quantum field theory, we consider the Hilbert space of states :math:`|\phi>`, :math:`|\pi>`
@@ -667,7 +668,7 @@ We will do this in any case, since we want to end up with discrete spacetime, bu
 The Hamiltonian in discrete space is
 
 .. math::
-   &\hat H = a^3 \sum_x \left [ \frac 12 [\hat pi(x)]^2 + \frac 12 [\hat pi(x)]^2  \right ]
+   \hat H = a^3 \sum_x \left [ \frac 12 [\hat pi(x)]^2 + \frac 12 [\hat pi(x)]^2  \right ]
    :label:
 
 Now let's consider the amplitude of the fields :math:`\phi_A` and :math:`\phi_B` in equilibrium at inverse temperature :math:`\tau = 1/T` and split the time interval into N small sections
@@ -766,7 +767,7 @@ The correlation functions of a classical theory are related to the Green's funct
 Earlier we used the "transfer matrix" :math:`T`,
 
 .. math::
-   T_{\phi_{i+1},\phi_i} = \left < \phi_{i+1} \left | e^{-a_\tau \hat H}\right | \phi_i \right > 
+   T_{\phi_{i+1},\phi_i} = \Braketmid{ \phi_{i+1} }{ e^{-a_\tau \hat H} }{ \phi_i } 
    :label:
 We can write the partition function using the transfer matrix as
 
@@ -795,16 +796,16 @@ Introducing a time dependent operator
 In the limit :math:`N_\tau\to\infty` (and because :math:`a_\tau(i-j) = \tau_i-\tau_j`),
 
 .. math::
-   <\phi_i \phi_j> = \left< 0 \left| \hat\phi \left(\frac{T}{\lambda_0}\right)^{i-j} \hat\phi \right| 0 \right>
-   = \left< 0 \left| \hat\phi(\tau_i) \hat\phi(\tau_j) \right| 0 \right>
+   <\phi_i \phi_j> = \Braketmid{ 0 }{ \hat\phi \left(\frac{T}{\lambda_0}\right)^{i-j} \hat\phi }{ 0 }
+   = \Braketmid{ 0 }{ \hat\phi(\tau_i) \hat\phi(\tau_j) }{ 0 }
    :label:
 
 Finally, if including also negative time separation :math:`i-j`, we have 
 
 .. math::
-   <\phi_i \phi_j> = \left< 0 \left| \mathcal T \left[ \hat\phi(\tau_i) \hat\phi(\tau_j) \right] \right| 0 \right>,
+   <\phi_i \phi_j> =\Braketmid{ 0 }{ \mathcal T \left[ \hat\phi(\tau_i) \hat\phi(\tau_j) \right] }{ 0 },
    :label:
-where $\mathal T$ is the time ordering operator.
+where :math:`\mathcal T` is the time ordering operator.
 
 
 **Greens Function and the Mass Spectrum**
@@ -813,25 +814,28 @@ Any greens function for operator :math:`\Gamma` can be expanded in terms of ener
 (eigenstates of the hamiltonian)
 
 .. math::
-   \left< 0 \left| \Gamma(\tau) \Gamma^\dagger(0) \right| 0 \right>
+   \Braketmid{ 0 }{ \Gamma(\tau) \Gamma^\dagger(0) }{ 0 }
    &= \frac 1Z \int\left[ d\phi \right ] \Gamma(\tau) \Gamma^\dagger(0) e^{-S}\\
-   &= \left< 0 \left| e^{\hat H \tau} \Gamma(0) e^{-\hat H \tau} \Gamma(0) \right| 0 \right>\\
-   &= \sum_n  \left< 0 \left| \Gamma(0) \right| E_n \right>  e^{-E_n \tau} \left< E_n \left | \Gamma(0) \right| 0 \right>\\
-   &= \sum_n e^{-E_n\tau} \left| \left< 0 \left| \Gamma(0) \right| E_n \right> \right|^2
+   &= \Braketmid{ 0 }{ e^{\hat H \tau} \Gamma(0) e^{-\hat H \tau} \Gamma(0) }{ 0 }\\
+   &= \sum_n  \Braketmid{ 0 }{ \Gamma(0) }{ E_n }  e^{-E_n \tau}  \Braketmid{ E_n }{ \Gamma(0) }{ 0 }\\
+   &= \sum_n e^{-E_n\tau} \left| \Braketmid{ 0 }{ \Gamma(0) }{ E_n } \right|^2
    :label:
+
 At long enough distances we find
 
 .. math::
-   \left< 0 \left| \Gamma(\tau) \Gamma^\dagger(0) \right| 0 \right> 
-   \to e^{-E_0\tau} \left| \left< 0 \left| \Gamma(0) \right| E_0 \right> \right|^2
+   \Braketmid{ 0 }{ \Gamma(\tau) \Gamma^\dagger(0) }{ 0 } 
+   \to e^{-E_0\tau} \left| \Braketmid{ 0 }{ \Gamma(0) }{ E_0 } \right|^2,
    \textrm{ when } \tau \to \infty
    :label:
+
 Here the state :math:`E_0` is the lowest energy eigenstate that the operator :math:`\Gamma(0)`
 constructs out of the vacuum state and therefore the eigenvalue :math:`E_0` is the mass of a
 state with the same quantum numbers as :math:`\Gamma(0)`.
 
 This relation allows us to measure the masses of propagating composite states.
 It is also useful for calculating certain more complicated observables, such as scattering lengths.
+
 
 
 
