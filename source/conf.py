@@ -193,7 +193,7 @@ mathjax_config = {
                          'ket': ["|{#1}\\rangle", '1'],
                          'ev': ["\\langle{#1}\\rangle", '1'],
                          'braket': ["\\langle{#1}\\rangle", '1'],
-                         'Braket': ['\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle','2'], 
+                         'Braket': ['\\left\\langle {#1} \\,\\middle|\\, {#2} \\right\\rangle','2'],
                          'Braketmid': ['\\left\\langle {#1} \\,\\middle|\\, {#2} \\,\\middle|\\, {#3} \\right\\rangle','3'] }
     }
 }
