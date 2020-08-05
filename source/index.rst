@@ -539,6 +539,9 @@ temperature, but the two phases are nevertheless distinct.
 Field theories
 ============================
 
+Imaginary Time Path integral
+----------------------------
+
 Now we will approach quantum field theories using *Feynman's path integral*. [Phys. Rev. Mod. Phys. 20, 1948].
 In this representation, expecation values are calculated as
 
@@ -589,8 +592,6 @@ The problem here is the complex, unimodular weight, :math:`\exp(iS)`.
 Every configuration :math:`\{\phi\}` contributes with the same magnitude and result depends on cancellations between configurations.
 However, this is (mostly) solved in the imaginary time formalism of thermal field theory.
 
-
-**The imaginary time path integral**
 
 
 Let's consider a scalar field theory is Minkowsky spacetime (the field :math:`\phi` could also represent a more complicated set of fields). Given the action
@@ -741,6 +742,9 @@ In the continuum limit we would have
    :label:
 
  
+Finite Temperature
+------------------
+
 So the path integral formulation in thermal equilibrium is has the same form as a
 Euclidean field theory in four dimensions.
 Furthern we can now write the partition function as
@@ -749,6 +753,10 @@ Furthern we can now write the partition function as
    Z &= \int d\phi \left<\phi\left| e^{ -\hat H / T } \right|\phi\right>\\
      &= \int \left[d\phi \right] e^{ - \frac 1T S_E(\phi)}
    :label:
+
+The quantum statistical model in 3 dimensions corresponds to a classical statistical model
+in 4 dimensions with periodic boundary conditions.
+
 
 In summary
 
@@ -837,12 +845,79 @@ This relation allows us to measure the masses of propagating composite states.
 It is also useful for calculating certain more complicated observables, such as scattering lengths.
 
 
+**Lattice Terminology**
+
+We do computation on a lattice with a finite number of points, so a finite volume and finite lattice spacing.
+In order to obtain results in a continuum model, we need to take two limits in order:
+ - :math:`V \to \infty`: the *thermodynamic* limit
+ - :math:`a \to 0`: the *continuum* limit
+
+ 1. Run simulations at fixed :math:`a` and several :math:`V`. Extrapolate to :math:`V\to\infty`
+ 2. Do the previous with different values of :math:`a` and extrapolate to :math:`a\to 0`
+
+Often it is also easier to run simulations with unphysical parameters, such as quark mass in QCD
+and take the limit :math:`m_q \to m_{q,phys}`
+
+At :math:`T=0`
+
+ 1) :math:`V\to \infty`
+    :math:`N_\tau,N_s\to\infty`, :math:`a` constant
+ 2) continuum:
+    :math:`a\to 0`
+
+At :math:`T>0`
+
+ 1) :math:`V\to \infty`
+    :math:`N_s\to\infty`, :math:`a` constant, :math:`N_\tau a` constant
+ 2) continuum:
+    :math:`a\to 0`, :math:`\frac 1T = aN_\tau` constant
+
+
+
+
+Scalar Fields
+---------------
+
+**The action**
+
+The continuum action of a free scalar field :math:`\phi` in Euclidean space is
+
+.. math::
+   S = \int dx \frac 12 \sum_\mu \phi(x) \partial_\mu \partial_\mu \phi(x) + \frac 12 m^2\phi(x)^2
+   :label:
+
+On a lattice we can define the d'Alembert operator as
+
+.. math::
+   \Box_{x,y} \phi_y = -\Delta^2\phi = \sum_\mu \frac {1}{a^2} \left( 2\phi_x - \phi_{x-\hat\mu} - \phi_{\hat\mu} \right)
+   :label:
+where :math:`\hat\mu` a basis vector of length :math:`a` and :math:`x` and :math:`y` are vectors,
+:math:`x_\mu = an_\mu`
+Using these definitions, we can write the lattice action as
+
+.. math::
+   S =  a^d \sum_x\left[ \frac 12 \sum_\mu \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 \right]
+   :label:
+
+The action is Gaussian, :math:`S=\frac12 \phi_xM_{x,y}\phi_y`, and we can actually do the integral
+in the partition function
+
+.. math::
+   Z = \int \left[d\phi\right] e^{-S} = \left( \frac {1}{2\pi} \det M  \right)^{-1/2}
+   :label:
+
+While this seems looks like it should reproduce the continuum action when :math:`a\to 0`, but this is
+actually a subtle issue. In this case things will work out, but once we get to fermions, we will see
+how this can go wrong. In any case, we should check that our action produces the correct model in 
+continuum.
+
+
+**Fourier Transforms**
+
+
 
 
 -   Field theories, scalar field theory as an example
-
-    -   Quantum field theory with a scalar field - derivation of
-        discretized system
 
     -   Universality, critical points
 
@@ -892,10 +967,8 @@ Project suggestions:
 
 -   Transition type and temperature in the U(N) model
 
--   Higgs model, transition
+-   Higgs-Yukawa model, transition
 
 -   String tension in SU(3)
-
--   Counting naive fermions?
 
 -   3D Thirring model (2D?)
