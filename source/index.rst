@@ -816,7 +816,7 @@ Any greens function for operator :math:`\Gamma` can be expanded in terms of ener
    \left< 0 \left| \Gamma(\tau) \Gamma^\dagger(0) \right| 0 \right>
    &= \frac 1Z \int\left[ d\phi \right ] \Gamma(\tau) \Gamma^\dagger(0) e^{-S}\\
    &= \left< 0 \left| e^{\hat H \tau} \Gamma(0) e^{-\hat H \tau} \Gamma(0) \right| 0 \right>\\
-   &= \sum_n  \left< 0 \left| \Gamma(0) \right| E_n \right>  e^{-E_n \tau} \left< E_n \left | \Gamma(0) \right| 0 \right>
+   &= \sum_n  \left< 0 \left| \Gamma(0) \right| E_n \right>  e^{-E_n \tau} \left< E_n \left | \Gamma(0) \right| 0 \right>\\
    &= \sum_n e^{-E_n\tau} \left| \left< 0 \left| \Gamma(0) \right| E_n \right> \right|^2
    :label:
 At long enough distances we find
@@ -828,7 +828,7 @@ At long enough distances we find
    :label:
 Here the state :math:`E_0` is the lowest energy eigenstate that the operator :math:`\Gamma(0)`
 constructs out of the vacuum state and therefore the eigenvalue :math:`E_0` is the mass of a
-state with the same quantum numbers as :math:`Gamma(0)`.
+state with the same quantum numbers as :math:`\Gamma(0)`.
 
 This relation allows us to measure the masses of propagating composite states.
 It is also useful for calculating certain more complicated observables, such as scattering lengths.
