@@ -768,11 +768,70 @@ Earlier we used the "transfer matrix" :math:`T`,
 .. math::
    T_{\phi_{i+1},\phi_i} = \left < \phi_{i+1} \left | e^{-a_\tau \hat H}\right | \phi_i \right > 
    :label:
-The partition function then is
+We can write the partition function using the transfer matrix as
 
 .. math::
    Z = \int \left [ d\phi \right ] e^{S_E} = Tr \left( T^{N_\tau} \right)
    :label:
+Now diagonalizing the transfer matrix :math:`T` and labeling the eigenvalues as :math:`\lambda_0, \lambda_1,\dots`,
+
+.. math::
+   Z = \sum_i \lambda_i^{N_\tau} = \lambda_0^{N_\tau} \left[ 1 + O((\lambda_1/\lambda_0)^{N_\tau}) + \dots \right]
+   :label:
+Note that the eigenvalues :math:`\lambda_i` are equal to :math:`exp(E_i)`, where :math:`E_i` are the eigenvalues of :math:`\hat H`.
+So :math:`\lambda_0` corresponds to the lowest energy state, or the vacuum :math:`|0>`.
+
+The two point function (with :math:`i>j`) in the path integral and operator representations is
+
+.. math::
+   <\phi_i \phi_j> = \frac 1Z \int\left[ d\phi \right] \phi_i \phi_j e^{-S_E} 
+   = \frac 1Z Tr\left( T^{N_\tau-(i-j)} \hat\phi T^{i-j} \hat\phi  \right) 
+   :label:
+Introducing a time dependent operator
+
+.. math::
+   \hat \phi(\tau) = e^{\tau\hat H} \hat\phi e^{-\tau\hat H}
+   :label:
+In the limit :math:`N_\tau\to\infty` (and because :math:`a_\tau(i-j) = \tau_i-\tau_j`),
+
+.. math::
+   <\phi_i \phi_j> = \left< 0 \left| \hat\phi \left(\frac{T}{\lambda_0}\right)^{i-j} \hat\phi \right| 0 \right>
+   = \left< 0 \left| \hat\phi(\tau_i) \hat\phi(\tau_j) \right| 0 \right>
+   :label:
+
+Finally, if including also negative time separation :math:`i-j`, we have 
+
+.. math::
+   <\phi_i \phi_j> = \left< 0 \left| \mathcal T \left[ \hat\phi(\tau_i) \hat\phi(\tau_j) \right] \right| 0 \right>,
+   :label:
+where $\mathal T$ is the time ordering operator.
+
+
+**Greens Function and the Mass Spectrum**
+
+Any greens function for operator :math:`\Gamma` can be expanded in terms of energy states
+(eigenstates of the hamiltonian)
+
+.. math::
+   \left< 0 \left| \Gamma(\tau) \Gamma^\dagger(0) \right| 0 \right>
+   &= \frac 1Z \int\left[ d\phi \right ] \Gamma(\tau) \Gamma^\dagger(0) e^{-S}\\
+   &= \left< 0 \left| e^{\hat H \tau} \Gamma(0) e^{-\hat H \tau} \Gamma(0) \right| 0 \right>\\
+   &= \sum_n  \left< 0 \left| \Gamma(0) \right| E_n \right>  e^{-E_n \tau} \left< E_n \left | \Gamma(0) \right| 0 \right>
+   &= \sum_n e^{-E_n\tau} \left| \left< 0 \left| \Gamma(0) \right| E_n \right> \right|^2
+   :label:
+At long enough distances we find
+
+.. math::
+   \left< 0 \left| \Gamma(\tau) \Gamma^\dagger(0) \right| 0 \right> 
+   \to e^{-E_0\tau} \left| \left< 0 \left| \Gamma(0) \right| E_0 \right> \right|^2
+   \textrm{ when } \tau \to \infty
+   :label:
+Here the state :math:`E_0` is the lowest energy eigenstate that the operator :math:`\Gamma(0)`
+constructs out of the vacuum state and therefore the eigenvalue :math:`E_0` is the mass of a
+state with the same quantum numbers as :math:`Gamma(0)`.
+
+This relation allows us to measure the masses of propagating composite states.
+It is also useful for calculating certain more complicated observables, such as scattering lengths.
 
 
 
