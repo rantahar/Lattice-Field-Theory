@@ -5,17 +5,17 @@ import draw_ising
 
 
 ### Set up parameters
-L = 128
+lattice_size = 128
 T = 1.0
 updates_per_frame = 100
 
 # Start with all spins 1
-spin = np.ones([L,L], dtype=int) 
+spin = np.ones([lattice_size,lattice_size], dtype=int) 
 
 
 
 ###########################################
-# Assing the increase temperature buttons 
+# Assign the increase temperature buttons 
 def tup(event):
    global T
    T = T+0.1
@@ -32,13 +32,13 @@ draw_ising.setup(spin, tup, tdn)
 # Run updates
 while True :
    for i in range(updates_per_frame):
-      x = int( L*np.random.random() )
-      y = int( L*np.random.random() )
+      x = int( lattice_size*np.random.random() )
+      y = int( lattice_size*np.random.random() )
 
-      # current energy
+      # change in energy
       energy_difference = 2*spin[x][y] * (
-                            spin[x][(y+1)%L] + spin[x][y-1] 
-                          + spin[(x+1)%L][y] + spin[x-1][y] )
+                            spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                          + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
 
       # propability from the distributions
       p = np.exp( -energy_difference/T )

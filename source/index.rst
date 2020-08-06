@@ -121,7 +121,7 @@ The thermal expectation value of an observable :math:`O` is then
    :label:
  
 At high temperatures the spins become essentially random and the
-magnetisation dissappears.
+magnetisation disappears.
 
 The Ising Model
 -----------
@@ -140,11 +140,88 @@ The Ising model has been solved in 1 and 2 dimensions **(citation
 onsager).**
 
 
+
 .. container:: note
 
    **Example**
 
-   Let's implement the Ising model.
+   Let's implement the Ising model. This is in python, but it's hopefully readable
+   if you know another language. The algorithm is the important part. I recommend that
+   you write the code yourself, and don't just copy and paste.
+   
+   First will need numpy
+
+   .. code-block:: python
+
+      import numpy as np
+   
+   Next set up some parameters
+
+   .. code-block:: python
+
+      lattice_size = 16
+      temperature = 4.0
+      number_of_updates = 1000
+
+   Create a numpy array that contains a spin on each lattice site
+
+   .. code-block:: python
+
+      spin = np.ones([lattice_size,lattice_size], dtype=int)
+
+   and run updates in a loop, updating one random site at a time
+
+   .. code-block:: python
+
+      for i in range(number_of_updates):
+         x = int( lattice_size*np.random.random() )
+         y = int( lattice_size*np.random.random() )
+
+   Now we will randomly change the spin so that the probability matches the Boltzmann
+   distribution. The current state is should have the weight :math:`e^{-\frac{1}{T}E_{this}}`.
+   The probability weight of the other state should be :math:`e^{-\frac{1}{T}E_{flipped}}`, so we
+   will change it with the probability
+   
+   .. math::
+      p = \min\left ( 1, \frac{e^{-\frac{1}{T}E_{this}}}{e^{-\frac{1}{T}E_{flipped}}} \right )
+      = \min\left ( 1, e^{\frac{1}{T}(E_{flipped}-E_{this})} \right )
+   This way we end up with the correct probability distribution.
+
+   .. code-block:: python
+
+         energy_difference = 2*spin[x][y] * (
+                             spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                           + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+         probability = np.exp( -energy_difference/temperature )
+
+   Now we flip the sping with this probability
+
+   .. code-block:: python
+
+      if np.random.random() < probability:
+         spin[x][y] = - spin[x][y]
+
+   This works in principle, but the program is a bit boring since it doesn't measure anything.
+   Let's print out the energy after each update.
+
+   .. code-block:: python
+
+      energy = 0
+      for x in range(lattice_size):
+         for y in range(lattice_size):
+            energy += 4 - spin[x][y] * (
+                          spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                        + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+      
+      print("The energy is {}".format(energy))
+   
+   
+   **Exercise**
+   
+   1. Measure the magnetisation as well
+   2. Running the measurement between each update is really wasteful.
+      Do multiple updates between measurements.
+
 
 
 Observables
