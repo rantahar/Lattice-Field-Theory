@@ -42,8 +42,8 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.githubpages',
+    'rst2pdf.pdfbuilder',
 ]
-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -122,7 +122,9 @@ latex_elements = {
 
     # Additional stuff for the LaTeX preamble.
     #
-    'preamble': r'''\newcommand{\bra}[1]{\langle #1 |}
+    'preamble': r'''
+                 \usepackage{epstopdf}
+                 \newcommand{\bra}[1]{\langle #1 |}
                  \newcommand{\ket}[1]{|{#1}\rangle}
                  \newcommand{\ev}[1]{\langle{#1}\rangle|}
                  \newcommand{\braket}[1]{\langle{#1}\rangle|}

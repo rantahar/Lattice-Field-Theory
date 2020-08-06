@@ -64,13 +64,30 @@ Spin models describe, in a rather simplified way, how a ferromagnet works.
 We think of a clump of iron as a bunch of "atoms" sitting
 unmoving on a structured lattice.
 
-\[Image\]
+.. raw:: html
+
+   <img src="_static/spin_random.svg">
+
+
+.. raw:: latex
+
+   \includegraphics[width=0.6\linewidth]{spin_random.eps}
+
+
 
 Each atom has a spin, which creates a small magnetic field. When the
 spins point to different random directions (as above), they cancel each
 other and the iron is not magnetized. But if for some reason they point
 to the same direction, the small magnetic fields add up into a
 macroscopic value.
+
+.. raw:: html
+
+   <img src="_static/spin_ordered.svg">
+
+.. raw:: latex
+
+   \includegraphics[width=0.6\linewidth]{spin_ordered.eps}
 
 Why would this happen?
 
