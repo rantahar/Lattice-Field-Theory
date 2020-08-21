@@ -278,7 +278,7 @@ the probability of flippping a spin:
 
    .. code-block:: python
 
-         probability = P_now / (P_now + P_flipped)
+         probability = P_flipped / (P_now + P_flipped)
 
    Now we flip the sping with this probability
 
