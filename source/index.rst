@@ -140,9 +140,11 @@ The thermal expectation value of an observable :math:`O` is then
 At high temperatures the spins become essentially random and the
 magnetisation disappears.
 
-The Ising Model
------------
 
+
+
+The Ising Model
+-----------------
 
 The Ising model is a further simplification of the above. All the spins
 are either :math:`+1` or :math:`-1`. The paritition function then is
@@ -153,9 +155,72 @@ are either :math:`+1` or :math:`-1`. The paritition function then is
 Here we use dimensionless couplings, :math:`\beta=\frac{1}{kT}` and
 :math:`h=\frac{\gamma H}{kT}`.
 
-The Ising model has been solved in 1 and 2 dimensions **(citation
-onsager).**
+The Ising model has been solved in 1 and 2 dimensions (Onsager 1944, Yang 1952).
 
+
+**Simulation Algorithms**
+
+The integral in the partition funtion has a very high dimension and cannot
+practically be performed directly.
+We introduce the Heat Path algorithm here and will cover other Monte Carlo
+methods in later chapters.
+Monte Carlo methods perform very well when calculating high dimensional
+integrals.
+
+In the Ising model, the integral reduces to a sum over all possible configurations
+of the spins. At constant temperature (in a heat path), the probability of finding
+the model in a given state should be equal to the Boltzmann weight.
+
+.. math::
+   P(s) = \frac{1}{Z} e^{-\frac{1}{kT}E(s)}
+   :label:
+
+We use a model known as a Markov Chain to draw configurations from this distribution.
+Starting from any given configuration :math:`s_0`, we build a new configuration
+math:`s_1` and accept it with an appropriate probability math:`W_f(s_0 \to s_1)`.
+The probability needs to be chosen correctly so that we do not move out of the
+Boltzmann distribution.
+
+One way to achieve this is to require that the algorithm satisfies the 
+*detailed balance* condition:
+
+.. math::
+   \frac{W_f(s_0\to s_1)}{W_f(s_1 \to s_0)} = \frac{P(s_1)}{P(s_0)} = e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]}
+   :label:
+
+If the first configuration is drawn with the corrrect probability, so will be
+the second one. Detailed balance is in fact a bit more stringent a requirement
+than is necessary, but it's usually easiest to implement an algorithm that
+satisfies it.
+
+The complete algorithms needs to satisfy another requirement, *ergodicity*.
+It must be possible to reach any possible configuration from any other possible
+configuration in a finite number of updates. Otherwise we might get stuck in 
+a finite region of the space of configurations.
+
+With these two conditions, as long as the original configuration is drawn from
+the correct distribution, the next one will also be.
+And since all configurations have a non-zero weight, we can actually start from
+any configuration.
+
+But how do we construct the update? The Ising model has been studied for a long
+time and there are many options.
+One option is to update one spin at a time, flipping each spin with the appropriate
+probability to satisfy detailed balance. Here are two common options for
+the probability of flippping a spin:
+
+**Heat Path Algorithm**:
+
+.. math::
+   W_f(s_0\to s_1) = \frac{ P(s_1) }{ \sum_s P(s) } = \frac{ P(s_1) }{ P(1) + P(-1) }
+   :label:
+
+
+**Metropolis Algorithm** (Metropolis-Hastings Algorithm):
+
+.. math::
+   W_f(s_0\to s_1) = min\left( 1, e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]} \right )
+   :label:
 
 
 .. container:: note
@@ -195,21 +260,25 @@ onsager).**
          y = int( lattice_size*np.random.random() )
 
    Now we will randomly change the spin so that the probability matches the Boltzmann
-   distribution. The current state is should have the weight :math:`e^{-\frac{1}{T}E_{this}}`.
-   The probability weight of the other state should be :math:`e^{-\frac{1}{T}E_{flipped}}`, so we
-   will change it with the probability
-   
-   .. math::
-      p = \min\left ( 1, \frac{e^{-\frac{1}{T}E_{this}}}{e^{-\frac{1}{T}E_{flipped}}} \right )
-      = \min\left ( 1, e^{\frac{1}{T}(E_{flipped}-E_{this})} \right )
-   This way we end up with the correct probability distribution.
+   distribution. First calculate the probabilities of each state
 
    .. code-block:: python
 
-         energy_difference = 2*spin[x][y] * (
+         energy_now = spin[x][y] * (
                              spin[x][(y+1)%lattice_size] + spin[x][y-1] 
                            + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
-         probability = np.exp( -energy_difference/temperature )
+         energy_flipped = -spin[x][y] * (
+                             spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                           + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+         
+         P_now = np.exp( -energy_now/temperature )
+         P_flipped = np.exp( -energy_flipped/temperature )
+      
+   Then the heat bath probability is
+
+   .. code-block:: python
+
+         probability = P_now / (P_now + P_flipped)
 
    Now we flip the sping with this probability
 
@@ -238,6 +307,7 @@ onsager).**
    1. Measure the magnetisation as well
    2. Running the measurement between each update is really wasteful.
       Do multiple updates between measurements.
+   3. Switch to the Metropolis Algorithm
 
 
 
