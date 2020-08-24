@@ -465,7 +465,15 @@ From here we can calculate the magnetisation as a function of :math:`h`
 
 So at :math:`h=0` the magnetisation is zero, which is what we expect. At large :math:`\beta`, small temperature, it approaches one, which is also expected. Here is a schetch of its behaviour in general:
 
-[Image]
+.. raw:: html
+
+   <img src="_static/ising_solutions.svg">
+
+
+.. raw:: latex
+
+   \includegraphics[width=0.6\linewidth]{ising_solutions.eps}
+
 
 
 
