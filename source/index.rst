@@ -177,12 +177,13 @@ the model in a given state should be equal to the Boltzmann weight.
 
 We use a model known as a Markov Chain to draw configurations from this distribution.
 Starting from any given configuration :math:`s_0`, we build a new configuration
-math:`s_1` and accept it with an appropriate probability math:`W_f(s_0 \to s_1)`.
+:math:`s_1` and accept it with an appropriate probability :math:`W_f(s_0 \to s_1)`.
 The probability needs to be chosen correctly so that we do not move out of the
 Boltzmann distribution.
 
-One way to achieve this is to require that the algorithm satisfies the 
-*detailed balance* condition:
+The update probability needs to satisfy two conditions:
+
+**1. Detailed Balance**
 
 .. math::
    \frac{W_f(s_0\to s_1)}{W_f(s_1 \to s_0)} = \frac{P(s_1)}{P(s_0)} = e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]}
@@ -193,7 +194,8 @@ the second one. Detailed balance is in fact a bit more stringent a requirement
 than is necessary, but it's usually easiest to implement an algorithm that
 satisfies it.
 
-The complete algorithms needs to satisfy another requirement, *ergodicity*.
+**2. Ergodicity**
+
 It must be possible to reach any possible configuration from any other possible
 configuration in a finite number of updates. Otherwise we might get stuck in 
 a finite region of the space of configurations.
@@ -209,14 +211,14 @@ One option is to update one spin at a time, flipping each spin with the appropri
 probability to satisfy detailed balance. Here are two common options for
 the probability of flippping a spin:
 
-**Heat Path Algorithm**:
+**1. Heat Path Algorithm**:
 
 .. math::
    W_f(s_0\to s_1) = \frac{ P(s_1) }{ \sum_s P(s) } = \frac{ P(s_1) }{ P(1) + P(-1) }
    :label:
 
 
-**Metropolis Algorithm** (Metropolis-Hastings Algorithm):
+**2. Metropolis Algorithm** (Metropolis-Hastings Algorithm):
 
 .. math::
    W_f(s_0\to s_1) = min\left( 1, e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]} \right )
@@ -578,7 +580,7 @@ Therefore we always have
 
 - On a finite lattice the symmetry is *restored* and the model is in a *disordered phase*.
 
-- If :math:`h\neq` the symmetry is explicitly broken and :math:`<M>\neq 0`
+- If :math:`h\neq 0` the symmetry is explicitly broken and :math:`<M>\neq 0`
 
 Non-trivial symmetry breaking happens in the thermodynamic limit, :math:`V\to 0`. 
 The symmetry is spontaneously broken if
