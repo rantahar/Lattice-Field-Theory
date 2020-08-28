@@ -605,7 +605,7 @@ The order of the limits is important here. If the limit :math:`h\to0` is taken t
 In many models we have a broken symmetry at :math:`\beta > \beta_c` and a restored symmetry at :math:`\beta < \beta_c`. This means there is a phase transition at :math:`\beta=\beta_c`
 
  - **First order**
- One or more of the first derivatives of the gree energy :math:`F=-\log(Z)` os discontinuous:
+ One or more of the first derivatives of the gree energy :math:`F=-\log(Z)` is discontinuous:
 
 .. math::
    <E> = \frac{\partial}{\partial\beta} F
@@ -615,7 +615,17 @@ In many models we have a broken symmetry at :math:`\beta > \beta_c` and a restor
    <M> = \frac{\partial}{\partial h} F
    :label:
 
-[sketch]
+
+
+.. raw:: html
+
+   <img src="_static/transition_1.svg">
+
+
+.. raw:: latex
+
+   \includegraphics[width=0.6\linewidth]{transition_1.eps}
+
 
 The jump in energy is known as the latent heat
 
@@ -645,12 +655,22 @@ In a first order transition the two phases can coexist, such as ice and water. T
 No discontinuity in the first derivative of the free energy, 
 but there is a discontinuity in the second derivative.
 This is the case in spin models.
+The derivative of magnetisation
 
 .. math::
    \frac{\partial}{\partial_h}<M> \neq 0
    :label:
 
-[scketch]
+is discontinuous.
+
+.. raw:: html
+
+   <img src="_static/transition_2.svg">
+
+
+.. raw:: latex
+
+   \includegraphics[width=0.6\linewidth]{transition_2.eps}
 
 Critical Phenomena:
 """"""""""""""
