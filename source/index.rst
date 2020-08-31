@@ -253,28 +253,25 @@ the probability of flipping a spin:
 
    .. code-block:: python
 
-         energy_now = spin[x][y] * (
-                             spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+         energy_plus  =   ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
                            + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
-         energy_flipped = -spin[x][y] * (
-                             spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+         energy_minus = - ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
                            + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
          
-         P_now = np.exp( -energy_now/temperature )
-         P_flipped = np.exp( -energy_flipped/temperature )
+         P_plus  = np.exp( -energy_plus/temperature )
+         P_minus = np.exp( -energy_minus/temperature )
       
-   Then the heat bath probability is
+   Now calculate the heat bath probability of choosing positive spin and we choose the spin
+   according to the this probability
 
    .. code-block:: python
 
-         probability = P_flipped / (P_now + P_flipped)
+      probability_plus = P_plus / (P_plus + P_minus)
 
-   Now we flip the spin with this probability
-
-   .. code-block:: python
-
-      if np.random.random() < probability:
-         spin[x][y] = - spin[x][y]
+      if np.random.random() < probability_plus:
+         spin[x][y] = 1
+      else:
+         spin[x][y] = -1
 
    This works in principle, but the program is a bit boring since it doesn't measure anything.
    Let's print out the energy after each update.
