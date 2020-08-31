@@ -202,11 +202,14 @@ the probability a spin:
 
 In the heat bath method, we choose a random new spin based on its Boltzmann weight
 normalized by the sum of all choices (in the Ising model just :math:`\pm 1`).
+The probability of choosing a new state :math:`s_1` from possible states :math:`s`
+is
 
 .. math::
    W_f(s_0\to s_1) = \frac{ P(s_1) }{ \sum_s P(s) }
    :label:
 
+Notice that the probability does not depend on the previous state :math:`s_0`.
 So the probability of choosing a positive spin is
 
 .. math::
@@ -221,9 +224,23 @@ and for a negative spin
 
 **2. Metropolis Algorithm** (Metropolis-Hastings Algorithm):
 
+In the Metropolis method we suggest a random change to the current state
+of the model. Given the initial state :math:`s_0` the probability of choosing
+the new state :math:`s_1` is 
+
 .. math::
    W_f(s_0\to s_1) = min\left( 1, e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]} \right )
    :label:
+
+So in the Metropolis method the probability of changing the spin depends
+on the initial state. If the energy decreases, the update is always accepted.
+If it increases, the probability is the ratio of Boltzmann weights of the two
+options. You can check that the update follows detailed balance in both cases.
+
+Note that if there were more than one possible spin, we would need to choose between
+them using some update probability. This probability would need to be chosen so that
+detailed balance is still preserved. More on this later, when we update models with
+continuous parameters.
 
 
 .. container:: note
