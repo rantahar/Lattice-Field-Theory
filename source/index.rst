@@ -419,7 +419,7 @@ First we'll write the energy in a symmetric way between the neighboring sites
 
 .. math::
    E &= \beta\sum_{x=1}^L s_x s_{x+1} +h\sum_{x=1}^L s_x\\
-     &=\sum_{x=1}^L \left( \beta s_x s_x+1 + \frac 12 h s_x + s_{x+1} \right)
+     &=\sum_{x=1}^L \left( \beta s_x s_{x+1} + \frac 12 h (s_x + s_{x+1}) \right)
    :label:
 
 We'll define the :math:`2\times2` transfer matrix
