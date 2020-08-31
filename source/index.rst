@@ -30,7 +30,7 @@ After successfully completing the course, the student
 -   can implement a Monte Carlo simulation of a quantum field theory in
     discrete space
 
--   can analyse the output of the calculation and describe it's
+-   can analyse the output of the calculation and describe its
     connection to the theory
 
 -   recognizes the most common discrete representations of field
@@ -86,7 +86,7 @@ to each other would prefer to align. At zero temperature, they would
 eventually all point to the same direction and create a magnet. At higher
 temperatures, thermal fluctuations will occasionally cause a spin to flip.
 
-Let's only consider the spins closes to each other (nearest neighbors.)
+Let's only consider the spins closest to each other (nearest neighbors.)
 The energy of two spins is
 
 .. math::
@@ -98,11 +98,9 @@ and the energy of the whole system is
 .. math::
    E=-J\sum_{<ij>}\mathbf{s}_{i}\mathbf{s}_{j}.
    :label:
-The sum over
-:math:`<ij>`
-here counts pairs of neighbors. If the spins are coupled to a
-magnetic field :math:`\mathbf{H}`, with the magnetic momentum :math:`\gamma`,
-the energy is
+The sum over :math:`<ij>` here counts pairs of neighbors. If the spins are
+coupled to a magnetic field :math:`\mathbf{H}`, with the magnetic momentum
+:math:`\gamma`, the energy is
 
 .. math::
    E=-J\sum_{<ij>}\mathbf{s}_{i}\mathbf{s}_{j}-\gamma\mathbf{H}\cdot\sum_{i}\mathbf{s}_{i}.
