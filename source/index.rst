@@ -4,9 +4,10 @@ Lattice Field Theories
 **********************
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 3
 
+   index
+   
 
 
 
@@ -19,6 +20,9 @@ principles.
 We approach the topic mainly from the point of view of QCD, going
 through the building blocks necessary to simulate a model with fermions
 with a gauge interaction.
+
+
+
 
 Learning Objectives
 ==================
@@ -40,6 +44,7 @@ After successfully completing the course, the student
     to find information on them
 
 -   can apply perturbation theory in a discrete space
+
 
 
 Spin models
