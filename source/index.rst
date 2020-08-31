@@ -1036,7 +1036,7 @@ In summary
 
 **Correlation functions**
 
-The correlation functions of a classical theory are related to the Green's functions of the quantum field theory.
+The correlation functions of a classical theory are related to the Greens functions of the quantum field theory.
 Earlier we used the "transfer matrix" :math:`T`,
 
 .. math::
@@ -1207,6 +1207,22 @@ The inverse transform is a sum over these momenta:
 .. math::
   f(k) &= \sum_k \frac {1}{(aN)^d} e^{ikx}\tilde f(k), \\
   k_\mu &=\frac{2\pi}{aN} n_\mu -\pi 
+
+This approaches the integral form when :math:`N\to \infty`
+
+
+**Lattice Propagator**
+
+The scalar field propagator :math:`G(x,y)` is the inverse (Greens function) of the operator
+:math:`a^{-d}M = (\Box + m^2)`,
+
+.. math::
+   \sum_y a^d ( \Box_{x,y} + \delta_{x,y} m^2 ) G(y,z) = \delta_{x,y}`
+
+Calculating Greens functions is often simplest by taking a Fourier transform:
+
+.. math::
+   \left [ \sum_\mu \frac {2}{a^2} (1-cos(k_\mu a)) + m^2 \delta_{x,y} \right ] \tilde G(k) = 1
 
 
 
