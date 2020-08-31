@@ -81,12 +81,12 @@ macroscopic value.
 Why would this happen?
 
 A spin pointing against a magnetic field has a slightly higher energy
-than a spin pointing to agaist it. So atoms close to each other would
-prefer to align. At zero temperature, they would eventually all point to
-the same direction and create a magnet. At higher temperatures, thermal
-fluctuations will occationally cause a spin to flip.
+than a spin pointing to the same direction as the field. So atoms close
+to each other would prefer to align. At zero temperature, they would
+eventually all point to the same direction and create a magnet. At higher
+temperatures, thermal fluctuations will occasionally cause a spin to flip.
 
-Let's only consider the spins closes to each other (nearest neighbours.)
+Let's only consider the spins closes to each other (nearest neighbors.)
 The energy of two spins is
 
 .. math::
@@ -100,7 +100,7 @@ and the energy of the whole system is
    :label:
 The sum over
 :math:`<ij>`
-here counts pairs of neighbours. If the spins are coupled to a
+here counts pairs of neighbors. If the spins are coupled to a
 magnetic field :math:`\mathbf{H}`, with the magnetic momentum :math:`\gamma`,
 the energy is
 
@@ -127,7 +127,7 @@ The thermal expectation value of an observable :math:`O` is then
    :label:
  
 At high temperatures the spins become essentially random and the
-magnetisation disappears.
+magnetization disappears.
 
 
 
@@ -136,7 +136,7 @@ The Ising Model
 -----------------
 
 The Ising model is a further simplification of the above. All the spins
-are either :math:`+1` or :math:`-1`. The paritition function then is
+are either :math:`+1` or :math:`-1`. The partition function then is
 
 .. math::
    Z =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
@@ -149,7 +149,7 @@ The Ising model has been solved in 1 and 2 dimensions (Onsager 1944, Yang 1952).
 
 **Simulation Algorithms**
 
-The integral in the partition funtion has a very high dimension and cannot
+The integral in the partition function has a very high dimension and cannot
 practically be performed directly.
 We introduce the Heat Bath algorithm here and will cover other Monte Carlo
 methods in later chapters.
@@ -178,7 +178,7 @@ The update probability needs to satisfy two conditions:
    \frac{W_f(s_0\to s_1)}{W_f(s_1 \to s_0)} = \frac{P(s_1)}{P(s_0)} = e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]}
    :label:
 
-If the first configuration is drawn with the corrrect probability, so will be
+If the first configuration is drawn with the correct probability, so will be
 the second one. Detailed balance is in fact a bit more stringent a requirement
 than is necessary, but it's usually easiest to implement an algorithm that
 satisfies it.
@@ -198,7 +198,7 @@ But how do we construct the update? The Ising model has been studied for a long
 time and there are many options.
 One option is to update one spin at a time, flipping each spin with the appropriate
 probability to satisfy detailed balance. Here are two common options for
-the probability of flippping a spin:
+the probability of flipping a spin:
 
 **1. Heat Bath Algorithm**:
 
@@ -271,7 +271,7 @@ the probability of flippping a spin:
 
          probability = P_flipped / (P_now + P_flipped)
 
-   Now we flip the sping with this probability
+   Now we flip the spin with this probability
 
    .. code-block:: python
 
@@ -295,7 +295,7 @@ the probability of flippping a spin:
    
    **Exercise**
    
-   1. Measure the magnetisation as well
+   1. Measure the magnetization as well
    2. Running the measurement between each update is really wasteful.
       Do multiple updates between measurements.
    3. Switch to the Metropolis Algorithm
@@ -305,7 +305,7 @@ the probability of flippping a spin:
 Observables
 -----------
 
-We can measure the amount of magnetisation through the sum of the spins.
+We can measure the amount of magnetization through the sum of the spins.
 For an individual configuration
 
 
@@ -325,7 +325,7 @@ This can also be expressed as a derivative of the partition function with respec
 .. math::
    <M> = \frac{1}{V} \frac{\partial}{\partial h} \log(Z).
    :label:
-So the field :math:`h` functions as a source for the magnetisation.
+So the field :math:`h` functions as a source for the magnetization.
 
 Similarly the energy is 
 
@@ -384,7 +384,7 @@ and assume periodic boundary conditions
    s_{x+L}=s_x
    :label:
 
-First we'll write the energy in a symmetric way between the neighbouring sites
+First we'll write the energy in a symmetric way between the neighboring sites
 
 .. math::
    E &= \beta\sum_{x=1}^L s_x s_{x+1} +h\sum_{x=1}^L s_x\\
@@ -446,7 +446,7 @@ and
    \log(Z) = L\log \left( \cosh(h) + \sqrt{\sinh^2(h)+e^{-4\beta}} \right )
    :label:
 
-From here we can calculate the magnetisation as a function of :math:`h`
+From here we can calculate the magnetization as a function of :math:`h`
 
 .. math::
    <M> &= \frac 1L \frac \partial {\partial h} \log(Z)
@@ -454,7 +454,7 @@ From here we can calculate the magnetisation as a function of :math:`h`
    &= \frac{\sinh(h)}{\sqrt{\sinh(h)+e^{-4\beta}} }
    :label:
 
-So at :math:`h=0` the magnetisation is zero, which is what we expect. At large :math:`\beta`, small temperature, it approaches one, which is also expected. Here is a schetch of its behaviour in general:
+So at :math:`h=0` the magnetization is zero, which is what we expect. At large :math:`\beta`, small temperature, it approaches one, which is also expected. Here is a sketch of its behavior in general:
 
 .. raw:: html
 
@@ -577,7 +577,7 @@ The symmetry is spontaneously broken if
 .. math::
    \lim_{h\to 0} \left[ \lim_{V\to\infty} <M> \right ]
    :label:
-The order of the limits is important here. If the limit :math:`h\to0` is taken too quickly the magnetisation will approach :math:`0`.
+The order of the limits is important here. If the limit :math:`h\to0` is taken too quickly the magnetization will approach :math:`0`.
 
 - The 1D Ising model the symmetry is *not* spontaneously broken. 
 
@@ -623,7 +623,7 @@ The jump in energy is known as the latent heat
    :label:
 
 How does this work on the lattice? The transition is not instantaneous,
-but get's smoothed over a small span of temperatures.
+but gets smoothed over a small span of temperatures.
 The derivative of the energy in fact grow with the volume.
 
 .. math::
@@ -644,7 +644,7 @@ In a first order transition the two phases can coexist, such as ice and water. T
 No discontinuity in the first derivative of the free energy, 
 but there is a discontinuity in the second derivative.
 This is the case in spin models.
-The derivative of magnetisation
+The derivative of magnetization
 
 .. math::
    \frac{\partial}{\partial_h}<M> \neq 0
@@ -661,8 +661,11 @@ is discontinuous.
 
    \includegraphics[width=0.6\linewidth]{transition_2.eps}
 
+
+
+
 Critical Phenomena:
-""""""""""""""
+""""""""""""""""""""""
 
 The correlation length :math:`\xi` diverges exponentially at :math:`\beta_c`.
 Structures scale to all distances:
@@ -708,7 +711,7 @@ More on this later.
 
 
 In the O(N), Ising and Potts models, there is also a first order transition
-when :math:`\beta > \beta_c` :math:`h\neq 0`, if we change :math:`h` continuously accross :math:`0`.
+when :math:`\beta > \beta_c` :math:`h\neq 0`, if we change :math:`h` continuously across :math:`0`.
 
 -  **Crossover**
   
@@ -726,7 +729,7 @@ Imaginary Time Path integral
 ----------------------------
 
 Now we will approach quantum field theories using *Feynman's path integral*. [Phys. Rev. Mod. Phys. 20, 1948].
-In this representation, expecation values are calculated as
+In this representation, expectation values are calculated as
 
 
 .. math::
