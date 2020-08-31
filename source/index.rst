@@ -1179,10 +1179,34 @@ continuum.
 
 **Fourier Transforms**
 
+The discrete Fourier transform is
 
+.. math::
+  \tilde f(k) = \sum_x a^d e^{-ikx} f(x)
 
+On a lattice with finite lattice spacing :math:`a`, :math:`x=an`, the momentum is periodic
 
+.. math::
+  \tilde f(k+2\pi m/a) = \tilde f(k)
 
+and we can restrict it to the Brillouin zone, :math:`-\pi < ak_\mu \leq \pi`
+
+In infinite volume the inverse transform is
+
+.. math::
+  f(k) = \int_{-\pi/a}^{\pi/a}\frac{d^dk}{(2\pi)^d}e^{ikx}\tilde f(k)
+
+It is often more convenient to use dimensionless units, where :math:`x_\mu \in Z,`
+:math:`-\pi < k_\mu \neq \pi`.
+
+If the lattice is finite, the inverse transform depends on the boundary conditions.
+With periodic boundaries, :math:`x_\mu +aN = x\mu`, the allowed momenta are 
+:math:`ak_\mu = \frac{2\pi}{N} n_\mu -\pi`, with :math:`0<n_\mu \leq N`.
+The inverse transform is a sum over these momenta:
+
+.. math::
+  f(k) &= \sum_k \frac {1}{(aN)^d} e^{ikx}\tilde f(k), \\
+  k_\mu &=\frac{2\pi}{aN} n_\mu -\pi 
 
 
 
