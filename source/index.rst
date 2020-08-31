@@ -603,7 +603,7 @@ The order of the limits is important here. If the limit :math:`h\to0` is taken t
 In many models we have a broken symmetry at :math:`\beta > \beta_c` and a restored symmetry at :math:`\beta < \beta_c`. This means there is a phase transition at :math:`\beta=\beta_c`
 
  - **First order**
- One or more of the first derivatives of the gree energy :math:`F=-\log(Z)` is discontinuous:
+ One or more of the first derivatives of the free energy :math:`F=-\log(Z)` is discontinuous:
 
 .. math::
    <E> = \frac{\partial}{\partial\beta} F
@@ -633,7 +633,7 @@ The jump in energy is known as the latent heat
 
 How does this work on the lattice? The transition is not instantaneous,
 but gets smoothed over a small span of temperatures.
-The derivative of the energy in fact grow with the volume.
+The derivative of the energy in fact grows with the volume.
 
 .. math::
    \chi = \frac 1V \left<(E-<E>)^2\right> 
@@ -940,7 +940,7 @@ In the continuum limit we would have
 Finite Temperature
 ------------------
 
-So the path integral formulation in thermal equilibrium is has the same form as a
+So the path integral formulation in thermal equilibrium has the same form as a
 Euclidean field theory in four dimensions.
 Further we can now write the partition function as
 
@@ -1013,7 +1013,7 @@ where :math:`\mathcal T` is the time ordering operator.
 
 **Greens Function and the Mass Spectrum**
 
-Any greens function for operator :math:`\Gamma` can be expanded in terms of energy states
+Any Greens function for an operator :math:`\Gamma` can be expanded in terms of energy states
 (eigenstates of the hamiltonian)
 
 .. math::
