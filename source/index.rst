@@ -408,7 +408,16 @@ Transfer matrices (Example of an exact solution)
 -----------
 
 Consider the 1D Ising model:
-[image]
+
+.. raw:: html
+
+   <img src="_static/1Dlat.svg">
+
+
+.. raw:: latex
+
+   \includegraphics[width=0.6\linewidth]{1Dlat.eps}
+
 and assume periodic boundary conditions
 
 .. math::
