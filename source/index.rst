@@ -196,12 +196,26 @@ But how do we construct the update? The Ising model has been studied for a long
 time and there are many options.
 One option is to update one spin at a time, flipping each spin with the appropriate
 probability to satisfy detailed balance. Here are two common options for
-the probability of flipping a spin:
+the probability a spin:
 
 **1. Heat Bath Algorithm**:
 
+In the heat bath method, we choose a random new spin based on its Boltzmann weight
+normalized by the sum of all choices (in the Ising model just :math:`\pm 1`).
+
 .. math::
-   W_f(s_0\to s_1) = \frac{ P(s_1) }{ \sum_s P(s) } = \frac{ P(new\_spin) }{ P(1) + P(-1) }
+   W_f(s_0\to s_1) = \frac{ P(s_1) }{ \sum_s P(s) }
+   :label:
+
+So the probability of choosing a positive spin is
+
+.. math::
+   P_+ = \frac{ P(1) }{ P(1) + P(-1) }
+   :label:
+and for a negative spin
+
+.. math::
+   P_- = \frac{ P(-1) }{ P(1) + P(-1) }
    :label:
 
 
@@ -249,20 +263,20 @@ the probability of flipping a spin:
          y = int( lattice_size*np.random.random() )
 
    Now we will randomly change the spin so that the probability matches the Boltzmann
-   distribution. First calculate the probabilities of each state
+   distribution. First calculate the probability weights of each state
 
    .. code-block:: python
 
-         energy_plus  =   ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
-                           + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
-         energy_minus = - ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
-                           + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+         energy_plus  =  1 * ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                              + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+         energy_minus = -1 * ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                              + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
          
          P_plus  = np.exp( -energy_plus/temperature )
          P_minus = np.exp( -energy_minus/temperature )
-      
+   
    Now calculate the heat bath probability of choosing positive spin and we choose the spin
-   according to the this probability
+   according to this probability
 
    .. code-block:: python
 
