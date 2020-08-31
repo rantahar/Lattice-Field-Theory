@@ -13,13 +13,6 @@ Lattice Field Theories
 
 
 
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
 
 Motivation
 ==================
