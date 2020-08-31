@@ -1,7 +1,3 @@
-.. Lattice Field Theories master file, created by
-   sphinx-quickstart on Tue Jul 14 08:25:05 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
 **********************
 Lattice Field Theories
@@ -18,7 +14,7 @@ Motivation
 ==================
 
 These lecture notes give an introduction to lattice field theory, a
-powerful framework for solving quantum field theries from first
+powerful framework for solving quantum field theories from first
 principles.
 We approach the topic mainly from the point of view of QCD, going
 through the building blocks necessary to simulate a model with fermions
@@ -27,11 +23,11 @@ with a gauge interaction.
 Learning Objectives
 ==================
 
-The course has two main objectives: to learn enough about lattice methods to put the into practical use and to become familiar with common methods used in studies of Standard Model physics.
+The course has two main objectives: to learn enough about lattice methods to put them into practical use and to become familiar with common methods used in studies of Standard Model physics.
 
-After succesfully completing the course, the student
+After successfully completing the course, the student
 
--   can implement a Montecarlo simulation of a quantum field theory in
+-   can implement a Monte Carlo simulation of a quantum field theory in
     discrete space
 
 -   can analyse the output of the calculation and describe it's
@@ -155,13 +151,13 @@ The Ising model has been solved in 1 and 2 dimensions (Onsager 1944, Yang 1952).
 
 The integral in the partition funtion has a very high dimension and cannot
 practically be performed directly.
-We introduce the Heat Path algorithm here and will cover other Monte Carlo
+We introduce the Heat Bath algorithm here and will cover other Monte Carlo
 methods in later chapters.
 Monte Carlo methods perform very well when calculating high dimensional
 integrals.
 
 In the Ising model, the integral reduces to a sum over all possible configurations
-of the spins. At constant temperature (in a heat path), the probability of finding
+of the spins. At constant temperature (in a heat bath), the probability of finding
 the model in a given state should be equal to the Boltzmann weight.
 
 .. math::
@@ -204,10 +200,10 @@ One option is to update one spin at a time, flipping each spin with the appropri
 probability to satisfy detailed balance. Here are two common options for
 the probability of flippping a spin:
 
-**1. Heat Path Algorithm**:
+**1. Heat Bath Algorithm**:
 
 .. math::
-   W_f(s_0\to s_1) = \frac{ P(s_1) }{ \sum_s P(s) } = \frac{ P(s_1) }{ P(1) + P(-1) }
+   W_f(s_0\to s_1) = \frac{ P(s_1) }{ \sum_s P(s) } = \frac{ P(new\_spin) }{ P(1) + P(-1) }
    :label:
 
 
@@ -290,7 +286,7 @@ the probability of flippping a spin:
       energy = 0
       for x in range(lattice_size):
          for y in range(lattice_size):
-            energy += 4 - spin[x][y] * (
+            energy += - spin[x][y] * (
                           spin[x][(y+1)%lattice_size] + spin[x][y-1] 
                         + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
       
@@ -338,7 +334,7 @@ Similarly the energy is
    &= -\frac{\partial}{\partial \beta} \log(Z)
    :label:
 
-Other intersting observables include
+Other interesting observables include
 - the specific heat (heat capacity)
 
 .. math::
@@ -765,7 +761,7 @@ is not well defined and needs to be regularized. This is a general problem with 
 Lattice field theory is a conceptually simple renormalization method:
 we divide the volume into a lattice of discrete points :math:`x\in aZ^4` and study a system with
 a finite volume :math:`V`. 
-Since the intgeral is now finite, we can in principle calculate is directly (brute force, with supercomputers,)
+Since the integral is now finite, we can in principle calculate is directly (brute force, with supercomputers,)
 and get fully non-perturbative results.
 
 The full theory is recovered by taking the infinite volume and continuum limit :math:`v\to \infty, a\to0`.
@@ -774,7 +770,7 @@ The order of the limits is important here, just like for the spin models.
 In practice the dimensionality of the integral grows quickly when increasing the volume and decreasing the lattice spacing.
 In most cases the integral can be calculated directly only for lattice sizes that are practically useless.
 
-Instead, we should use Montecarlo methods.
+Instead, we should use Monte Carlo methods.
 The problem here is the complex, unimodular weight, :math:`\exp(iS)`.
 Every configuration :math:`\{\phi\}` contributes with the same magnitude and result depends on cancellations between configurations.
 However, this is (mostly) solved in the imaginary time formalism of thermal field theory.
@@ -895,7 +891,7 @@ and that
 where :math:`\Delta_0 = \frac {1}{a_\tau} \left( \phi_{n+1} - \phi_n \right)`.
 
 Repeating this we can write the entire expression in terms of the field values :math:`\phi_n` and :math:`\pi_n` in discrete time.
-Further, the intergral over the field :math:`\pi_n({\bf x})` is gaussian and 
+Further, the integral over the field :math:`\pi_n({\bf x})` is gaussian and 
 after performing that integral we are only left with :math:`\phi_n`.
 
 .. math::
@@ -934,7 +930,7 @@ Finite Temperature
 
 So the path integral formulation in thermal equilibrium is has the same form as a
 Euclidean field theory in four dimensions.
-Furthern we can now write the partition function as
+Further we can now write the partition function as
 
 .. math::
    Z &= \int d\phi \left<\phi\left| e^{ -\hat H / T } \right|\phi\right>\\
@@ -1100,6 +1096,10 @@ continuum.
 
 
 **Fourier Transforms**
+
+
+
+
 
 
 
