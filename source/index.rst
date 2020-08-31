@@ -332,6 +332,45 @@ continuous parameters.
    3. Switch to the Metropolis Algorithm
 
 
+   
+
+Other Spin Models
+------------------
+
+Several more complicated spin models are studied. Some of the simpler ones include
+
+**The Potts Model**
+
+Similar to the Ising model, but there are :math:`N` possible spins. Neighboring spins have
+lower energy if they are equal.
+
+.. math::
+   E = -\beta\sum_{<ij>} \delta(s_{i},s_{j}) + |h| \sum_{i} \delta(\hat h, s_{i})
+   :label:
+
+
+**The XY Spin Model**
+
+Each spin is represented by an angle :math:`\alpha`, or a 2D vector :math:`s` of length 1.
+The distance between spins is represented by the dot product, or equivalently the cosine
+of the difference of the angles.
+
+.. math::
+   E &= -\beta\sum_{<ij>} \cos( \alpha_i - \alpha_j ) + |h| \sum_{i} \cos( \alpha_i - \alpha_h )\\
+     &= -\beta\sum_{<ij>} s_{i} \cdot s_{j} + h \cdot \sum_{i} s_{i}
+   :label:
+
+
+**O(N) Spin Models**
+
+Similarly, spins can be represented by N-dimensional vectors.
+
+.. math::
+   E = -\beta\sum_{<ij>} s_{i} \cdot s_{j} + h \cdot \sum_{i} s_{i}
+   :label:
+
+
+
 
 Observables
 -----------
