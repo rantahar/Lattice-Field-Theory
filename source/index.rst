@@ -144,7 +144,7 @@ are either :math:`+1` or :math:`-1`. The partition function then is
 .. math::
    Z =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
    :label:
-Here we use dimensionless couplings, :math:`\beta=\frac{1}{kT}` and
+Here we use dimensionless couplings, :math:`\beta=\frac{J}{kT}` and
 :math:`h=\frac{\gamma H}{kT}`.
 
 The Ising model has been solved in 1 and 2 dimensions (Onsager 1944, Yang 1952).
@@ -164,7 +164,7 @@ of the spins. At constant temperature (in a heat bath), the probability of findi
 the model in a given state should be equal to the Boltzmann weight.
 
 .. math::
-   P(s) = \frac{1}{Z} e^{-\frac{1}{kT}E(s)}
+   P(s) = \frac{1}{Z} e^{-\beta E(s)}
    :label:
 
 We use a model known as a Markov Chain to draw configurations from this distribution.
@@ -178,7 +178,7 @@ The update probability needs to satisfy two conditions:
 **1. Detailed Balance**
 
 .. math::
-   \frac{W_f(s_0\to s_1)}{W_f(s_1 \to s_0)} = \frac{P(s_1)}{P(s_0)} = e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]}
+   \frac{W_f(s_0\to s_1)}{W_f(s_1 \to s_0)} = \frac{P(s_1)}{P(s_0)} = e^{-\beta [ E(s_1) - E(s_0) ]}
    :label:
 
 If the first configuration is drawn with the correct probability, so will be
@@ -234,7 +234,7 @@ of the model. Given the initial state :math:`s_0` the probability of choosing
 the new state :math:`s_1` is 
 
 .. math::
-   W_f(s_0\to s_1) = min\left( 1, e^{-\frac{1}{kT}[ E(s_1) - E(s_0) ]} \right )
+   W_f(s_0\to s_1) = min\left( 1, e^{- \beta [ E(s_1) - E(s_0) ]} \right )
    :label:
 
 So in the Metropolis method the probability of changing the spin depends
@@ -573,7 +573,7 @@ has global symmetries when :math:`h=0`. There are transformations :math:`M` that
    s_i\to -s_i
    :label:
 
-- **Pots Model:**
+- **Potts Model:**
 
 
 .. math::
@@ -654,7 +654,7 @@ Non-trivial symmetry breaking happens in the thermodynamic limit, :math:`V\to 0`
 The symmetry is spontaneously broken if
 
 .. math::
-   \lim_{h\to 0} \left[ \lim_{V\to\infty} <M> \right ]
+   \lim_{h\to 0} \left[ \lim_{V\to\infty} <M> \right ] \neq 0
    :label:
 The order of the limits is important here. If the limit :math:`h\to0` is taken too quickly the magnetization will approach :math:`0`.
 
@@ -712,7 +712,7 @@ At :math:`\beta=\beta_c`, :math:`<E>\approx \frac 12 (E_+ + E_-)`, so
 
 .. math::
    \chi \approx \frac 1V \frac{\Delta E^2}{4}
-   = V \frac 14 \left( \frac{\Delta E}{V} \right) \sim V
+   = V \frac 14 \left( \frac{\Delta E}{V} \right)^2 \sim V
    :label:
 
 In a first order transition the two phases can coexist, such as ice and water. The average energy density in this state is between the two phases.
