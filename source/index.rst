@@ -1182,19 +1182,22 @@ continuum.
 The discrete Fourier transform is
 
 .. math::
-  \tilde f(k) = \sum_x a^d e^{-ikx} f(x)
+   \tilde f(k) = \sum_x a^d e^{-ikx} f(x)
+   :label:
 
 On a lattice with finite lattice spacing :math:`a`, :math:`x=an`, the momentum is periodic
 
 .. math::
-  \tilde f(k+2\pi m/a) = \tilde f(k)
+   \tilde f(k+2\pi m/a) = \tilde f(k)
+   :label:
 
 and we can restrict it to the Brillouin zone, :math:`-\pi < ak_\mu \leq \pi`
 
 In infinite volume the inverse transform is
 
 .. math::
-  f(k) = \int_{-\pi/a}^{\pi/a}\frac{d^dk}{(2\pi)^d}e^{ikx}\tilde f(k)
+   f(k) = \int_{-\pi/a}^{\pi/a}\frac{d^dk}{(2\pi)^d}e^{ikx}\tilde f(k)
+   :label:
 
 It is often more convenient to use dimensionless units, where :math:`x_\mu \in Z,`
 :math:`-\pi < k_\mu \neq \pi`.
@@ -1206,7 +1209,8 @@ The inverse transform is a sum over these momenta:
 
 .. math::
   f(k) &= \sum_k \frac {1}{(aN)^d} e^{ikx}\tilde f(k), \\
-  k_\mu &=\frac{2\pi}{aN} n_\mu -\pi 
+  k_\mu &=\frac{2\pi}{aN} n_\mu -\pi
+  :label:
 
 This approaches the integral form when :math:`N\to \infty`
 
@@ -1214,25 +1218,92 @@ This approaches the integral form when :math:`N\to \infty`
 **Lattice Propagator**
 
 The scalar field propagator :math:`G(x,y)` is the inverse (Greens function) of the operator
-:math:`a^{-d}M = (\Box + m^2)`,
+:math:`a^{-d}M = (\Box + m^2),
 
 .. math::
    \sum_y a^d ( \Box_{x,y} + \delta_{x,y} m^2 ) G(y,z) = \delta_{x,y}`
+   :label:
 
 Calculating Greens functions is often simplest by taking a Fourier transform:
 
 .. math::
    \left [ \sum_\mu \frac {2}{a^2} (1-cos(k_\mu a)) + m^2 \delta_{x,y} \right ] \tilde G(k) = 1
+   :label:
+
+So the propagator is
+
+.. math::
+   \tilde G(k) = \frac{1}{\hat k^2 + m^2},
+   :label:
+
+where :math:`\hat k` is the lattice momentum
+
+.. math::
+   \hat k^2 = \sum_\mu \hat k_\mu 
+   = \sum_\mu \left[ \frac 2 a \sin\left( \frac{ak_\mu}{2} \right) \right]^2
+   :label:
+
+In the continuum limit we take :math:`a\to 0` and
+
+.. math::
+   \hat k^2 &= k^2 + O(a)\\
+   \tilde G(k) &= \frac{1}{k^2+m^2} + O(a)
+   :label:
+
+In this case everything works well. The propagator behaves correctly in
+the continuum and describes a single particle.
 
 
+** Poles of the Propagator in Minkowsky Space **
 
--   Field theories, scalar field theory as an example
+In Minkowsky spacetime the propagator has a pole at
+:math:`k_0^2 = k_ik^i + m^2` and this defines the dispersion
+relation of a free particle.
+In Euclidean time there is no pole since the square in the denominator
+is always positive.
 
-    -   Universality, critical points
+We can recover the pole structure using a Wick rotation back into
+Minkowski space: :math:`k_0^M \to ik_0^E`. This works since the propagator
+has no poles in the quarter of complex space between :math:`k_0^E` and 
+:math:`k_0^M`.
 
-    -   Thermal field theory
+.. math::
+   &\left[ \frac 2 a \sin\left( \frac{iak_0}{2} \right) \right]^2
+   + \sum_i \hat k_i^2 + m^2\\
+   & = \left[ \frac 2 a \sinh\left( \frac{ak_0}{2} \right) \right]^2
+   + \sum_i \hat k_i^2 + m^2 = 0
+   :label:
 
--   Quantum Monte Carlo,
+So
+
+.. math::
+   ak_0 = 2 \sinh^{-1} \sqrt{ \sum_i \sin^2\frac {ak_i}{2} + \frac{(am)^2}{4} }
+   :label:
+   
+
+**N-point Functions**
+
+The Greens functions can be generated using a source :math:`J`
+
+.. math::
+   S(J) = \sum_x a^d \left[ \frac 12 \phi_x (\Box + m^2) \phi_x - J_x \phi_x \right]
+   :label:
+
+with
+
+.. math::
+   Z(J) = \int [d\phi] e^{-S(J)} = \frac{1}{Z(0)} e^{\sum_{x,y} a^2d \frac 12 J_x G(x,y) J_y}
+   :label:
+
+This defines N-point functions
+
+.. math::
+   \ev{\phi_x,\dots,\phi_y} = \left . \frac{1}{Z(0)}
+   \frac{\partial}{\partial J_x} \cdots \frac{\partial}{\partial J_y}
+   Z(J) \right |_{J=0} 
+   :label:
+
+
 
 Gauge fields
 ============
