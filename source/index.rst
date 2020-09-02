@@ -1279,6 +1279,18 @@ So
 .. math::
    ak_0 = 2 \sinh^{-1} \sqrt{ \sum_i \sin^2\frac {ak_i}{2} + \frac{(am)^2}{4} }
    :label:
+
+
+Here is a comparison of the lattice and continuum propagators at :math:`am=0.1`
+
+.. raw:: html
+
+   <img src="_static/lattice_continuum_scalar_propagator.svg">
+
+
+.. raw:: latex
+
+   \includegraphics[width=0.6\linewidth]{lattice_continuum_scalar_propagator.eps}
    
 
 **N-point Functions**
@@ -1302,6 +1314,7 @@ This defines N-point functions
    \frac{\partial}{\partial J_x} \cdots \frac{\partial}{\partial J_y}
    Z(J) \right |_{J=0} 
    :label:
+
 
 
 
