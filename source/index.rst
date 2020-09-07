@@ -483,7 +483,10 @@ Now the partition function can be written as
      &= Tr (T^L)
    :label:
 
-Writing the transfer matrix explicitly,
+The transfer matrix describes the contribution to the energy between two connected
+spins, :math:`s` and :math:`s'`.
+
+Writing the matrix explicitly,
 
 .. math::
    T_{s,s'} = 
