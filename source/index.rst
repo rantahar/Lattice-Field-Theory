@@ -1360,7 +1360,8 @@ long as we can determine whether the dart has landed inside it.
 
 
 
-**Monte Carlo integration**
+Monte Carlo integration
+-------------------------
 
 Now let's take a look at a 1D integral
 
@@ -1395,29 +1396,222 @@ In error of the Monte Carlo method is statistical and it follows from the
 We will not prove this here, but you can check it by calculating the
 standard deviation in you own simulations.
 
-
 .. container:: note
    
    **Exercise**
    
-   1. Measure the magnetization as well
-   2. Running the measurement between each update is really wasteful.
-      Do multiple updates between measurements.
-   3. Switch to the Metropolis Algorithm
+   1. Run a simulation of the Ising model and print out 
+      a large number of measurements. Take the first 100, 200, 500
+      and  1000 measurements and check this follows the
+      inverse square root scaling.
 
 
 So the Monte Carlo method becomes more efficient around :math:`D = 8`.
-In the 2D XY model each site has a single spin, so for a small :math:`4\times4` 
+In the 2D XY model each site has a single spin, so for a small :math:`8\times8` 
 lattice we already have
 
 .. math::
-   D = 4\times 4 = 16
+   D = 4\times 8 = 64
 
 
-**Importance Sampling**
+This result is true as long as the function and it's square are 
+integrable 
+
+.. math::
+   \int_0^1 f(x) = \textrm{finite}\\
+   \int_0^1 f^2(x) = \textrm{finite}
+
+This is true in lattice simulations, but here is a counterexample
+
+.. math::
+   I=\int_0^1 x^{0.5}
+
+The mean and standard deviation from a Monte Carlo run are still
+correct, but the error may not scale as inverse square root.
+
+
+
+Importance Sampling
+----------------------
 
 The Monte Carlo Method can be made even more efficient using importance sampling.
 Again, we already do this in our example program.
+
+The integrand in our simulations has a small value in most of the
+integration space. The integral is dominated by a small region of
+space. If we use completely random points in the Monte Carlo
+estimate, most of the values will be very small and only a small
+fraction will actually contribute to the integral.
+
+Instead we choose the random points from a distribution and mimics
+the function we are integrating. This leads to more measurements
+actually contributing to the result and reduces the variance.
+
+In lattice simulation we are integrating
+
+.. math::
+   \int d\phi e^{-S}
+
+The function is exponentially peaked where S is small. Further, :math:`S`
+is an extensive quantity, meaning it grows with the volume.
+The function gets more peaked as the volume increases.
+
+Say we are integrating 
+
+.. math::
+   I = \int dV f(x)
+
+We choose to draw random numbers from the distribution :math:`p(x)`.
+The integral is
+
+.. math::
+   I = \int dV p(x) \frac{f(X)}{p(x)} 
+     = \lim_{N\to\infty} \frac 1N \sum_i \frac{f(x_i)}{p(x)}
+
+If :math:`p` is chosen well, the function :math:`p/f` will be flatter
+than the original and the variance of the result will be smaller. The 
+optimal choice would be to use :math:`p(x) = C |f(x)|`. Of course it is
+usually not that straightforward, using the function :math:`f` itself
+as a probability density would require knowing the value of the integral.
+
+In lattice simulations we are calculating integrals of the type
+
+.. math::
+   \ev{O} = \frac {\int [d\phi] O(\phi) e^{-S(\phi)} }{\int [d\phi] e^{-S(\phi)}}
+
+The integral in the denominator is always the same, so usually the best
+choice is 
+
+.. math::
+   g(\phi) = C \int [d\phi] e^{-S(\phi)}
+
+with an unknown normalization coefficient :math:`C`.
+
+Now the integral is
+
+.. math::
+   \ev{O} = \frac 1N \sum_i O(\phi_i)
+
+Notice that since the normalization coefficient drops out in the
+Monte Carlo run, we cannot calculate the partition function
+directly from the simulation.
+
+
+Autocorrelation Time
+----------------------
+
+The autocorrelation time measures the number of update steps required
+to reach an independent configuration.
+
+Given a measurement :math:`X`, let's label the individual measurements
+as :math:`X_i` with the configuration numbers :math:`i=1,2,...,N`.
+The autocorrelation function for measurable :math:`X` is the
+correlation between measurements separated by time :math:`t`
+normalized by the overall variation:
+
+.. math::
+   C(t) = \frac{\frac{1}{N-t} \sum_{i=1}^{N-t} X_i X_{i+t} - \ev{X}^2 }{\ev{X^2} - \ev{X}^2}
+
+This is normalized to :math:`C(0)=1`.
+
+When the number of measurements is large, :math:`N\to \infty`, and
+the time :math:`t` is not small (:math:`t\to\infty`, :math:`t\ll L`),
+the autocorrelation function decays exponentially
+
+.. math::
+   C(t) \sim e^{-t/\tau_{exp}}
+
+The exponential autocorrelation time :math:`\tau_{exp}` is generally 
+roughly the same for all measurements and really measures the time
+it takes to decorrelate the configurations. For error analysis the relevant quantity is the integrated autocorrelation time
+
+.. math::
+   \tau_{int} = \frac 12 + \sum_{t=1}^\infty C(t)
+
+Note that if the autocorrelation function is purely exponential,
+:math:`C(t) = e^{-t\tau_{exp}}`, the two autocorrelation times are
+the same, :math:`\tau_{int}\sim\tau_{exp}`. Generally 
+:math:`\tau_{int} < \tau_{exp}`.
+
+In a Monte Carlo simulation, the corrected error estimate is
+
+.. math::
+   \sigma_X = \sqrt{2\tau_{int}} \sigma_{X, naive}
+   = \sqrt{2\tau_{int} \frac{ \sum_i \left(X_i - \ev{X}\right)^2 }{N(N-1)} }
+
+In practice :math:`N` is always finite. Taking this into account, the 
+formula for the autocorrelation function is modified slightly:
+
+.. math::
+   &C(t) = \frac{\frac{1}{N-t} \sum_{i=1}^{N-t} X_i X_{i+t} - \ev{X}_1 \ev{X}_2 }{\ev{X^2} - \ev{X}^2},\\
+   &\ev{X}_1 = \frac{1}{N-t} \sum_{i=1}^{N-t} X_i, \textrm{ and}\\
+   &\ev{X}_2 = \frac{1}{N-t} \sum_{i=t}^{N} X_i,\\
+
+
+It is important to keep track of autocorrelation times and to use them
+in error estimates. Calculating observables too often is a waste of time,
+so if the autocorrelation time is large, it might be worth adjusting the
+number of updates between measurements.
+
+
+.. hint::
+   Check out jackknife blocking for a second possible error analysis method.
+   It is useful when doing complicated calculations with expectation
+   values and tracking errors becomes unreliable. It also works well
+   with correlated data.
+
+
+Update Sweeps
+---------------
+
+In our previous example we update the sites in random order. It is 
+often better, in terms of the autocorrelation time, to update each
+spin in order.
+
+Here are three common choices for update ordering:
+
+1. **Typewriter:** Just start site zero, update every site in a row
+   in order and then continue to the next row. Simple to implement, but
+   has a significant drawback: it breaks detailed balance in the Ising
+   model, at least in 1D.
+
+2. **Checkerboard:** When all interactions are nearest neighbor, it is
+   possible to update all even sites (:math:`\sum_i x_i` is even) or all
+   odd sites without problems with detailed balance. So for a full
+   update run over even sites first and odd sites second.
+
+3. **Random ordering:** Just pick sites completely at random. This 
+   always respects detailed balance, but might leave a region unchanged
+   for a long time.
+
+
+Cluster and Worm Algorithm
+------------
+
+Local updates are not the only option. The most efficient method for
+simulating the Ising model is a cluster algorithm. The Wolff cluster 
+update [U. Wolff, PRL 62 (1989) 361] proceeds as follows:
+
+1. Choose a random site i.
+2. Check each neighboring site j.  If :math:`s_j=s_i`, join the site
+   to the cluster with probability :math:`p=1-e^{-2\beta}`.
+3. Repeat step 2 for each site :math:`j` that was joined to the cluster.
+   Continue until there are no more sites to consider.
+4. Flip all spins in the cluster.
+
+Cluster updates perform an update on a large region at once. The reason
+this is efficient is ultimately that updating a spin does not require
+considering all its neighbors. Many of them may already be in the 
+cluster.
+
+Worm  updates are similar, but they update the configuration as they go.
+They usually start by creating two mutually cancelling deformations 
+(head and tail). The head moves around the lattice while updating the 
+configuration. When the deformations meet, they cancel and the new
+update ends.
+
+Worm algorithms can be efficient in a large :math:`\beta` expansion,
+for example.
 
 
 
