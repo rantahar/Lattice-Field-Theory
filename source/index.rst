@@ -1141,9 +1141,10 @@ At :math:`T>0`
 
 
 Scalar Fields
----------------
+==============
 
-**The action**
+The action
+-------------
 
 The continuum action of a free scalar field :math:`\phi` in Euclidean space is
 
@@ -1177,7 +1178,8 @@ how this can go wrong. In any case, we should check that our action produces the
 continuum.
 
 
-**Fourier Transforms**
+Fourier Transforms
+---------------------
 
 The discrete Fourier transform is
 
@@ -1215,7 +1217,8 @@ The inverse transform is a sum over these momenta:
 This approaches the integral form when :math:`N\to \infty`
 
 
-**Lattice Propagator**
+Lattice Propagator
+---------------------
 
 The scalar field propagator :math:`G(x,y)` is the inverse (Greens function) of the operator
 :math:`a^{-d}M = (\Box + m^2),
@@ -1254,7 +1257,7 @@ In this case everything works well. The propagator behaves correctly in
 the continuum and describes a single particle.
 
 
-** Poles of the Propagator in Minkowsky Space **
+**Poles of the Propagator**
 
 In Minkowsky spacetime the propagator has a pole at
 :math:`k_0^2 = k_ik^i + m^2` and this defines the dispersion
@@ -1318,8 +1321,107 @@ This defines N-point functions
 
 
 
+
+
+Monte Carlo Methods
+====================
+
+Now let's take a brief look at Markov Chain Monte Carlo algorithms.
+We already used these in the Ising model example, but we need to go
+over a bit more detail in order to analyze our results properly.
+
+**Dartboard Example**
+
+The dartboard example clarifies the general idea of the Monte Carlo method.
+Monte Carlo is a general method for numerically evaluating an integral.
+Say we need to calculate the area of a circle with unit radius.
+The area is
+
+.. math::
+   V = \pi r^2 = \pi
+
+But assume we don't know this, but we do know the area of a square.
+We can evaluate the are of any shape within the square by randomly throwing
+darts into the square. The probability of a dart landing in the circle is
+
+.. math::
+   p(\textrm{hits inside circle}) = \frac{A_{circle}}{A_{square}} \approx
+   \frac{\textrm{#hits inside circle}}{\textrm{#hits inside square}}
+
+This method can be used to evaluate the area of any irregular shape as
+long as we can determine whether the dart has landed inside it.
+
+.. math::
+   \lim_{N\to\infty} \frac 1N \sum_{i=0}^N \delta({\bf x}_i \textrm{ in circle})
+    = \pi 
+
+
+
+**Monte Carlo integration**
+
+Now let's take a look at a 1D integral
+
+.. math::
+   I = \int_a^b dx f(x)
+
+We could take this to describe a shape inside a square and 
+draw random values on both x and y axis.
+We would need to evaluate the function at x to determine whether
+:math:`y<f(x)`.
+This simplifies to
+
+.. math::
+   I \approx \frac{b-a}{N} \sum_{i=0}^N p(y_i < f(x_i))
+           = \frac{b-a}{N} \sum_{i=0}^N f(x_i)
+
+In the 1D case this this is not the most efficient method, but for large
+dimensional integrals the error of this method scales favorably.
+The other standard method for numerical integration is to split the domain
+into equal pieces and sum them up, following a simple rule for each piece.
+For example, if following the *trapezoidal rule*, the error scales as
+
+.. math::
+   \delta \sim \frac {1}{N^{2D}}.
+
+In error of the Monte Carlo method is statistical and it follows from the
+*central limit theorem* that
+
+.. math::
+   \delta \sim \frac {1}{\sqrt{N}}.
+
+We will not prove this here, but you can check it by calculating the
+standard deviation in you own simulations.
+
+
+.. container:: note
+   
+   **Exercise**
+   
+   1. Measure the magnetization as well
+   2. Running the measurement between each update is really wasteful.
+      Do multiple updates between measurements.
+   3. Switch to the Metropolis Algorithm
+
+
+So the Monte Carlo method becomes more efficient around :math:`D = 8`.
+In the 2D XY model each site has a single spin, so for a small :math:`4\times4` 
+lattice we already have
+
+.. math::
+   D = 4\times 4 = 16
+
+
+**Importance Sampling**
+
+The Monte Carlo Method can be made even more efficient using importance sampling.
+Again, we already do this in our example program.
+
+
+
 Gauge fields
-============
+=============
+
+
 
 -   Representing gauge symmetry, back to U(1)
 
