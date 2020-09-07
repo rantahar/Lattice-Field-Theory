@@ -505,7 +505,7 @@ We can evaluate the trace by diagonalizing :math:`T`:
 
 
 .. math::
-   \log(Z) &= \log \left( \left (\begin{matrix}
+   \log(Z) &= \log \left( Tr \left (\begin{matrix}
    \lambda_+ & 0 \\
    0& \lambda_-
    \end{matrix} \right )^L\right) 
