@@ -1165,7 +1165,7 @@ where :math:`\hat\mu` a basis vector of length :math:`a` and :math:`x` and :math
 Using these definitions, we can write the lattice action as
 
 .. math::
-   S =  a^d \sum_x\left[ \frac 12 \sum_\mu \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 \right]
+   S =  a^d \sum_x\left[ \frac 12 \sum_x \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 \right]
    :label:
 
 The action is Gaussian, :math:`S=\frac12 \phi_xM_{x,y}\phi_y`, and we can actually do the integral
@@ -1179,6 +1179,53 @@ While this seems looks like it should reproduce the continuum action when :math:
 actually a subtle issue. In this case things will work out, but once we get to fermions, we will see
 how this can go wrong. In any case, we should check that our action produces the correct model in 
 continuum.
+
+Scalar Field Theories
+----------------------
+
+Most classes in field theories will introduce the :math:`\phi^4`-theory:
+
+.. math::
+   L_4(\phi) &= \sum_x \left [ \frac 12 \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 
+       + \frac{\lambda}{4!} \phi_x^4 \right ] \\
+   Z &= \int [d\phi] e^{-L_4(\phi)}
+   :label:
+
+
+The partition function of the Higgs field, excluding interactions with other standard
+model fields is
+
+.. math::
+   L_H(\phi) &= \sum_x \left [ \frac 12 \phi_x \Box_{x,y} \phi_y - \frac 12 \mu^2\phi_x^2 
+       + \frac{\lambda}{4!} \phi_x^4 \right ] \\
+   Z &= \int [d\phi] e^{-L_H(\phi)}
+   :label:
+
+This is similar to the :math:`\phi^4`-theory, but the *mass* term is negative. This leads
+to a potential well at zero temperature. As a results, the Higgs model has a symmetry
+breaking transition at a finite temperature.
+
+
+
+Updating Scalar Fields
+-----------------------
+
+Scalar fields are continuous, represented by floating point numbers.
+The most efficient update method depends on the theory, but the metropolis update
+gives a very general method:
+
+1. Choose a random field on a random site
+
+2. Update the field by adding a random value :math:`\Delta`. Gaussian distribution usually 
+   works well. The parameter C is tunable.
+
+.. math::
+   \phi_x \to \phi + C \Delta
+   :label:
+
+3. accept or reject the change according to the metropolis probability.
+
+
 
 
 Fourier Transforms
@@ -1224,7 +1271,7 @@ Lattice Propagator
 ---------------------
 
 The scalar field propagator :math:`G(x,y)` is the inverse (Greens function) of the operator
-:math:`a^{-d}M = (\Box + m^2),
+:math:`a^{-d}M = (\Box + m^2)`,
 
 .. math::
    \sum_y a^d ( \Box_{x,y} + \delta_{x,y} m^2 ) G(y,z) = \delta_{x,y}`
@@ -1274,9 +1321,9 @@ has no poles in the quarter of complex space between :math:`k_0^E` and
 :math:`k_0^M`.
 
 .. math::
-   &\left[ \frac 2 a \sin\left( \frac{iak_0}{2} \right) \right]^2
-   + \sum_i \hat k_i^2 + m^2\\
-   & = \left[ \frac 2 a \sinh\left( \frac{ak_0}{2} \right) \right]^2
+   \left[ \frac 2 a \sin\left( \frac{iak_0}{2} \right) \right]^2
+   + \sum_i \hat k_i^2 + m^2
+    = \left[ \frac 2 a \sinh\left( \frac{ak_0}{2} \right) \right]^2
    + \sum_i \hat k_i^2 + m^2 = 0
    :label:
 
@@ -1356,7 +1403,7 @@ long as we can determine whether the dart has landed inside it.
 
 .. math::
    \lim_{N\to\infty} \frac 1N \sum_{i=0}^N \delta({\bf x}_i \textrm{ in circle})
-    = \pi 
+    = \frac{\pi}{4}
 
 
 
