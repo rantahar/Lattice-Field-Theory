@@ -822,7 +822,7 @@ Quantum field theory builds on this observation and uses field theories to descr
 as well.
 
 
-Here we will derive the path integral representation of a quantum field theory in finite temperature.
+Here we will derive the path integral representation of a quantum field theory in thermal equilibrium.
 The derivation is quite similar with real dynamical time. There, in the path integral representation,
 the expectation value of an observable is
 
@@ -1170,7 +1170,7 @@ The continuum action of a free scalar field :math:`\phi` in Euclidean space is
 On a lattice we can define the d'Alembert operator as
 
 .. math::
-   \Box_{x,y} \phi_y = -\Delta^2\phi = \sum_\mu \frac {1}{a^2} \left( 2\phi_x - \phi_{x-\hat\mu} - \phi_{\hat\mu} \right)
+   \Box_{x,y} \phi_y = -\Delta^2\phi = \sum_\mu \frac {1}{a^2} \left( 2\phi_x - \phi_{x-\hat\mu} - \phi_{x+\hat\mu} \right)
    :label:
 where :math:`\hat\mu` a basis vector of length :math:`a` and :math:`x` and :math:`y` are vectors,
 :math:`x_\mu = an_\mu`
@@ -1401,6 +1401,7 @@ The area is
 
 .. math::
    V = \pi r^2 = \pi
+   :label:
 
 But assume we don't know this, but we do know the area of a square.
 We can evaluate the are of any shape within the square by randomly throwing
@@ -1409,6 +1410,7 @@ darts into the square. The probability of a dart landing in the circle is
 .. math::
    p(\textrm{hits inside circle}) = \frac{A_{circle}}{A_{square}} \approx
    \frac{\textrm{#hits inside circle}}{\textrm{#hits inside square}}
+   :label:
 
 This method can be used to evaluate the area of any irregular shape as
 long as we can determine whether the dart has landed inside it.
@@ -1416,6 +1418,7 @@ long as we can determine whether the dart has landed inside it.
 .. math::
    \lim_{N\to\infty} \frac 1N \sum_{i=0}^N \delta({\bf x}_i \textrm{ in circle})
     = \frac{\pi}{4}
+   :label:
 
 
 
@@ -1426,6 +1429,7 @@ Now let's take a look at a 1D integral
 
 .. math::
    I = \int_a^b dx f(x)
+   :label:
 
 We could take this to describe a shape inside a square and 
 draw random values on both x and y axis.
@@ -1436,6 +1440,7 @@ This simplifies to
 .. math::
    I \approx \frac{b-a}{N} \sum_{i=0}^N p(y_i < f(x_i))
            = \frac{b-a}{N} \sum_{i=0}^N f(x_i)
+   :label:
 
 In the 1D case this this is not the most efficient method, but for large
 dimensional integrals the error of this method scales favorably.
@@ -1445,12 +1450,14 @@ For example, if following the *trapezoidal rule*, the error scales as
 
 .. math::
    \delta \sim \frac {1}{N^{2D}}.
+   :label:
 
 In error of the Monte Carlo method is statistical and it follows from the
 *central limit theorem* that
 
 .. math::
    \delta \sim \frac {1}{\sqrt{N}}.
+   :label:
 
 We will not prove this here, but you can check it by calculating the
 standard deviation in you own simulations.
@@ -1471,6 +1478,7 @@ lattice we already have
 
 .. math::
    D = 4\times 8 = 64
+   :label:
 
 
 This result is true as long as the function and it's square are 
@@ -1479,11 +1487,13 @@ integrable
 .. math::
    \int_0^1 f(x) = \textrm{finite}\\
    \int_0^1 f^2(x) = \textrm{finite}
+   :label:
 
 This is true in lattice simulations, but here is a counterexample
 
 .. math::
    I=\int_0^1 x^{0.5}
+   :label:
 
 The mean and standard deviation from a Monte Carlo run are still
 correct, but the error may not scale as inverse square root.
@@ -1510,6 +1520,7 @@ In lattice simulation we are integrating
 
 .. math::
    \int d\phi e^{-S}
+   :label:
 
 The function is exponentially peaked where S is small. Further, :math:`S`
 is an extensive quantity, meaning it grows with the volume.
@@ -1519,6 +1530,7 @@ Say we are integrating
 
 .. math::
    I = \int dV f(x)
+   :label:
 
 We choose to draw random numbers from the distribution :math:`p(x)`.
 The integral is
@@ -1526,6 +1538,7 @@ The integral is
 .. math::
    I = \int dV p(x) \frac{f(X)}{p(x)} 
      = \lim_{N\to\infty} \frac 1N \sum_i \frac{f(x_i)}{p(x)}
+   :label:
 
 If :math:`p` is chosen well, the function :math:`p/f` will be flatter
 than the original and the variance of the result will be smaller. The 
@@ -1537,12 +1550,14 @@ In lattice simulations we are calculating integrals of the type
 
 .. math::
    \ev{O} = \frac {\int [d\phi] O(\phi) e^{-S(\phi)} }{\int [d\phi] e^{-S(\phi)}}
+   :label:
 
 The integral in the denominator is always the same, so usually the best
 choice is 
 
 .. math::
    g(\phi) = C \int [d\phi] e^{-S(\phi)}
+   :label:
 
 with an unknown normalization coefficient :math:`C`.
 
@@ -1550,6 +1565,7 @@ Now the integral is
 
 .. math::
    \ev{O} = \frac 1N \sum_i O(\phi_i)
+   :label:
 
 Notice that since the normalization coefficient drops out in the
 Monte Carlo run, we cannot calculate the partition function
@@ -1570,6 +1586,7 @@ normalized by the overall variation:
 
 .. math::
    C(t) = \frac{\frac{1}{N-t} \sum_{i=1}^{N-t} X_i X_{i+t} - \ev{X}^2 }{\ev{X^2} - \ev{X}^2}
+   :label:
 
 This is normalized to :math:`C(0)=1`.
 
@@ -1579,6 +1596,7 @@ the autocorrelation function decays exponentially
 
 .. math::
    C(t) \sim e^{-t/\tau_{exp}}
+   :label:
 
 The exponential autocorrelation time :math:`\tau_{exp}` is generally 
 roughly the same for all measurements and really measures the time
@@ -1586,6 +1604,7 @@ it takes to decorrelate the configurations. For error analysis the relevant quan
 
 .. math::
    \tau_{int} = \frac 12 + \sum_{t=1}^\infty C(t)
+   :label:
 
 Note that if the autocorrelation function is purely exponential,
 :math:`C(t) = e^{-t\tau_{exp}}`, the two autocorrelation times are
@@ -1597,6 +1616,7 @@ In a Monte Carlo simulation, the corrected error estimate is
 .. math::
    \sigma_X = \sqrt{2\tau_{int}} \sigma_{X, naive}
    = \sqrt{2\tau_{int} \frac{ \sum_i \left(X_i - \ev{X}\right)^2 }{N(N-1)} }
+   :label:
 
 In practice :math:`N` is always finite. Taking this into account, the 
 formula for the autocorrelation function is modified slightly:
@@ -1604,7 +1624,8 @@ formula for the autocorrelation function is modified slightly:
 .. math::
    &C(t) = \frac{\frac{1}{N-t} \sum_{i=1}^{N-t} X_i X_{i+t} - \ev{X}_1 \ev{X}_2 }{\ev{X^2} - \ev{X}^2},\\
    &\ev{X}_1 = \frac{1}{N-t} \sum_{i=1}^{N-t} X_i, \textrm{ and}\\
-   &\ev{X}_2 = \frac{1}{N-t} \sum_{i=t}^{N} X_i,\\
+   &\ev{X}_2 = \frac{1}{N-t} \sum_{i=t}^{N} X_i
+   :label:
 
 
 It is important to keep track of autocorrelation times and to use them
@@ -1674,8 +1695,85 @@ for example.
 
 
 
+
+
 Gauge fields
 =============
+
+Gauge field theories are fundamental to the Standard Model of particle physics.
+They describe the three fundamental interactions, strong and weak nuclear forces
+and electromagnetism. In this section we will see how they can be implemented on
+the lattice and study some of their properties.
+
+Ising Gauge Model
+-------------------
+
+The defining feature of a gauge field is the gauge symmetry, a local symmetry of
+the action. Let's look at the following Lagrangian for spins :math:`s = \pm 1`
+
+.. math::
+   L = \sum_x \sum_{\mu,\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
+   :label:
+
+The kinetic term consists of a product of spins around a single lattice square,
+also known as a plaquette.
+
+The lagrangian is symmetric with respect to the transformation
+
+.. math::
+   &s_x \to -s_x \textrm{ and} \\
+   &s_{x+\mu} \to -s_{x+\mu} \textrm{ for all } \mu
+   :label:
+
+We have promoted a global symmetry into a **local symmetry**.
+
+We can build a similar model out of the other spin models discussed above.
+However, it is actually easier to discretize the model in a slightly different
+way. Instead of a spin at each lattice site, move the spins to each link between
+two sites, :math:`s_{x,\mu} = \pm 1`.
+
+.. math::
+   L = \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
+   :label:
+
+This does not look very different, but the transformation is now
+
+.. math::
+   s_{x,\mu} \to -s_{x,\mu} \textrm{ for all } \mu.
+   :label:
+
+Now let's look at a scalar field
+
+.. math::
+   L = \sum_x \sum_\mu \frac {1}{a^2} \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) .
+   :label:
+
+This model has a global symmetry, 
+
+.. math::
+   \phi_x \to -\phi_x \textrm{ for all } x.
+   :label:
+
+We turn this into a local symmetry by adding the Ising Gauge field and multiplying with it
+when ever multiplying neighboring scalar fields.
+
+.. math::
+   L &= \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}\\
+     &+ \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - s_{x-\mu,\mu}\phi_{x+\mu} - s_{s+\mu,\mu}\phi_{x+\mu} \right ).
+   :label:
+
+The local symmetry is 
+
+.. math::
+   &\phi_x \to -\phi_x \\
+   &s_{x,\mu} \to -s_{x,\mu} \textrm{ for all } \mu 
+   :label:
+
+
+The Electromagnetic Field
+--------------------------
+
+
 
 
 
