@@ -478,7 +478,7 @@ We'll define the :math:`2\times2` transfer matrix
 Now the partition function can be written as
 
 .. math::
-   z &= \sum_{\{s_x\}} T_{s_1,s_2} T_{s_2,s_3} \dots T_{s_{L-1},s_L} T_{s_L,s_1}\\
+   Z &= \sum_{\{s_x\}} T_{s_1,s_2} T_{s_2,s_3} \dots T_{s_{L-1},s_L} T_{s_L,s_1}\\
      &= \sum_{s_1} \left( T^L \right)_{s_1,s_1}\\
      &= Tr (T^L)
    :label:
@@ -533,7 +533,7 @@ From here we can calculate the magnetization as a function of :math:`h`
 .. math::
    <M> &= \frac 1L \frac \partial {\partial h} \log(Z)
    = \frac{\sinh(h) + \frac{\cosh(h) \sinh(h)}{\sqrt{\sinh^2(h)+e^{-4\beta}} }}{\cosh(h)+\sqrt{\sinh^2(h)+e^{-4\beta}} }\\
-   &= \frac{\sinh(h)}{\sqrt{\sinh(h)+e^{-4\beta}} }
+   &= \frac{\sinh(h)}{\sqrt{\sinh^2(h)+e^{-4\beta}} }
    :label:
 
 So at :math:`h=0` the magnetization is zero, which is what we expect. At large :math:`\beta`, small temperature, it approaches one, which is also expected. Here is a sketch of its behavior in general:
@@ -664,7 +664,7 @@ The order of the limits is important here. If the limit :math:`h\to0` is taken t
 - The 1D Ising model the symmetry is *not* spontaneously broken. 
 
 .. math::
-   \lim_{N\to\infty} <M> = \sinh(h) \times \frac{\sinh(h)}{\sqrt{\sinh^2 + e^{-4\beta}}}
+   \lim_{N\to\infty} <M> =  \frac{\sinh(h)}{\sqrt{\sinh^2 + e^{-4\beta}}}
    :label:
 
 - At :math:`D>1` the symmetry is broken at :math:`T>T_c`, or :math:`\beta < \beta_c`.
