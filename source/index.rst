@@ -810,6 +810,10 @@ Field theories
 Imaginary Time Path integral
 ----------------------------
 
+Quantum field theory is a huge field and introducing it properly is outside the scope of this
+course. There is a quick, less than 10 minute, intro to them on the
+`Pretty Much Physics Youtube Channel <www.youtube.com/watch?v=2ElUe5rcrB8&ab_channel=JoeScott>`_.
+
 Now we will approach quantum field theories using *Feynman's path integral*. [Phys. Rev. Mod. Phys. 20, 1948].
 In this representation, expectation values are calculated as
 
