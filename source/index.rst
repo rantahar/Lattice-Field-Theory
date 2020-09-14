@@ -814,9 +814,17 @@ Quantum field theory is a huge field and introducing it properly is outside the 
 course. There is a quick, less than 10 minute, intro to them on the
 `Pretty Much Physics Youtube Channel <www.youtube.com/watch?v=2ElUe5rcrB8&ab_channel=JoeScott>`_.
 
-Now we will approach quantum field theories using *Feynman's path integral*. [Phys. Rev. Mod. Phys. 20, 1948].
-In this representation, expectation values are calculated as
+In short, quantum field theory unifies the *special* theory of relativity and quantum mechanics.
+It turns out you can turn the relativistic theory of electromagnetism, which is a field theory,
+into a quantum mechanical model without running into as much trouble as you would with a theory
+of individual particles. 
+Quantum field theory builds on this observation and uses field theories to describe other particles
+as well.
 
+
+Here we will derive the path integral representation of a quantum field theory in finite temperature.
+The derivation is quite similar with real dynamical time. There, in the path integral representation,
+the expectation value of an observable is
 
 .. math::
    &<O> = \frac{1}{Z} \int \left [ \prod_x d\phi(x) \right ] O(\phi) e^{\frac{i}{\hbar} S(\phi)} \\
