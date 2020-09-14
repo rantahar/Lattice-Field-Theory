@@ -812,7 +812,7 @@ Imaginary Time Path integral
 
 Quantum field theory is a huge field and introducing it properly is outside the scope of this
 course. There is a quick, less than 10 minute, intro to them on the
-`Pretty Much Physics Youtube Channel <www.youtube.com/watch?v=2ElUe5rcrB8&ab_channel=JoeScott>`_.
+`Pretty Much Physics Youtube Channel <https://www.youtube.com/watch?v=2ElUe5rcrB8&ab_channel=JoeScott>`_.
 
 In short, quantum field theory unifies the *special* theory of relativity and quantum mechanics.
 It turns out you can turn the relativistic theory of electromagnetism, which is a field theory,
