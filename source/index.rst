@@ -1773,7 +1773,7 @@ We also need to check the measure. Here :math:`ds \to ds |ds'/ds| = ds |-1| = ds
 :math:`d\phi \to d\phi`.
 
 
-The Electromagnetic Field
+Quantum Electrodynamics 
 --------------------------
 
 
