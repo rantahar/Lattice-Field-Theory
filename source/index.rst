@@ -807,29 +807,100 @@ temperature, but the two phases are nevertheless distinct.
 Field theories
 ============================
 
-Imaginary Time Path integral
-----------------------------
+Quantum Field Theories
+-----------------------
 
 Quantum field theory is a huge field and introducing it properly is outside the scope of this
-course. There is a quick, less than 10 minute, intro to them on the
-`Pretty Much Physics Youtube Channel <https://www.youtube.com/watch?v=2ElUe5rcrB8&ab_channel=JoeScott>`_.
-
-In short, quantum field theory unifies the *special* theory of relativity and quantum mechanics.
-It turns out you can turn the relativistic theory of electromagnetism, which is a field theory,
-into a quantum mechanical model without running into as much trouble as you would with a theory
-of individual particles. 
+course. In short, quantum field theory unifies the *special* theory of relativity and quantum mechanics.
+This is not an easy task for point particles, but
+it turns out you the quantum mechanical version of relativistic electromagnetism works.
 Quantum field theory builds on this observation and uses field theories to describe other particles
 as well.
 
+Let's consider a scalar field theory is Minkowsky spacetime (the field :math:`\phi` could also represent a more complicated set of fields). Given the action
 
-Here we will derive the path integral representation of a quantum field theory in thermal equilibrium.
-The derivation is quite similar with real dynamical time. There, in the path integral representation,
-the expectation value of an observable is
+.. math::
+   S = \int d^3 dt \mathcal L(\phi,\partial_t \phi) = \int d^3 dt \left [ \frac 12 \partial_\mu \phi \partial^\mu\phi - V(\phi) \right ]
+   :label:
+The classical equations of motion are found by minimizing the action, which leads to the 
+Euler-Lagrange equation
+
+.. math::
+   \partial_\mu \frac{\delta L}{\delta(\partial_\mu \phi)} - \frac{\delta L}{\delta \phi} = 0.
+   :label:
+In this case we find the Klein-Gordon equation
+
+.. math::
+   \partial_\mu \partial^\mu \phi = -\frac{dV(\phi)}{d\phi}.
+   :label:
+
+The classical Hamiltonian is obtained by a Legendre transformation
+
+.. math::
+   H = \int d^3xdt\left [ \pi\dot\phi-\mathcal L \right ],
+   :label:
+where :math:`\pi = \delta \mathcal L/\delta\dot\phi` is the canonical momentum, and
+
+.. math::
+   H(\phi,\pi) = \int d^3xdt\left [ \pi^2 +\frac 12 (\partial_i\phi)^2 + V(\phi) \right ].
+   :label:
+
+In quantum field theory, we consider the Hilbert space of states :math:`\ket{\phi,\pi}`.
+These evolve according to the Schrödinger equation
+
+.. math::
+   i\hbar\partial_t \ket{\phi,\pi} = \hat H \ket{\phi,\pi}.
+   :label:
+
+Here the Hamilton operator is
+
+.. math::
+   \hat H \ket{\phi,\pi} = H(\phi,\pi) \ket{\phi,\pi}.
+   :label:
+The expectation value of a measurable that depends on the fields :math:`\phi` and :math:`\pi`
+is
+
+.. math::
+   \Braketmid{\phi,\pi}{O(\phi,\pi)}{\phi,\pi}.
+   :label:
+
+We also define field operators
+
+.. math::
+   &\hat \phi({\bf x}) \ket{\phi} = \phi({\bf x}) \ket{\phi}\\
+   &\hat \pi({\bf x}) \ket{\pi} = \pi({\bf x}) \ket{\pi}\\
+   &\int \left[\prod_x d\phi({\bf x})\right] \ket{\phi}\bra{\phi} = 1\\
+   &\int \left[\prod_x \frac {d\pi({\bf x})}{2\pi} \right] \ket{\pi}\bra{\pi} = 1\\
+   &[\hat\phi({\bf x}),\hat\phi({\bf x}')] = -i\delta^3({\bf x} - {\bf x}') \\
+   &\Braket{\pi}{\pi} = e^{i\int d^3xdt \pi({\bf x})\phi({\bf x})}
+   :label:
+
+We can Formally solve the Schrödinger equation to find the time evolution operator
+
+.. math::
+   U(t)=e^{\frac{i}{\hbar}\hat H t}.
+   :label:
+In this representation, we can define a partition function analogically to classical statistics,
+
+.. math::
+   Z = \textrm{Tr} e^{\frac{i}{\hbar}\hat H t} = \int d\phi \left<\phi\left| e^{\frac{i}{\hbar} \hat H t} \right|\phi\right>.
+   :label:
+From here we could derive the Feynman path integral representation by 
+evolving the a field configuration :math:`\bra{\phi,\pi}` by small time steps :math:`\delta t` and 
+taking the limit :math:`\delta t\to 0`. Here we will skip the derivation and simply introduce the result.
+Then we will follow essentially the same steps in field theory at thermal equilibrium.
+
+
+Imaginary Time Path integral
+----------------------------
+
+First, let us quickly introduce the path integral representation in Minkowsky space.
+The expectation value of an observable is
 
 .. math::
    &<O> = \frac{1}{Z} \int \left [ \prod_x d\phi(x) \right ] O(\phi) e^{\frac{i}{\hbar} S(\phi)} \\
    & \textrm{ where } Z= \int \left [ \prod_x d\phi(x) \right ]e^{\frac{i}{\hbar} S(\phi)}\\
-   & \textrm{ and } S=\int d^4x \mathcal L (\phi, \partial_t \phi) 
+   & \textrm{ and } S=\int d^4x \mathcal L (\phi) 
    :label: pathintegral
 
 Or using natural units :math:`\hbar = 1`
@@ -848,6 +919,9 @@ We can write observables using source fields,
    &= \frac 1Z \int \left [ d\phi \right ] \phi(x) \phi(y) e^{iS} - <\phi(x)>^2
    :label:
 
+There are no state vectors or operators in the path integral representation. Instead, the variables closely
+resemble classical fields. The difference is the integral over all possible field values, with a weight
+defined by the action. 
 
 Now, since the fields are defined at all space-time locations, the integral measure
 
@@ -874,56 +948,6 @@ However, this is (mostly) solved in the imaginary time formalism of thermal fiel
 
 
 
-Let's consider a scalar field theory is Minkowsky spacetime (the field :math:`\phi` could also represent a more complicated set of fields). Given the action
-
-.. math::
-   S = \int d^3 dt \mathcal L(\phi,\partial_t \phi) = \int d^3 dt \left [ \frac 12 \partial_\mu \phi \partial^\mu\phi - V(\phi) \right ]
-   :label:
-The classical Hamiltonian is obtained by a Legendre transformation
-
-.. math::
-   H = \int d^3xdt\left [ \pi\dot\phi-\mathcal L \right ],
-   :label:
-where :math:`\pi = \delta \mathcal L/\delta\dot\phi` is the canonical momentum, and
-
-.. math::
-   H = \int d^3xdt\left [ \pi^2 +\frac 12 (\partial_i\phi)^2 + V(\phi) \right ].
-   :label:
-
-In quantum field theory, we consider the Hilbert space of states :math:`|\phi>`, :math:`|\pi>`
-and the Hamiltonian operator
-
-.. math::
-   \hat H |\phi,\pi> = H |\phi,\pi>.
-   :label:
-Let's also define the field operators
-
-.. math::
-   &\hat \phi({\bf x}) |\phi> = \phi({\bf x}) |\phi>\\
-   &\hat \pi({\bf x}) |\pi> = \pi({\bf x}) |\pi>\\
-   &\int \left[\prod_x d\phi({\bf x})\right] |\phi><\phi| = 1\\
-   &\int \left[\prod_x \frac {d\pi({\bf x})}{2\pi} \right] |\pi><\pi| = 1\\
-   &[\hat\phi({\bf x}),\hat\phi({\bf x}')] = -i\delta^3({\bf x} - {\bf x}') \\
-   &<\phi|\pi> = e^{i\int d^3xdt \pi({\bf x})\phi({\bf x})}
-   :label:
-In this representation the time evolution operator is 
-
-.. math::
-   U(t)=e^{i\hat H t}
-   :label:
-
-In this representation, we can write expectation values in using the
-partition function,
-
-.. math::
-   Z = \textrm{Tr} e^{i\hat H t} = \int d\phi \left<\phi\left| e^{i \hat H t} \right|\phi\right>.
-   :label:
-From here we could derive the Feynman path integral representation :eq:`pathintegral`.
-Here we will follow the derivation,
-evolving the a field configuration :math:`<\phi|` by small time steps :math:`\delta t` and 
-taking the limit :math:`\delta t\to 0`,
-but in the imaginary time formalism.
-
 In equilibrium at a finite temperature :math:`T`, a quantum field theory follows the Gibbs ensemble:
 
 .. math::
@@ -949,7 +973,7 @@ We will do this in any case, since we want to end up with discrete spacetime, bu
 The Hamiltonian in discrete space is
 
 .. math::
-   \hat H = a^3 \sum_x \left [ \frac 12 [\hat pi(x)]^2 + \frac 12 [\hat pi(x)]^2  \right ]
+   \hat H = a^3 \sum_x \left [ \hat \pi^2(x) + \frac 12 [\Delta_i \hat \phi(x)]^2 +V(\phi) \right ]
    :label:
 
 Now let's consider the amplitude of the fields :math:`\phi_A` and :math:`\phi_B` in equilibrium at inverse temperature :math:`\tau = 1/T` and split the time interval into N small sections
@@ -970,7 +994,7 @@ In order to evaluate this, we insert the identity operators :math:`1 = \int\left
    \left<\phi_2 |\pi_{1}\right > \left<\pi_1 |e^{-a_\tau \hat H}|\phi_A\right >
    :label:
 
-Now the matrix in each exponential is small, we can expand the first few two and conclude that
+Since the matrix in each exponential is small, we can expand the first few two and conclude that
 
 .. math::
    \left<\pi_n |e^{-a_\tau \hat H}|\phi_n\right > = 
