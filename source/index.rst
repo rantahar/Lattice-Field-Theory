@@ -1769,6 +1769,9 @@ The local symmetry is
    &s_{x,\mu} \to -s_{x,\mu} \textrm{ for all } \mu 
    :label:
 
+We also need to check the measure. Here :math:`ds \to ds |ds'/ds| = ds |-1| = ds` and similarly 
+:math:`d\phi \to d\phi`.
+
 
 The Electromagnetic Field
 --------------------------
