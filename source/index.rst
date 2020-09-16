@@ -683,7 +683,7 @@ In many models we have a broken symmetry at :math:`\beta > \beta_c` and a restor
    :label:
 
 .. math::
-   <M> = \frac{\partial}{\partial h} F
+   <M> = -\frac 1V \frac{\partial}{\partial h} F
    :label:
 
 
@@ -729,7 +729,7 @@ This is the case in spin models.
 The derivative of magnetization
 
 .. math::
-   \frac{\partial}{\partial_h}<M> \neq 0
+   \frac 1V \frac{\partial}{\partial_h}<M> \neq 0
    :label:
 
 is discontinuous.
@@ -762,8 +762,8 @@ Writing :math:`\tau = \beta-\beta_c`:
 
 
 .. math::
-   \frac{<M>}{V} &= 0 \textrm{ at } \beta \leq \beta_c \textrm{ and }\\
-   \frac{<M>}{V} &\sim |\tau|^\delta \textrm{ at } \beta > \beta_c
+   <M> &= 0 \textrm{ at } \beta \leq \beta_c \textrm{ and }\\
+   <M> &\sim |\tau|^\delta \textrm{ at } \beta > \beta_c
    :label:
 
 The critical exponents are characteristic to the symmetries and dimensionality of the model.
