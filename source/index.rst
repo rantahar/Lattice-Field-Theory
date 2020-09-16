@@ -120,7 +120,7 @@ the Boltzmann distribution,
 
 .. math::
    Z & =\int[\prod_{i}ds_{i}]e^{-\frac{1}{kT}E(s)}\\
-     & =\int[\prod_{i}ds_{i}]e^{\frac{J}{kT}\sum_{<ij>}\mathbf{s}_{i}\mathbf{s}_{j}+\frac{\gamma}{kT}\mathbf{H}\cdot\sum_{i}\mathbf{s}_{i}}
+     & =\int[\prod_{i}ds_{i}]e^{-\frac{J}{kT}\sum_{<ij>}\mathbf{s}_{i}\mathbf{s}_{j}+\frac{\gamma}{kT}\mathbf{H}\cdot\sum_{i}\mathbf{s}_{i}}
    :label:
 
 The thermal expectation value of an observable :math:`O` is then
@@ -142,7 +142,7 @@ The Ising model is a further simplification of the above. All the spins
 are either :math:`+1` or :math:`-1`. The partition function then is
 
 .. math::
-   Z =\sum_{s_{i}=\pm1}e^{\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
+   Z =\sum_{s_{i}=\pm1}e^{-\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
    :label:
 Here we use dimensionless couplings, :math:`\beta=\frac{J}{kT}` and
 :math:`h=\frac{\gamma H}{kT}`.
@@ -289,10 +289,10 @@ continuous parameters.
 
    .. code-block:: python
 
-         energy_plus  =  1 * ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
-                              + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
-         energy_minus = -1 * ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
-                              + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+         energy_plus  = -(1) * ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                               + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+         energy_minus = -(-1) * ( spin[x][(y+1)%lattice_size] + spin[x][y-1] 
+                                + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
          
          P_plus  = np.exp( -energy_plus/temperature )
          P_minus = np.exp( -energy_minus/temperature )
