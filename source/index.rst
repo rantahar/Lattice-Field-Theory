@@ -837,7 +837,7 @@ In this case we find the Klein-Gordon equation
 The classical Hamiltonian is obtained by a Legendre transformation
 
 .. math::
-   H = \int d^3xdt\left [ \pi\dot\phi-\mathcal L \right ],
+   H = \pi\dot\phi-\mathcal L \right ,
    :label:
 where :math:`\pi = \delta \mathcal L/\delta\dot\phi` is the canonical momentum, and
 
@@ -872,10 +872,10 @@ We also define field operators
    &\int \left[\prod_x d\phi({\bf x})\right] \ket{\phi}\bra{\phi} = 1\\
    &\int \left[\prod_x \frac {d\pi({\bf x})}{2\pi} \right] \ket{\pi}\bra{\pi} = 1\\
    &[\hat\phi({\bf x}),\hat\phi({\bf x}')] = -i\delta^3({\bf x} - {\bf x}') \\
-   &\Braket{\pi}{\pi} = e^{i\int d^3xdt \pi({\bf x})\phi({\bf x})}
+   &\Braket{\pi}{\phi} = e^{i\int d^3xdt \pi({\bf x})\phi({\bf x})}
    :label:
 
-We can Formally solve the Schrödinger equation to find the time evolution operator
+We can formally solve the Schrödinger equation to find the time evolution operator
 
 .. math::
    U(t)=e^{\frac{i}{\hbar}\hat H t}.
@@ -891,10 +891,12 @@ taking the limit :math:`\delta t\to 0`. Here we will skip the derivation and sim
 Then we will follow essentially the same steps in field theory at thermal equilibrium.
 
 
-Imaginary Time Path integral
-----------------------------
+The Path Integral Representation
+-----------------------------------
 
-First, let us quickly introduce the path integral representation in Minkowsky space.
+First, let us quickly introduce the path integral representation in Minkowsky space. We will not
+derive this, since the derivation is essentially the same in thermal field theory and we will do
+it there.
 The expectation value of an observable is
 
 .. math::
@@ -946,6 +948,10 @@ The problem here is the complex, unimodular weight, :math:`\exp(iS)`.
 Every configuration :math:`\{\phi\}` contributes with the same magnitude and result depends on cancellations between configurations.
 However, this is (mostly) solved in the imaginary time formalism of thermal field theory.
 
+
+
+Imaginary Time Path integral
+----------------------------
 
 
 In equilibrium at a finite temperature :math:`T`, a quantum field theory follows the Gibbs ensemble:
