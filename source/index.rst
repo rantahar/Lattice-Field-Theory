@@ -837,12 +837,13 @@ In this case we find the Klein-Gordon equation
 The classical Hamiltonian is obtained by a Legendre transformation
 
 .. math::
-   H = \pi\dot\phi-\mathcal L \right ,
+   \int d^3xdt H = \int d^3xdt\left [  \pi\dot\phi-\mathcal L \right ],
    :label:
+
 where :math:`\pi = \delta \mathcal L/\delta\dot\phi` is the canonical momentum, and
 
 .. math::
-   H(\phi,\pi) = \int d^3xdt\left [ \pi^2 +\frac 12 (\partial_i\phi)^2 + V(\phi) \right ].
+   H(\phi,\pi) = \pi^2 +\frac 12 (\partial_i\phi)^2 + V(\phi).
    :label:
 
 In quantum field theory, we consider the Hilbert space of states :math:`\ket{\phi,\pi}`.
@@ -861,7 +862,15 @@ The expectation value of a measurable that depends on the fields :math:`\phi` an
 is
 
 .. math::
-   \Braketmid{\phi,\pi}{O(\phi,\pi)}{\phi,\pi}.
+   \Braketmid{\phi,\pi}{O(\phi,\pi)}{\phi,\pi}
+   :label:
+
+and
+
+.. math::
+   &\int \left[\prod_x d\phi({\bf x})\right] \ket{\phi}\bra{\phi} = 1\\
+   &\int \left[\prod_x \frac {d\pi({\bf x})}{2\pi} \right] \ket{\pi}\bra{\pi} = 1\\
+   &\Braket{\pi}{\phi} = e^{i\int d^3xdt \pi({\bf x})\phi({\bf x})}
    :label:
 
 We also define field operators
@@ -869,10 +878,7 @@ We also define field operators
 .. math::
    &\hat \phi({\bf x}) \ket{\phi} = \phi({\bf x}) \ket{\phi}\\
    &\hat \pi({\bf x}) \ket{\pi} = \pi({\bf x}) \ket{\pi}\\
-   &\int \left[\prod_x d\phi({\bf x})\right] \ket{\phi}\bra{\phi} = 1\\
-   &\int \left[\prod_x \frac {d\pi({\bf x})}{2\pi} \right] \ket{\pi}\bra{\pi} = 1\\
    &[\hat\phi({\bf x}),\hat\phi({\bf x}')] = -i\delta^3({\bf x} - {\bf x}') \\
-   &\Braket{\pi}{\phi} = e^{i\int d^3xdt \pi({\bf x})\phi({\bf x})}
    :label:
 
 We can formally solve the Schrödinger equation to find the time evolution operator
