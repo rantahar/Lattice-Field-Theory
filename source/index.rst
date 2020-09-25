@@ -297,6 +297,10 @@ continuous parameters.
          P_plus  = np.exp( -energy_plus/temperature )
          P_minus = np.exp( -energy_minus/temperature )
    
+   Notice the module lattice size (%lattice_size) in the neighbor index. If the current site
+   is at the lattice boundary, this will point to the other side. We don't need this in the
+   negative direction since python does it automatically.
+
    Now calculate the heat bath probability of choosing positive spin and we choose the spin
    according to this probability
 
@@ -317,9 +321,8 @@ continuous parameters.
       energy = 0
       for x in range(lattice_size):
          for y in range(lattice_size):
-            energy += - spin[x][y] * (
-                          spin[x][(y+1)%lattice_size] + spin[x][y-1] 
-                        + spin[(x+1)%lattice_size][y] + spin[x-1][y] )
+            energy += - spin[x][y] * spin[x][(y+1)%lattice_size]
+            energy += - spin[x][y] * spin[(x+1)%lattice_size][y]
       
       print("The energy is {}".format(energy))
    
@@ -525,7 +528,7 @@ In the thermodynamic limit, :math:`L\to\infty`,
 and 
 
 .. math::
-   \log(Z) = L\log \left( \cosh(h) + \sqrt{\sinh^2(h)+e^{-4\beta}} \right )
+   \log(Z) = \log(\lambda_+) = L\log \left( \cosh(h) + \sqrt{1 + \sinh^2(h)+e^{-4\beta}} \right ) + L\beta
    :label:
 
 From here we can calculate the magnetization as a function of :math:`h`
