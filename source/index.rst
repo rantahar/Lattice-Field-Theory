@@ -421,8 +421,8 @@ Other interesting observables include
 - The magnetic susceptibility
 
 .. math::
-   \chi_M & = \frac 1V \frac{\partial}{\partial h} <M> = \frac 1V \frac{\partial^2}{\partial^2 h} \log(Z) \\
-   &= \frac 1V\left( <M^2> - <M>^2 \right)
+   \chi_M & = V\frac{\partial}{\partial h} <M> = \frac 1V \frac{\partial^2}{\partial^2 h} \log(Z) \\
+   &= V\left( <M^2> - <M>^2 \right)
    :label:
 
 - Correlation functions
@@ -732,7 +732,7 @@ This is the case in spin models.
 The derivative of magnetization
 
 .. math::
-   \frac 1V \frac{\partial}{\partial_h}<M> \neq 0
+   \frac{\partial}{\partial_h}<M> \neq 0
    :label:
 
 is discontinuous.
@@ -1448,7 +1448,7 @@ darts into the square. The probability of a dart landing in the circle is
 
 .. math::
    p(\textrm{hits inside circle}) = \frac{A_{circle}}{A_{square}} \approx
-   \frac{\textrm{#hits inside circle}}{\textrm{#hits inside square}}
+   \frac{\textrm{\#hits inside circle}}{\textrm{\#hits inside square}}
    :label:
 
 This method can be used to evaluate the area of any irregular shape as
