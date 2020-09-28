@@ -421,7 +421,7 @@ Other interesting observables include
 - The magnetic susceptibility
 
 .. math::
-   \chi_M & = V\frac{\partial}{\partial h} <M> = \frac 1V \frac{\partial^2}{\partial^2 h} \log(Z) \\
+   \chi_M & = \frac{\partial}{\partial h} <M> = \frac 1V \frac{\partial^2}{\partial^2 h} \log(Z) \\
    &= V\left( <M^2> - <M>^2 \right)
    :label:
 
