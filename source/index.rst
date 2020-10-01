@@ -1311,7 +1311,7 @@ With periodic boundaries, :math:`x_\mu +aN = x\mu`, the allowed momenta are
 The inverse transform is a sum over these momenta:
 
 .. math::
-  f(k) &= \sum_k \frac {1}{(aN)^d} e^{ikx}\tilde f(k), \\
+  f(x) &= \sum_k \frac {1}{(aN)^d} e^{ikx}\tilde f(k), \\
   k_\mu &=\frac{2\pi}{aN} n_\mu -\pi
   :label:
 
@@ -1325,7 +1325,7 @@ The scalar field propagator :math:`G(x,y)` is the inverse (Greens function) of t
 :math:`a^{-d}M = (\Box + m^2)`,
 
 .. math::
-   \sum_y a^d ( \Box_{x,y} + \delta_{x,y} m^2 ) G(y,z) = \delta_{x,y}`
+   \sum_y a^d ( \Box_{x,y} + \delta_{x,y} m^2 ) G(y,z) = \delta_{x,z}
    :label:
 
 Calculating Greens functions is often simplest by taking a Fourier transform:
@@ -1448,7 +1448,7 @@ darts into the square. The probability of a dart landing in the circle is
 
 .. math::
    p(\textrm{hits inside circle}) = \frac{A_{circle}}{A_{square}} \approx
-   \frac{\textrm{\#hits inside circle}}{\textrm{\#hits inside square}}
+   \frac{\textrm{number of hits inside circle}}{\textrm{number of hits inside square}}
    :label:
 
 This method can be used to evaluate the area of any irregular shape as
