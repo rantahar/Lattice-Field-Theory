@@ -1466,13 +1466,13 @@ darts into the square. The probability of a dart landing in the circle is
    \frac{\textrm{number of hits inside circle}}{\textrm{number of hits inside square}}
    :label:
 
-This method can be used to evaluate the area of any irregular shape as
-long as we can determine whether the dart has landed inside it.
-
 .. math::
    \lim_{N\to\infty} \frac 1N \sum_{i=0}^N \delta({\bf x}_i \textrm{ in circle})
     = \frac{\pi}{4}
    :label:
+
+This method can be used to evaluate the area of any irregular shape as
+long as we can determine whether the dart has landed inside it.
 
 
 
@@ -1489,11 +1489,15 @@ We could take this to describe a shape inside a square and
 draw random values on both x and y axis.
 We would need to evaluate the function at x to determine whether
 :math:`y<f(x)`.
-This simplifies to
 
 .. math::
-   I \approx \frac{b-a}{N} \sum_{i=0}^N p(y_i < f(x_i))
-           = \frac{b-a}{N} \sum_{i=0}^N f(x_i)
+   I \approx \frac{(b-a)(y_{max}-y_{min})}{N} \sum_{i=0}^N p(y_i < f(x_i))
+   :label:
+
+Since the propability is always :math:`f(x_i)/(y_{max}-y_{min})` simplifies to
+
+.. math::
+   I \approx \frac{b-a}{N} \sum_{i=0}^N f(x_i)
    :label:
 
 In the 1D case this this is not the most efficient method, but for large
@@ -1514,7 +1518,7 @@ In error of the Monte Carlo method is statistical and it follows from the
    :label:
 
 We will not prove this here, but you can check it by calculating the
-standard deviation in you own simulations.
+standard deviation in your own simulations.
 
 .. container:: note
    
@@ -1527,15 +1531,15 @@ standard deviation in you own simulations.
 
 
 So the Monte Carlo method becomes more efficient around :math:`D = 8`.
-In the 2D XY model each site has a single spin, so for a small :math:`8\times8` 
-lattice we already have
+In a model with a single scalar field each site has a single spin, so
+for a small :math:`4\times4\times4\times4` lattice we already have
 
 .. math::
-   D = 4\times 8 = 64
+   D = 4\times4\times4\times4 = 256
    :label:
 
 
-This result is true as long as the function and it's square are 
+This result is true as long as the function and its square are 
 integrable 
 
 .. math::
@@ -1543,10 +1547,10 @@ integrable
    \int_0^1 f^2(x) = \textrm{finite}
    :label:
 
-This is true in lattice simulations, but here is a counterexample
+This is true in lattice simulations, but here is a counterexample:
 
 .. math::
-   I=\int_0^1 x^{0.5}
+   I=\int_0^1 \frac {1}{\sqrt{x}}
    :label:
 
 The mean and standard deviation from a Monte Carlo run are still
@@ -1559,26 +1563,23 @@ Importance Sampling
 
 The Monte Carlo Method can be made even more efficient using importance sampling.
 Again, we already do this in our example program.
-
-The integrand in our simulations has a small value in most of the
-integration space. The integral is dominated by a small region of
-space. If we use completely random points in the Monte Carlo
-estimate, most of the values will be very small and only a small
-fraction will actually contribute to the integral.
-
-Instead we choose the random points from a distribution and mimics
-the function we are integrating. This leads to more measurements
-actually contributing to the result and reduces the variance.
-
-In lattice simulation we are integrating
+We integrate 
 
 .. math::
    \int d\phi e^{-S}
    :label:
 
-The function is exponentially peaked where S is small. Further, :math:`S`
+The weight function of the Gibbs ensemble is exponentially peaked where S is
+small. Further, :math:`S`
 is an extensive quantity, meaning it grows with the volume.
 The function gets more peaked as the volume increases.
+If we use completely random points in the Monte Carlo
+estimate, most of the values will be very small and only a small
+fraction will actually contribute to the integral.
+
+Instead we should choose the random points from a distribution and mimics
+the function we are integrating. This leads to more measurements
+actually contributing to the result and reduces the variance.
 
 Say we are integrating 
 
@@ -1596,33 +1597,42 @@ The integral is
 
 If :math:`p` is chosen well, the function :math:`p/f` will be flatter
 than the original and the variance of the result will be smaller. The 
-optimal choice would be to use :math:`p(x) = C |f(x)|`. Of course it is
-usually not that straightforward, using the function :math:`f` itself
-as a probability density would require knowing the value of the integral.
+optimal choice would be to use :math:`p(x) = C |f(x)|`.
 
-In lattice simulations we are calculating integrals of the type
+Of course if it was that straightforward, we would always just draw from
+the f(x). The problem is that f(x) is probably not a distribution, and to turn
+it into one, we would need to calculate
+
+.. math::
+   C = \int dV f(x),
+   :label:
+which is exactly the problem we are trying to solve.
+
+In lattice simulations though, this is exactly what we do. 
+We are actually calculating
 
 .. math::
    \ev{O} = \frac {\int [d\phi] O(\phi) e^{-S(\phi)} }{\int [d\phi] e^{-S(\phi)}}
    :label:
 
-The integral in the denominator is always the same, so usually the best
-choice is 
+If we normalize the two integrals in the same way, the normalization drops out.
+
+Since the denominator does not depend on :math:`O`,
+the best choice generally is
 
 .. math::
    g(\phi) = C \int [d\phi] e^{-S(\phi)}
    :label:
 
 with an unknown normalization coefficient :math:`C`.
-
-Now the integral is
+We then find
 
 .. math::
    \ev{O} = \frac 1N \sum_i O(\phi_i)
    :label:
 
 Notice that since the normalization coefficient drops out in the
-Monte Carlo run, we cannot calculate the partition function
+Monte Carlo, we cannot calculate the partition function
 directly from the simulation.
 
 
