@@ -1776,16 +1776,16 @@ Ising Gauge Model
 -------------------
 
 The defining feature of a gauge field is the gauge symmetry, a local symmetry of
-the action. Let's look at the following Lagrangian for spins :math:`s = \pm 1`
+the action. Let's look at the following action for spins :math:`s = \pm 1`
 
 .. math::
-   L = \beta \sum_x \sum_{\mu,\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
+   S = -\beta \sum_x \sum_{\mu,\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
    :label:
 
 The kinetic term consists of a product of spins around a single lattice square,
 also known as a plaquette.
 
-The lagrangian is symmetric with respect to the transformation
+The acton is symmetric with respect to the transformation
 
 .. math::
    &s_x \to -s_x \textrm{ and} \\
@@ -1800,7 +1800,7 @@ way. Instead of a spin at each lattice site, move the spins to each link between
 two sites, :math:`s_{x,\mu} = \pm 1`.
 
 .. math::
-   L = \beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
+   S = -\beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
    :label:
 
 This does not look very different, but the transformation is now
@@ -1812,7 +1812,7 @@ This does not look very different, but the transformation is now
 Now let's look at a scalar field
 
 .. math::
-   L = \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) .
+   S = \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) .
    :label:
 
 This model has a global symmetry, 
@@ -1825,7 +1825,7 @@ We turn this into a local symmetry by adding the Ising Gauge field and
 multiplying with it in the derivative term.
 
 .. math::
-   L &= \beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}\\
+   S &= -\beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}\\
      &+ \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - s_{x-\hat\mu,\mu}\phi_{x-\mu} - s_{x,\mu}\phi_{x+\mu} \right ).
    :label:
 
@@ -1846,7 +1846,7 @@ Quantum Electrodynamics
 Consider a complex scalar field,
 
 .. math::
-   L = \sum_x \left [ \sum_\mu \frac {1}{a^2} \phi_x^* \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) + m^2\phi_x^*\phi_x \right ].
+   S = \sum_x \left [ \sum_\mu \frac {1}{a^2} \phi_x^* \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) + m^2\phi_x^*\phi_x \right ].
    :label:
 
 This model has a :math:`U(1)` global symmetry, 
@@ -1858,12 +1858,15 @@ This model has a :math:`U(1)` global symmetry,
 As above, this can be turned into a local symmetry by adding a gauge field
 
 .. math::
-   U_{x,\mu} = e^{i A_{x,\mu}}.
+   U_{x,\mu} = e^{i aA_{x,\mu}}.
+Note the factor :math:`a` in the exponential. The field :math:`A` can be
+identified with the vector potential and should have the units of energy.
+
 We add a plaquette term to the Lagrangian and
 add the field :math:`U_\mu` to the derivative term:
 
 .. math::
-   L &= \beta \sum_x \sum_{\mu,\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
+   S &= -\beta \sum_x \sum_{\mu,\nu} Re U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
      &+ \sum_x \sum_\mu \frac {1}{a^2} \phi^*_x \left ( 2\phi_x - U^*_{x-\hat\mu,\mu}\phi_{x-\mu} - U_{x,\mu}\phi_{x+\mu} \right ).
    :label:
 
@@ -1883,14 +1886,67 @@ electromagnetic field and it was constructed with the same principle.
 Still, we should check that the plaquette actions reproduces the familiar
 continuum gauge action.
 
+First, what is the field :math:`U_{x,\mu}`?
+The product :math:`\phi^*_xU_{x,\mu}\phi_{x+\mu}` is covariant, it does not
+change with the local transformation. Therefore we can identify it with the
+parallel transport. This also works for longer chains, for example,
+
+.. math::
+   \phi^*_{(0,0,0,0)}U_{(0,0,0,0),0}U_{(1,0,0,0),1}U_{(1,1,0,0),0}\phi_{(2,1,0,0)}
+is covariant.
+
+One way of deriving the field strength tensor is to do a parallel transport over a
+closed loop and take the limit where the loop contracts to a point. This is 
+what we will do here. The plaquette is the smallest closed loop possible on the
+lattice and we will in the end take the limit :math:`a\to0`, where the loop
+contract to zero.
+
+More formally, we can write
+
+.. math::
+   L_x &= -\beta Re \sum_{\mu,\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
+   &= -\beta Re \sum_{\mu,\nu} e^{iaA_{x,\mu} + iaA_{x+\mu,\nu}-iaA_{x+\nu, \mu}-iaA_{x,\nu}}\\
+   :label:
+
+Now expanding
+
+.. math::
+   A_{x+\hat\mu,\nu} = A_{x,\mu} + a\partial_\mu A_{x,\nu} 
+   + \frac 12 a^2 \partial^2_\mu A_{x,\nu} + \dots
+   :label:
+
+we find
+
+.. math::
+   L_x &= -\beta Re \sum_{\mu,\nu} e^{ia^2\partial_\nu A_{x,\mu} - ia\partial_\mu A_{x,\nu} + O(a^3)}\\
+   &=-\beta Re\left( 1 + ia^2F_{x,\mu,\nu} - a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )\\
+   &=\beta \left ( -1 + a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )
+   :label:
+
+While constant shifts in the action do not actually make a difference, it is common
+to use the action
+
+.. math::
+   L_x = \beta\left [ 1 - Re \sum_{\mu,\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu} \right ]
+   :label:
+
+This is the Wilson plaquette gauge action [K. Wilson, 1974] for a U(1) gauge theory,
+such as electromagnetism.
+
+So the action matches the continuum action for gauge fields. The propagators can
+be derived similarly to the scalar fields. The kinetic terms are squared derivatives
+and will produce the same dispersion relation.
+
+In the Standard Model, the electromagnetic field interacts with fermion and the
+Higgs field. We will get to fermions after we the gauge field section. The 
+Higgs field also interacts with the weak gauge field and is not just a complex field.
+Next we will look at :math:`SU(2)` interactions, such as the weak interaction,
+and :math:`SU(3)` interactions, such as the strong interaction.
+The results for :math:`SU(3)` generalize to any :math:`SU(N)`.
 
 
 
 
-
-
-
--   Representing gauge symmetry, back to U(1)
 
 -   Updating a gauge field
 
