@@ -1180,6 +1180,7 @@ and take the limit :math:`m_q \to m_{q,phys}`
 At :math:`T=0`
 
  1) :math:`V\to \infty`
+
     :math:`N_\tau,N_s\to\infty`, :math:`a` constant
  2) continuum:
     :math:`a\to 0`
@@ -1187,6 +1188,7 @@ At :math:`T=0`
 At :math:`T>0`
 
  1) :math:`V\to \infty`
+
     :math:`N_s\to\infty`, :math:`a` constant, :math:`N_\tau a` constant
  2) continuum:
     :math:`a\to 0`, :math:`\frac 1T = aN_\tau` constant
@@ -1209,17 +1211,23 @@ The continuum action of a free scalar field :math:`\phi` in Euclidean space is
 On a lattice we can define the d'Alembert operator as
 
 .. math::
-   \Box_{x,y} \phi_y = -\Delta^2\phi = \sum_\mu \frac {1}{a^2} \left( 2\phi_x - \phi_{x-\hat\mu} - \phi_{x+\hat\mu} \right)
+   \Box_{x,y} = \sum_\mu \frac {1}{a^2} \left( 2\delta_{x,y} - \delta_{x+\hat\mu,y}  - \delta_{x-\hat\mu,y}\right)
    :label:
-where :math:`\hat\mu` a basis vector of length :math:`a` and :math:`x` and :math:`y` are vectors,
+
+so that
+
+.. math::
+   \sum_y \Box_{x,y} \phi_y = -\Delta^2\phi = \sum_\mu \frac {1}{a^2} \left( 2\phi_x - \phi_{x-\hat\mu} - \phi_{x+\hat\mu} \right)
+   :label:
+where :math:`\hat\mu` is a basis vector of length :math:`a` and :math:`x` and :math:`y` are vectors,
 :math:`x_\mu = an_\mu`
 Using these definitions, we can write the lattice action as
 
 .. math::
-   S =  a^d \sum_x\left[ \frac 12 \sum_x \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 \right]
+   S =  a^d \sum_x\left[ \frac 12 \sum_y \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 \right]
    :label:
 
-The action is Gaussian, :math:`S=\frac12 \phi_xM_{x,y}\phi_y`, and we can actually do the integral
+The action is Gaussian, :math:`S=\frac12 \sum_{x,y} \phi_xM_{x,y}\phi_y`, and we can actually do the integral
 in the partition function
 
 .. math::
@@ -1237,18 +1245,19 @@ Scalar Field Theories
 Most classes in field theories will introduce the :math:`\phi^4`-theory:
 
 .. math::
-   L_4(\phi) &= \sum_x \left [ \frac 12 \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 
+   L_4(\phi) &= \sum_x \left [ \frac 12 \sum_y \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 
        + \frac{\lambda}{4!} \phi_x^4 \right ] \\
    Z &= \int [d\phi] e^{-L_4(\phi)}
    :label:
 
 
-The partition function of the Higgs field, excluding interactions with other standard
+The Higgs field is a complex scalar field, :math:`\phi_x` is a complex number.
+The partition function, excluding interactions with other standard
 model fields is
 
 .. math::
-   L_H(\phi) &= \sum_x \left [ \frac 12 \phi_x \Box_{x,y} \phi_y - \frac 12 \mu^2\phi_x^2 
-       + \frac{\lambda}{4!} \phi_x^4 \right ] \\
+   L_H(\phi) &= \sum_x \left [ \frac 12 \sum_y \phi^*_x \Box_{x,y} \phi_y - \mu^2\phi_x^2 
+       + \lambda \phi_x^4 \right ] \\
    Z &= \int [d\phi] e^{-L_H(\phi)}
    :label:
 
@@ -1299,7 +1308,7 @@ and we can restrict it to the Brillouin zone, :math:`-\pi < ak_\mu \leq \pi`
 In infinite volume the inverse transform is
 
 .. math::
-   f(k) = \int_{-\pi/a}^{\pi/a}\frac{d^dk}{(2\pi)^d}e^{ikx}\tilde f(k)
+   f(x) = \int_{-\pi/a}^{\pi/a}\frac{d^dk}{(2\pi)^d}e^{ikx}\tilde f(k)
    :label:
 
 It is often more convenient to use dimensionless units, where :math:`x_\mu \in Z,`
@@ -1331,7 +1340,7 @@ The scalar field propagator :math:`G(x,y)` is the inverse (Greens function) of t
 Calculating Greens functions is often simplest by taking a Fourier transform:
 
 .. math::
-   \left [ \sum_\mu \frac {2}{a^2} (1-cos(k_\mu a)) + m^2 \delta_{x,y} \right ] \tilde G(k) = 1
+   \left [ \sum_\mu \frac {2}{a^2} (1-cos(k_\mu a)) + m^2 \right ] \tilde G(k) = 1
    :label:
 
 So the propagator is
@@ -1343,7 +1352,7 @@ So the propagator is
 where :math:`\hat k` is the lattice momentum
 
 .. math::
-   \hat k^2 = \sum_\mu \hat k_\mu 
+   \hat k^2 = \sum_\mu \hat k_\mu^2
    = \sum_\mu \left[ \frac 2 a \sin\left( \frac{ak_\mu}{2} \right) \right]^2
    :label:
 
@@ -1397,6 +1406,7 @@ Here is a comparison of the lattice and continuum propagators at :math:`am=0.1`
    \includegraphics[width=0.6\linewidth]{lattice_continuum_scalar_propagator.eps}
    
 
+
 **N-point Functions**
 
 The Greens functions can be generated using a source :math:`J`
@@ -1408,7 +1418,7 @@ The Greens functions can be generated using a source :math:`J`
 with
 
 .. math::
-   Z(J) = \int [d\phi] e^{-S(J)} = \frac{1}{Z(0)} e^{\sum_{x,y} a^2d \frac 12 J_x G(x,y) J_y}
+   Z(J) = \int [d\phi] e^{-S(J)} = Z(0) e^{\sum_{x,y} a^{2d} \frac 12 J_x G(x,y) J_y}
    :label:
 
 This defines N-point functions
