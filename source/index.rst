@@ -679,14 +679,19 @@ The order of the limits is important here. If the limit :math:`h\to0` is taken t
 In many models we have a broken symmetry at :math:`\beta > \beta_c` and a restored symmetry at :math:`\beta < \beta_c`. This means there is a phase transition at :math:`\beta=\beta_c`
 
  - **First order**
- One or more of the first derivatives of the free energy :math:`F=-\log(Z)` is discontinuous:
+ One or more of the first derivatives of the free energy
+ 
+.. math::
+   F=-\frac{1}{\beta}\log(Z)
+   :label:
+is discontinuous:
 
 .. math::
-   <E> = \frac{\partial}{\partial\beta} F
+   <E> = \frac{\partial}{\partial\beta} \beta F
    :label:
 
 .. math::
-   <M> = -\frac 1V \frac{\partial}{\partial h} F
+   <M> = -\frac 1V \frac{\partial}{\partial h} \beta F
    :label:
 
 
