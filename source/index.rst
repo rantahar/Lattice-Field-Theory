@@ -4,7 +4,7 @@ Lattice Field Theories
 **********************
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    index
    
@@ -1655,7 +1655,7 @@ normalized by the overall variation:
 This is normalized to :math:`C(0)=1`.
 
 When the number of measurements is large, :math:`N\to \infty`, and
-the time :math:`t` is not small (:math:`t\to\infty`, :math:`t\ll L`),
+the time :math:`t` is not small (:math:`t\to\infty`, :math:`t\ll N`),
 the autocorrelation function decays exponentially
 
 .. math::
@@ -1671,7 +1671,7 @@ it takes to decorrelate the configurations. For error analysis the relevant quan
    :label:
 
 Note that if the autocorrelation function is purely exponential,
-:math:`C(t) = e^{-t\tau_{exp}}`, the two autocorrelation times are
+:math:`C(t) = e^{-t/\tau_{exp}}`, the two autocorrelation times are
 the same, :math:`\tau_{int}\sim\tau_{exp}`. Generally 
 :math:`\tau_{int} < \tau_{exp}`.
 
@@ -1737,26 +1737,29 @@ simulating the Ising model is a cluster algorithm. The Wolff cluster
 update [U. Wolff, PRL 62 (1989) 361] proceeds as follows:
 
 1. Choose a random site i.
-2. Check each neighboring site j.  If :math:`s_j=s_i`, join the site
+2. Check each neighboring site j.  If :math:`s_j==s_i`, join the site
    to the cluster with probability :math:`p=1-e^{-2\beta}`.
 3. Repeat step 2 for each site :math:`j` that was joined to the cluster.
    Continue until there are no more sites to consider.
 4. Flip all spins in the cluster.
 
-Cluster updates perform an update on a large region at once. The reason
-this is efficient is ultimately that updating a spin does not require
-considering all its neighbors. Many of them may already be in the 
-cluster.
+Cluster updates perform an update on a large region at once. This way it can quickly 
+go from a state where most spins are :math:`+1` to a state where most spins are
+:math:`-1`. Doing this in multiple small steps is harder because each step can get
+reversed.
 
 Worm  updates are similar, but they update the configuration as they go.
 They usually start by creating two mutually cancelling deformations 
 (head and tail). The head moves around the lattice while updating the 
-configuration. When the deformations meet, they cancel and the new
+configuration. When the deformations meet, they cancel and the worm
 update ends.
-
 Worm algorithms can be efficient in a large :math:`\beta` expansion,
 for example.
 
+As a further generalization of the worm algorithm, it is possible to create
+impossible configurations that, configuration with extra fields or zero weight,
+as intermediate steps in an update. As long as the final result is not impossible,
+the update works.
 
 
 
@@ -1776,7 +1779,7 @@ The defining feature of a gauge field is the gauge symmetry, a local symmetry of
 the action. Let's look at the following Lagrangian for spins :math:`s = \pm 1`
 
 .. math::
-   L = \sum_x \sum_{\mu,\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
+   L = \beta \sum_x \sum_{\mu,\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
    :label:
 
 The kinetic term consists of a product of spins around a single lattice square,
@@ -1797,7 +1800,7 @@ way. Instead of a spin at each lattice site, move the spins to each link between
 two sites, :math:`s_{x,\mu} = \pm 1`.
 
 .. math::
-   L = \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
+   L = \beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
    :label:
 
 This does not look very different, but the transformation is now
@@ -1809,7 +1812,7 @@ This does not look very different, but the transformation is now
 Now let's look at a scalar field
 
 .. math::
-   L = \sum_x \sum_\mu \frac {1}{a^2} \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) .
+   L = \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) .
    :label:
 
 This model has a global symmetry, 
@@ -1818,12 +1821,12 @@ This model has a global symmetry,
    \phi_x \to -\phi_x \textrm{ for all } x.
    :label:
 
-We turn this into a local symmetry by adding the Ising Gauge field and multiplying with it
-when ever multiplying neighboring scalar fields.
+We turn this into a local symmetry by adding the Ising Gauge field and
+multiplying with it in the derivative term.
 
 .. math::
-   L &= \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}\\
-     &+ \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - s_{x-\mu,\mu}\phi_{x+\mu} - s_{s+\mu,\mu}\phi_{x+\mu} \right ).
+   L &= \beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}\\
+     &+ \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - s_{x-\hat\mu,\mu}\phi_{x-\mu} - s_{x,\mu}\phi_{x+\mu} \right ).
    :label:
 
 The local symmetry is 
@@ -1839,6 +1842,49 @@ We also need to check the measure. Here :math:`ds \to ds |ds'/ds| = ds |-1| = ds
 
 Quantum Electrodynamics 
 --------------------------
+
+Consider a complex scalar field,
+
+.. math::
+   L = \sum_x \left [ \sum_\mu \frac {1}{a^2} \phi_x^* \left ( 2\phi_x - \phi_{x-\hat\mu} -\phi_{x+\hat\mu} \right ) + m^2\phi_x^*\phi_x \right ].
+   :label:
+
+This model has a :math:`U(1)` global symmetry, 
+
+.. math::
+   \phi_x \to e^{i\alpha} \phi_x \textrm{ for all } x.
+   :label:
+
+As above, this can be turned into a local symmetry by adding a gauge field
+
+.. math::
+   U_{x,\mu} = e^{i A_{x,\mu}}.
+We add a plaquette term to the Lagrangian and
+add the field :math:`U_\mu` to the derivative term:
+
+.. math::
+   L &= \beta \sum_x \sum_{\mu,\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
+     &+ \sum_x \sum_\mu \frac {1}{a^2} \phi^*_x \left ( 2\phi_x - U^*_{x-\hat\mu,\mu}\phi_{x-\mu} - U_{x,\mu}\phi_{x+\mu} \right ).
+   :label:
+
+The local symmetry is
+
+.. math::
+   &\phi_x \to e^{i\alpha_x} \phi_x \\
+   &U_{x,\mu} \to e^{i\alpha_x} U_{x,\mu} e^{-i\alpha_{x+\hat\mu}} \textrm{ for all } \mu 
+   :label:
+
+
+
+**The plaquette action**
+
+This model has the correct symmetries for a scalar field interacting with the
+electromagnetic field and it was constructed with the same principle.
+Still, we should check that the plaquette actions reproduces the familiar
+continuum gauge action.
+
+
+
 
 
 
