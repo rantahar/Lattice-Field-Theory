@@ -1236,7 +1236,7 @@ The action is Gaussian, :math:`S=\frac12 \sum_{x,y} \phi_xM_{x,y}\phi_y`, and we
 in the partition function
 
 .. math::
-   Z = \int \left[d\phi\right] e^{-S} = \left( \frac {1}{2\pi} \det M  \right)^{-1/2}
+   Z = \int \left[d\phi\right] e^{-S} = \left( \det \frac {M}{2\pi}  \right)^{-1/2}
    :label:
 
 While this seems looks like it should reproduce the continuum action when :math:`a\to 0`, but this is
