@@ -1491,13 +1491,9 @@ We would need to evaluate the function at x to determine whether
 :math:`y<f(x)`.
 
 .. math::
-   I \approx \frac{(b-a)(y_{max}-y_{min})}{N} \sum_{i=0}^N p(y_i < f(x_i))
-   :label:
-
-Since the propability is always :math:`f(x_i)/(y_{max}-y_{min})` simplifies to
-
-.. math::
-   I \approx \frac{b-a}{N} \sum_{i=0}^N f(x_i)
+   I &\approx \frac{(b-a)(y_{max}-y_{min})}{N} \sum_{i=0}^N \delta(y_i < f(x_i))\\
+   &\approx \frac{(b-a)(y_{max}-y_{min})}{N} \sum_{i=0}^N \frac{f(x_i)}{y_{max}-y_{min}}\\
+   &\approx \frac{b-a}{N} \sum_{i=0}^N f(x_i)
    :label:
 
 In the 1D case this this is not the most efficient method, but for large
@@ -1779,7 +1775,7 @@ The defining feature of a gauge field is the gauge symmetry, a local symmetry of
 the action. Let's look at the following action for spins :math:`s = \pm 1`
 
 .. math::
-   S = -\beta \sum_x \sum_{\mu,\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
+   S = -\beta \sum_x \sum_{\mu>\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
    :label:
 
 The kinetic term consists of a product of spins around a single lattice square,
@@ -1800,7 +1796,7 @@ way. Instead of a spin at each lattice site, move the spins to each link between
 two sites, :math:`s_{x,\mu} = \pm 1`.
 
 .. math::
-   S = -\beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
+   S = -\beta \sum_x \sum_{\mu>\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
    :label:
 
 This does not look very different, but the transformation is now
@@ -1825,7 +1821,7 @@ We turn this into a local symmetry by adding the Ising Gauge field and
 multiplying with it in the derivative term.
 
 .. math::
-   S &= -\beta \sum_x \sum_{\mu,\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}\\
+   S &= -\beta \sum_x \sum_{\mu>\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}\\
      &+ \sum_x \sum_\mu \frac {1}{a^2} \phi_x \left ( 2\phi_x - s_{x-\hat\mu,\mu}\phi_{x-\mu} - s_{x,\mu}\phi_{x+\mu} \right ).
    :label:
 
@@ -1866,7 +1862,7 @@ We add a plaquette term to the Lagrangian and
 add the field :math:`U_\mu` to the derivative term:
 
 .. math::
-   S &= -\beta \sum_x \sum_{\mu,\nu} Re U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
+   S &= -\beta \sum_x \sum_{\mu>\nu} Re U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
      &+ \sum_x \sum_\mu \frac {1}{a^2} \phi^*_x \left ( 2\phi_x - U^*_{x-\hat\mu,\mu}\phi_{x-\mu} - U_{x,\mu}\phi_{x+\mu} \right ).
    :label:
 
@@ -1887,25 +1883,34 @@ Still, we should check that the plaquette actions reproduces the familiar
 continuum gauge action.
 
 First, what is the field :math:`U_{x,\mu}`?
-The product :math:`\phi^*_xU_{x,\mu}\phi_{x+\mu}` is covariant, it does not
+The product :math:`\phi^*_xU_{x,\mu}\phi_{x+\mu}` is invariant, it does not
 change with the local transformation. Therefore we can identify it with the
 parallel transport. This also works for longer chains, for example,
 
 .. math::
    \phi^*_{(0,0,0,0)}U_{(0,0,0,0),0}U_{(1,0,0,0),1}U_{(1,1,0,0),0}\phi_{(2,1,0,0)}
-is covariant.
+   :label:
+is invariant.
+
+Closed loops of the gauge field are also invariant. In fact, these can
+be seen as the parallel transport of a massless fermion,
+
+.. math::
+   \int d\phi_x \phi^*_{x}U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\phi_{x}
+    = Tr \left [ U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu} \right ].
+   :label:
 
 One way of deriving the field strength tensor is to do a parallel transport over a
 closed loop and take the limit where the loop contracts to a point. This is 
 what we will do here. The plaquette is the smallest closed loop possible on the
 lattice and we will in the end take the limit :math:`a\to0`, where the loop
-contract to zero.
+contracts to zero.
 
 More formally, we can write
 
 .. math::
-   L_x &= -\beta Re \sum_{\mu,\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
-   &= -\beta Re \sum_{\mu,\nu} e^{iaA_{x,\mu} + iaA_{x+\mu,\nu}-iaA_{x+\nu, \mu}-iaA_{x,\nu}}\\
+   L_x &= -\beta Re \sum_{\mu>\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
+   &= -\beta Re \sum_{\mu>\nu} e^{iaA_{x,\mu} + iaA_{x+\mu,\nu}-iaA_{x+\nu, \mu}-iaA_{x,\nu}}\\
    :label:
 
 Now expanding
@@ -1918,16 +1923,16 @@ Now expanding
 we find
 
 .. math::
-   L_x &= -\beta Re \sum_{\mu,\nu} e^{ia^2\partial_\nu A_{x,\mu} - ia\partial_\mu A_{x,\nu} + O(a^3)}\\
+   L_x &= -\beta Re \sum_{\mu>\nu} e^{ia^2\partial_\nu A_{x,\mu} - ia\partial_\mu A_{x,\nu} + O(a^3)}\\
    &=-\beta Re\left( 1 + ia^2F_{x,\mu,\nu} - a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )\\
    &=\beta \left ( -1 + a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )
-   :label:
+   :label: u1plaquetteaction
 
 While constant shifts in the action do not actually make a difference, it is common
 to use the action
 
 .. math::
-   L_x = \beta\left [ 1 - Re \sum_{\mu,\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu} \right ]
+   L_x = \beta\left [ 1 - Re \sum_{\mu>\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu} \right ]
    :label:
 
 This is the Wilson plaquette gauge action [K. Wilson, 1974] for a U(1) gauge theory,
@@ -1943,6 +1948,84 @@ Higgs field also interacts with the weak gauge field and is not just a complex f
 Next we will look at :math:`SU(2)` interactions, such as the weak interaction,
 and :math:`SU(3)` interactions, such as the strong interaction.
 The results for :math:`SU(3)` generalize to any :math:`SU(N)`.
+
+
+Non-Abelian Gauge Fields 
+--------------------------
+
+The U(1) gauge field is Abelian, meaning that
+
+.. math::
+   A_{x,\mu} A_{y,\nu} = A_{y,\nu} A_{x,\mu}
+   :label:
+
+The weak and strong nuclear forces are governed by a non-Abelian symmetry.
+Again, starting from a scalar matter field :math:`\phi_x`, but this is now a vector
+with :math:`N` indexes,
+
+.. math::
+   S = \sum_x \sum_\mu \frac {1}{a^2} \phi^\dagger_x \left ( 2\phi_x - \phi_{x-\hat\mu} - \phi_{x+\mu} \right ).
+   :label:
+
+the global symmetry is
+
+.. math::
+   &\phi_x \to \Lambda \phi_x \textrm{ for all } x \textrm{, and therefore } \\ 
+   &\phi_x^\dagger \to \phi_x^\dagger \Lambda^\dagger \textrm{ for all } x\\
+   &\Lambda^\dagger \Lambda = 1
+   :label:
+
+This in principle incorporates the U(1) symmetry, which is still a global symmetry.
+It can be separated and have a different coupling, so we consider it a separate interaction.
+This is achieved by requiring
+
+.. math::
+   \det \left ( \Lambda \right ) = 1.
+   :label:
+
+Thus the matrix :math:`\lambda` is a member of the :math:`SU(N)` symmetry group.
+
+The symmetry is made local using a gauge matrix :math:`U_{x,\mu}` as above.
+The gauge invariant action is
+
+.. math::
+   S &= -\beta \sum_x \sum_{\mu>\nu}
+   \left( 1 - \frac {1}{N} Re Tr U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu} \right )\\
+     &+ \sum_x \sum_\mu \frac {1}{a^2} \phi^\dagger_x \left ( 2\phi_x - U^\dagger_{x-\hat\mu,\mu}\phi_{x-\hat\mu} - U_{x,\mu}\phi_{x+\mu} \right ).
+   :label:
+
+
+The gauge matrix is a special unitary matrix,
+
+.. math::
+   &\det \left ( U_{x,\mu} \right ) = 1 \\
+   &U_{x,\mu}^\dagger U_{x,\mu} = 1
+   :label:
+
+and it can be written as
+
+.. math::
+   U = e^{i aA_{x,\mu}}.
+   :label:
+
+The color vector potential :math:`A_{x,\mu}` is a traceless, antihermitean matrix, and it is a member
+of a Lie algebra. The continuum action has the same form as in the U(1) case (equation :eq:`u1plaquetteaction`),
+
+.. math::
+   L_x = Tr F_{x, \mu\nu}F_{x, \mu\nu}
+   :label:
+
+
+.. container:: note
+   
+   **Exercise**
+   
+   1. Check that the plaquette action generates the correct continuum action. 
+   Note that it this case :math:`\left[ A_{x,\mu}, A_{y,\nu} \right] \neq 0`.
+
+
+
+
 
 
 
