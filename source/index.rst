@@ -1232,14 +1232,14 @@ Using these definitions, we can write the lattice action as
    S =  a^d \sum_x\left[ \frac 12 \sum_y \phi_x \Box_{x,y} \phi_y + \frac 12 m^2\phi_x^2 \right]
    :label:
 
-The action is Gaussian, :math:`S=\frac12 \sum_{x,y} \phi_xM_{x,y}\phi_y`, and we can actually do the integral
-in the partition function
+The partition function is Gaussian, :math:`S=\frac12 \sum_{x,y} \phi_xM_{x,y}\phi_y`, and we can actually
+do the integral
 
 .. math::
    Z = \int \left[d\phi\right] e^{-S} = \left( \det \frac {M}{2\pi}  \right)^{-1/2}
    :label:
 
-While this seems looks like it should reproduce the continuum action when :math:`a\to 0`, but this is
+While this looks like it should reproduce the continuum action when :math:`a\to 0`, this is
 actually a subtle issue. In this case things will work out, but once we get to fermions, we will see
 how this can go wrong. In any case, we should check that our action produces the correct model in 
 continuum.
@@ -1507,7 +1507,7 @@ into equal pieces and sum them up, following a simple rule for each piece.
 For example, if following the *trapezoidal rule*, the error scales as
 
 .. math::
-   \delta \sim \frac {1}{N^{2D}}.
+   \delta \sim \frac {1}{N^{2/D}}.
    :label:
 
 In error of the Monte Carlo method is statistical and it follows from the
