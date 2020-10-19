@@ -2119,6 +2119,9 @@ that depends on how the generators are defined. For SU(2) with Pauli matrices
 While there are more efficient algorithms for each SU(N) group, this is a general method and
 sufficient for our purposes.
 
+During a simulation floating point errors will cause the gauge field to drift outside the SU(N)
+group. In a long run this needs to be corrected for. The usual method is to change one of the
+columns and the rows to make sure that the new matrix is Hermitean and has determinant :math:`1`.
 
 
 Observables
