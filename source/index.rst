@@ -1781,7 +1781,7 @@ the action. Let's look at the following action for spins :math:`s = \pm 1`
 The kinetic term consists of a product of spins around a single lattice square,
 also known as a plaquette.
 
-The acton is symmetric with respect to the transformation
+The action is symmetric with respect to the transformation
 
 .. math::
    &s_x \to -s_x \textrm{ and} \\
@@ -1938,6 +1938,28 @@ to use the action
 This is the Wilson plaquette gauge action [K. Wilson, 1974] for a U(1) gauge theory,
 such as electromagnetism.
 
+The continuum action you may have seen does not have the factor :math:`\beta`.
+This is where the coupling comes in: we would usually write the covariant derivative as
+
+.. math::
+   D_\mu = \partial_\mu +i gA_\mu
+   :label:
+This would lead to the parallel transport
+
+.. math::
+   U_\mu = e^{i agA_{x,\mu}}.
+   :label:
+
+So the vector potential is scaled by a factor of :math:`g`. On the lattice it is more
+straightforward to not incorporate the coupling to the matrix, but if we did
+the rescaling, :math:`A_\mu \to gA_\mu`, we would find
+
+.. math::
+   L_{x, gauge} \to \beta g^2 a^4 F_{x,\mu,\nu} F_{x,\mu,\nu}.
+   :label: 
+
+From here we can set :math:`\beta=\frac {1}{g^2}` to recover the continuum action.
+
 So the action matches the continuum action for gauge fields. The propagators can
 be derived similarly to the scalar fields. The kinetic terms are squared derivatives
 and will produce the same dispersion relation.
@@ -1948,6 +1970,15 @@ Higgs field also interacts with the weak gauge field and is not just a complex f
 Next we will look at :math:`SU(2)` interactions, such as the weak interaction,
 and :math:`SU(3)` interactions, such as the strong interaction.
 The results for :math:`SU(3)` generalize to any :math:`SU(N)`.
+
+The electromagnetic interaction has a further complication not shared by the other
+fundamental interactions. The electromagnetic couplings for each particle can be 
+different. Modeling this on the lattice would require actually adding the coupling
+to the parallel transport. For particle :math:`i`,
+
+.. math::
+   U_{\mu,i} = e^{i ag_i A_{x,\mu}} = U_\mu^{g_i}.
+   :label:
 
 
 Non-Abelian Gauge Fields 
@@ -1983,7 +2014,7 @@ This is achieved by requiring
    \det \left ( \Lambda \right ) = 1.
    :label:
 
-Thus the matrix :math:`\lambda` is a member of the :math:`SU(N)` symmetry group.
+Thus the matrix :math:`\Lambda` is a member of the :math:`SU(N)` symmetry group.
 
 The symmetry is made local using a gauge matrix :math:`U_{x,\mu}` as above.
 The gauge invariant action is
@@ -2008,12 +2039,14 @@ and it can be written as
    U = e^{i aA_{x,\mu}}.
    :label:
 
-The color vector potential :math:`A_{x,\mu}` is a traceless, antihermitean matrix, and it is a member
-of a Lie algebra. The continuum action has the same form as in the U(1) case (equation :eq:`u1plaquetteaction`),
+The color vector potential :math:`A_{x,\mu}` is a traceless, hermitean matrix, and it is a member
+of a Lie algebra. The continuum action has the same form as in the U(1) case
+(equation :eq:`u1plaquetteaction`),
 
 .. math::
    L_x = Tr F_{x, \mu\nu}F_{x, \mu\nu}
    :label:
+
 
 
 .. container:: note
@@ -2021,9 +2054,151 @@ of a Lie algebra. The continuum action has the same form as in the U(1) case (eq
    **Exercise**
    
    1. Check that the plaquette action generates the correct continuum action. 
-   Note that it this case :math:`\left[ A_{x,\mu}, A_{y,\nu} \right] \neq 0`.
+   Note that it this case :math:`\left[ A_{x,\mu}, A_{y,\nu} \right] \neq 0`
+   and that the definition of :math:`F_{\mu,\nu}` is a bit different.
 
 
+**Note on Gauge Fixing**
+
+Unlike in perturbative calculations, there is no reason to fix the gauge during a lattice simulation.
+In general this is something we do not want to do.
+The gauge symmetry simply adds an irrelevant dimension to the integral and reduces to a constant factor
+in the metric.
+
+
+
+Updating Gauge Fields
+-----------------------
+
+The action of the gauge field is still local and in fact each of the directional fields
+:math:`U_\mu`, there are only nearest neighbor interactions. The complication is that we
+need to suggest a new matrix in the correct group. For U(1), there are two options.
+Either draw the vector potential and exponentiate it, or draw either the real
+or imaginary part and calculate the other one. It is somewhat easier to use first
+option:
+
+ 1. Loop over direction :math:`\mu`.
+ 2. Choose a site :math:`x`.
+ 3. Do a metropolis step:
+   1. Calculate the sum of "staples",
+
+   .. math::
+      S_{x,\mu} = \sum_{\nu\neq\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}
+      :label:
+   2. Calculate the initial action 
+
+      .. math::
+         S_1 = Re U_{x,\mu} S_{x,\mu}
+   3. Suggest the change 
+   
+      .. math::
+         A'_{x,\mu} &= \left . A_{x,\mu} + C x \right |_{mod(2\pi)},\\
+         U_{x,\mu} &= e^{iA_{x,\mu}} = \cos(A_{x,\mu}) + i \sin(A_{x,\mu})
+         :label:
+      (Here :math:`a=1`)
+
+
+If you are also simulating a scalar matter field, you need to derivative term in the action,
+since it depends on the gauge fields. This can be done by adding
+:math:`-\phi^*_x\phi_{x+\mu}-\phi^*_{x+\mu}\phi_x` to the staple.
+
+For non-Abelian fields, the vector potential is a matrix and exponentiating it is a bit more
+complicated. One general option is to generate a "small" SU(N) matrix and multiply with it,
+since this will produce an SU(N) matrix:
+
+.. math::
+   \Lambda &= e^{iCx\lambda_i} = \cos(C\sqrt{\tau_N}x)
+    + i \sin(C\sqrt{\tau_N}x)\frac{\lambda_i}{\sqrt{\tau_N}}\\
+   U'_{x,\mu} &= \Lambda U_{x,\mu}
+   :label:
+
+Here :math:`\lambda_i` is the generator matrix and :math:`\tau_N = \lambda_i^2` is a constant
+that depends on how the generators are defined. For SU(2) with Pauli matrices
+:math:`\tau_N = 1` and for SU(3) with Gell-Mann :math:`\tau_N = \frac23`.
+
+While there are more efficient algorithms for each SU(N) group, this is a general method and
+sufficient for our purposes.
+
+
+
+Observables
+---------------
+
+Any observables constructed out of gauge dependent objects should be gauge invariant.
+The gauge symmetry forces the expectation value of any non-invariant objects to zero
+(Elitzur’s theorem). For example, :math:`\ev{U_{x,\mu}} = 0`
+
+
+**Wilson Loops**
+
+Consider static (infinitely massive) charge and a similar anticharge separated by the distance
+:math:`R` that exist for the time :math:`T` and annihilate. To describe this we would need to parallel
+transport a matter field :math:`\phi` from a point :math:`x` to :math:`x+(T,0)`, then to :math:`x+(T,R)`,
+down in time (as an antiparticle) to :math:`x+(0,R)` and finally back to :math:`x` 
+to annihilate. This can be described by the operator
+
+.. math::
+   W_{RT} &= \int [d\phi_{(0,0)} d\phi_{(R,T)}] \phi^\dagger_{(0,0)} \prod_{x=(0,R)}^{(0,0)} U_{x,\hat x}^\dagger \prod_{x=(T,R)}^{(0,R)} U_{x,\hat t}^\dagger \phi_{(T,R)} \\
+   &\times \phi^\dagger_{(T,R)} \phi_{(0,0)} \prod_{x=(T,0)}^{(T,R)} U_{x,\hat x} \prod_{x=(0,0)}^{(T,0)} U_{x,\hat t} \phi_{(0,0)}\\
+   &= Tr \prod_{x=(0,R)}^{(0,0)} U_{x,\hat x}^\dagger \prod_{x=(T,R)}^{(0,R)} U_{x,\hat t}^\dagger \prod_{x=(T,0)}^{(T,R)} U_{x,\hat x} \prod_{x=(0,0)}^{(T,0)} U_{x,\hat t}.
+   :label:
+
+This is known as a Wilson loop. Since it is a closed loop, it is a gauge invariant observable.
+It has several possible interpretations, but perhaps the most straightforward is as the
+propagator of a state of two static charged particles.
+At large :math:`T` this should behave exponentially,
+
+.. math::
+   W_{RT} \to C e^{-V(R) T} \textrm{ as } T \to infty
+   :label:
+and indeed it generally does.
+
+The Wilson loops allows us to probe wether a gauge theory is confining.
+In a confining model, the potential energy :math:`V(R)` grows to infinity with distance,
+whereas without confinement it remains finite.
+
+.. math::
+   &V(R\to\infty) \to \infty : \textrm{confinement}\\
+   &V(R\to\infty) \to finite : \textrm{no confinement}
+   :label:
+
+
+The Wilson loop follows the
+ - *perimeter law*: Free charges.
+
+   :math:`W_{RT} \sim exp(-m (2R+2T))`, where m is the mass of the charge due to the gauge field.
+   At constant :math:`R` and large :math:`T`, :math:`W_{RT} \sim exp(-2m T)` and :math:`V(R) = m`
+ - *area law*: Confined charges
+
+   :math:`W_{RT} \sim exp(-\sigma RT)`, :math:`V(R) = \sigma R`. String tension :math:`\sigma` ties
+   the charges together.
+
+
+Note that because of the exponential decay of the Wilson loop, measuring it becomes difficult when
+:math:`R` and :math:`T` are large. The statistical uncertainty remains roughly constant and exponentially
+more data is required. 
+
+
+**Polyakov Line**
+
+Now add a single static test charge. It does not annihilate, but moves forward in time around the lattice.
+Since the lattice is periodic, this forms a closed loop:
+
+.. math::
+   P_\mu = Tr \prod_{t=0}^{T} U_{t,\hat t}
+   :label:
+
+This can be interpreted as the propagator of a single static particle,
+
+.. math::
+   \ev{P_\mu} = \exp{-T F_Q}.
+   :label:
+
+Here :math:`F_Q` is the free energy of a single charged quark.
+In the confined phase :math:`F_Q\to\infty`, and therefore :math:`\ev{P_\mu}\to 0`.
+Thus the Polyakov loop at large :math:`T` can be used as an order parameter of confinement,
+similarly to the Wilson loop.
+However, this relationship breaks if fermions are introduced.
 
 
 
@@ -2033,7 +2208,6 @@ of a Lie algebra. The continuum action has the same form as in the U(1) case (eq
 
 -   Updating a gauge field
 
--   Wilson loops
 
 -   Perturbation theory, large and small coupling
 
