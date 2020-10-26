@@ -2189,38 +2189,71 @@ Note that because of the exponential decay of the Wilson loop, measuring it beco
 :math:`R` and :math:`T` are large. The statistical uncertainty remains roughly constant and exponentially
 more data is required. 
 
+In general, the Wilson loop follows the phenomenological form
+
+.. math::
+   V(r) = V_0 + \sigma_r - \frac er + f\left[ G_L({\bf r}) - \frac 1r \right]
+
 
 **Polyakov Line**
 
-Now add a single static test charge. It does not annihilate, but moves forward in time around the lattice.
-Since the lattice is periodic, this forms a closed loop:
+Now let's add a single static test charge. It does not annihilate,but moves forward in time
+around the lattice. Since the lattice is periodic, this forms a closed loop:
 
 .. math::
-   P_\mu = Tr \prod_{t=0}^{T} U_{t,\hat t}
+   P = Tr \prod_{t=0}^{T} U_{t,\hat t}
    :label:
 
-This can be interpreted as the propagator of a single static particle,
+Similarly to the above, the this corresponds to a propagator and scales exponentially,
 
 .. math::
-   \ev{P_\mu} = \exp{-T F_Q}.
+   \ev{P} = e^{-T F_Q}.
    :label:
 
 Here :math:`F_Q` is the free energy of a single charged quark.
-In the confined phase :math:`F_Q\to\infty`, and therefore :math:`\ev{P_\mu}\to 0`.
-Thus the Polyakov loop at large :math:`T` can be used as an order parameter of confinement,
-similarly to the Wilson loop.
-However, this relationship breaks if fermions are introduced.
+In a confining model charged quarks cannot appear alone and :math:`F_Q\to\infty`.
+So we should find :math:`\ev{P}\to 0`. 
+
+Both :math:`SU(2)` and :math:`SU(3)` have a deconfining transition and are not 
+confining at high temperatures. Above some critical temperature we find :math:`\ev{P} \neq 0`.
+The same result can of course be found using Wilson loops, but the Polyakov line provides
+a particularly straightforward method.
+
+The transition is in fact related to spin models in an interesting way. SU(N) fields have
+an coincidental center symmetry. Center elements are elements of a group that commute with 
+other elements. For SU(2) these are :math:`1` and :math:`-1` and for SU(3) they are
+:math:`1`, :math:`exp(i2\pi/3)` and :math:`exp(i4\pi/3)`. Since they commute with all other
+elements, we can multiply all links at a given :math:`t` with a center element and not affect
+the plaquette action:
+
+.. math::
+   U_{t,({\bf x},\tau)} \to zU_{t,({\bf x},\tau)}  \textrm{ for all } {\bf x} \textrm{ and given } \tau.
+   :label:
+
+Now
+
+.. math::
+   L_{x,t,\nu} &= \beta \left [ 1 - ReTr U_{({\bf x}, \tau), t} U_{({\bf x}, \tau+1),\nu} U^\dagger_{({\bf x}+\hat\nu, \tau), t} U^\dagger_{({\bf x}, \tau),\nu} \right ]\\
+   &\to \beta \left [ 1 - ReTr z U_{({\bf x}, \tau), t} U_{({\bf x}, \tau+1),\nu} z^*U^\dagger_{({\bf x}+\hat\nu, \tau), t} U^\dagger_{({\bf x}, \tau),\nu} \right ]\\
+   &\to \beta \left [ 1 - ReTr z z^* U_{({\bf x}, \tau), t} U_{({\bf x}, \tau+1),\nu} U^\dagger_{({\bf x}+\hat\nu, \tau), t} U^\dagger_{({\bf x}, \tau),\nu} \right ]\\
+   &\to \beta \left [ 1 - ReTr U_{({\bf x}, \tau), t} U_{({\bf x}, \tau+1),\nu} U^\dagger_{({\bf x}+\hat\nu, \tau), t} U^\dagger_{({\bf x}, \tau),\nu} \right ].
+   :label:
+
+However the Polyakov loop does not remain invariant. In only contains one link for each :math:`t`-layer, so
+
+.. math::
+   P \to zP.
+   :label:
+
+Since all configurations that differ by a center trasformation have the same weight, 
+the expectation value is
+
+.. math::
+   \ev P = \frac 1N \sum_{n=0}^{N-1} e^{in\pi/N} \ev P = 0.
+   :label:
 
 
 
-
-
-
-
--   Updating a gauge field
-
-
--   Perturbation theory, large and small coupling
 
 Fermions
 ========
