@@ -2252,6 +2252,19 @@ the expectation value is
    \ev P = \frac 1N \sum_{n=0}^{N-1} e^{in\pi/N} \ev P = 0.
    :label:
 
+The center symmetry transformations are similar to the symmetries of an :math:`Z_N` spin model
+in 3 dimensions. The :math:`Z_3` part of the interaction in nearest neighbor and symmetry transformation cycles through the possible spins.
+
+The most notable similarity is that the symmetry is never broken at finite volume.
+The deconfinement transition requires large enough volume to prevent tunneling
+between the sectors.
+
+Any matter field breaks the center symmetry and prevents this mechanism for 
+confinement. This is because dynamical particles can break the string: 
+a particle-antiparticle loops can pop out of the vacuum and screen the
+charges. Confinement is still happening but the Wilson loop does not measure
+the correct thing.
+
 
 
 
