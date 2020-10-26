@@ -1775,31 +1775,13 @@ The defining feature of a gauge field is the gauge symmetry, a local symmetry of
 the action. Let's look at the following action for spins :math:`s = \pm 1`
 
 .. math::
-   S = -\beta \sum_x \sum_{\mu>\nu} s_x s_{x+\mu} s_{x+\mu+\nu} s_{x+\nu}.
+   S = -\beta \sum_x \sum_{\mu>\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
    :label:
 
 The kinetic term consists of a product of spins around a single lattice square,
 also known as a plaquette.
 
 The action is symmetric with respect to the transformation
-
-.. math::
-   &s_x \to -s_x \textrm{ and} \\
-   &s_{x+\mu} \to -s_{x+\mu} \textrm{ for all } \mu
-   :label:
-
-We have promoted a global symmetry into a **local symmetry**.
-
-We can build a similar model out of the other spin models discussed above.
-However, it is actually easier to discretize the model in a slightly different
-way. Instead of a spin at each lattice site, move the spins to each link between
-two sites, :math:`s_{x,\mu} = \pm 1`.
-
-.. math::
-   S = -\beta \sum_x \sum_{\mu>\nu} s_{x,\mu} s_{x+\mu,\nu} s_{x+\nu, \mu} s_{x,\nu}.
-   :label:
-
-This does not look very different, but the transformation is now
 
 .. math::
    s_{x,\mu} \to -s_{x,\mu} \textrm{ for all } \mu.
