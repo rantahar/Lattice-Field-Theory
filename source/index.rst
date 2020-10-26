@@ -2267,9 +2267,44 @@ the correct thing.
 
 
 
-
 Fermions
 ========
+
+Naive Fermions
+------------------
+
+As mentioned above, we run into problems when discretizing fermions.
+First let's just see what happens when we try to do this the most
+straightforward way. The action of a free fermion field is
+
+.. math::
+   S = \int dx \sum_\mu \chi^\dagger(x) \gamma_\mu \partial_\mu \chi(x) - m\chi^\dagger(x)\chi(x)
+   :label:
+
+The fields :math:`\chi` are Grassmann numbers, so
+:math:`\chi(x_1)\chi(x_2) = -\chi(x_2)\chi(x_1)`. This is true for any two
+Grassmann numbers and :math:`\chi(x_1)\chi(x_1) = 0`.
+
+The matrices :math:`\gamma_\mu` follow the anticommutation relation
+
+.. math::
+   \{\gamma_\mu,\gamma_\nu\} = 2 g_{\mu,\nu} = 2 \mathcal I
+   :label:
+ In 4 dimensions they are :math:`4\times 4` matrices.
+The fields :math:`chi` are actually vectors in the space of these matrix indexes.
+
+The Dirac equation in a kind of a square root of the Schrödinger equation in the sense that
+
+.. math::
+   (\gamma_\mu \partial_\mu - m)(\gamma_\nu \partial_\nu + m) = (\partial_\mu \partial_\mu + m^2) 
+   :label:
+It applies to a particle transforming in the spin :math:`1/2` representation of the Lorentz group.
+
+From the point of view of discretization, however, the significant property is that there is only one
+derivative. This will cause us some significant trouble.
+
+
+
 
 -   Fermion doubling, naive fermions
 
