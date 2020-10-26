@@ -1874,6 +1874,22 @@ parallel transport. This also works for longer chains, for example,
    :label:
 is invariant.
 
+In continuum the parallel transport is the line integral
+
+.. math::
+   e^{i \int_x^y A_{\mu}(x) \cdot dr},
+   :label:
+where :math:`A_\mu` is the vector potential, the integral runs along a contour
+from :math:`x` to :math:`y` and :math:`dr` is the line element along this contour.
+
+In our discrete setup, the gauge field is constant on the links between sites, and
+the parallel transport between :math:`x` and :math`x+\hat\mu` is
+
+.. math::
+   U_{x,\mu} = e^{i \int_x^{x+\hat\mu} A_{\mu}(x) \cdot dx} = e^{iaA_{x,\mu}} 
+   :label:
+
+
 Closed loops of the gauge field are also invariant. In fact, these can
 be seen as the parallel transport of a massless fermion,
 
@@ -1961,6 +1977,16 @@ to the parallel transport. For particle :math:`i`,
 .. math::
    U_{\mu,i} = e^{i ag_i A_{x,\mu}} = U_\mu^{g_i}.
    :label:
+
+In this case it is actually simpler to use store the vector potential
+:math:`A_{x_\mu}` instead of the parallel transport :math:`U_{x_\mu}`.
+The parallel transport can be calculated relatively easily,
+
+.. math::
+   U_{\mu,i} = e^{i a g_i A_{x,\mu}} = \cos(a g_i A_{x,\mu}) + i\sin(a g_i A_{x,\mu}).
+   :label:
+
+The exponentiation is not as straightforward in :math:`SU(N)`.
 
 
 Non-Abelian Gauge Fields 
