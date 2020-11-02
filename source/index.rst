@@ -1907,8 +1907,8 @@ contracts to zero.
 More formally, we can write
 
 .. math::
-   L_x &= -\beta Re \sum_{\mu>\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
-   &= -\beta Re \sum_{\mu>\nu} e^{iaA_{x,\mu} + iaA_{x+\mu,\nu}-iaA_{x+\nu, \mu}-iaA_{x,\nu}}\\
+   S &= -\sum_x \beta Re \sum_{\mu>\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}\\
+   &= -\sum_x  \beta Re \sum_{\mu>\nu} e^{iaA_{x,\mu} + iaA_{x+\mu,\nu}-iaA_{x+\nu, \mu}-iaA_{x,\nu}}\\
    :label:
 
 Now expanding
@@ -1921,16 +1921,16 @@ Now expanding
 we find
 
 .. math::
-   L_x &= -\beta Re \sum_{\mu>\nu} e^{ia^2\partial_\nu A_{x,\mu} - ia\partial_\mu A_{x,\nu} + O(a^3)}\\
-   &=-\beta Re\left( 1 + ia^2F_{x,\mu,\nu} - a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )\\
-   &=\beta \left ( -1 + a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )
+   S &= -\sum_x \beta Re \sum_{\mu>\nu} e^{ia^2\partial_\nu A_{x,\mu} - ia\partial_\mu A_{x,\nu} + O(a^3)}\\
+   &=-\sum_x \beta Re\left( 1 + ia^2F_{x,\mu,\nu} - a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )\\
+   &=\sum_x \beta \left ( -1 + a^4F_{x,\mu,\nu} F_{x,\mu,\nu} \right )
    :label: u1plaquetteaction
 
 While constant shifts in the action do not actually make a difference, it is common
 to use the action
 
 .. math::
-   L_x = \beta\left [ 1 - Re \sum_{\mu>\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu} \right ]
+   S = \sum_x \beta\left [ 1 - Re \sum_{\mu>\nu} U_{x,\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu} \right ]
    :label:
 
 This is the Wilson plaquette gauge action [K. Wilson, 1974] for a U(1) gauge theory,
@@ -1953,7 +1953,7 @@ straightforward to not incorporate the coupling to the matrix, but if we did
 the rescaling, :math:`A_\mu \to gA_\mu`, we would find
 
 .. math::
-   L_{x, gauge} \to \beta g^2 a^4 F_{x,\mu,\nu} F_{x,\mu,\nu}.
+   S_{gauge} \to \beta g^2 a^4 \sum_x  F_{x,\mu,\nu} F_{x,\mu,\nu}.
    :label: 
 
 From here we can set :math:`\beta=\frac {1}{g^2}` to recover the continuum action.
@@ -2052,7 +2052,7 @@ of a Lie algebra. The continuum action has the same form as in the U(1) case
 (equation :eq:`u1plaquetteaction`),
 
 .. math::
-   L_x = Tr F_{x, \mu\nu}F_{x, \mu\nu}
+   S = \int dx  Tr F_{x, \mu\nu}F_{x, \mu\nu}
    :label:
 
 
@@ -2245,7 +2245,7 @@ However the Polyakov loop does not remain invariant. In only contains one link f
    P \to zP.
    :label:
 
-Since all configurations that differ by a center trasformation have the same weight, 
+Since all configurations that differ by a center trasnformation have the same weight, 
 the expectation value is
 
 .. math::
