@@ -1883,7 +1883,7 @@ where :math:`A_\mu` is the vector potential, the integral runs along a contour
 from :math:`x` to :math:`y` and :math:`dr` is the line element along this contour.
 
 In our discrete setup, the gauge field is constant on the links between sites, and
-the parallel transport between :math:`x` and :math`x+\hat\mu` is
+the parallel transport between :math:`x` and :math:`x+\hat\mu` is
 
 .. math::
    U_{x,\mu} = e^{i \int_x^{x+\hat\mu} A_{\mu}(x) \cdot dx} = e^{iaA_{x,\mu}} 
