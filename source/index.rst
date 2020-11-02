@@ -2291,7 +2291,7 @@ The matrices :math:`\gamma_\mu` follow the anticommutation relation
    \{\gamma_\mu,\gamma_\nu\} = 2 g_{\mu,\nu} = 2
    :label:
 In 4 dimensions they are :math:`4\times 4` matrices.
-The fields :math:`chi` are actually vectors in the space of these matrix indexes.
+The fields :math:`\chi` are actually vectors in the space of these matrix indexes.
 
 The Dirac equation in a kind of a square root of the Schrödinger equation in the sense that
 
