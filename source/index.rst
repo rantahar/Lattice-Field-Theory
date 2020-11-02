@@ -2288,9 +2288,8 @@ Grassmann numbers and :math:`\chi(x_1)\chi(x_1) = 0`.
 The matrices :math:`\gamma_\mu` follow the anticommutation relation
 
 .. math::
-   \{\gamma_\mu,\gamma_\nu\} = 2 g_{\mu,\nu} = 2 \mathcal I
+   \{\gamma_\mu,\gamma_\nu\} = 2 g_{\mu,\nu} = 2
    :label:
-
 In 4 dimensions they are :math:`4\times 4` matrices.
 The fields :math:`chi` are actually vectors in the space of these matrix indexes.
 
