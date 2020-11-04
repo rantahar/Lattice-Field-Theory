@@ -1075,7 +1075,7 @@ Further we can now write the partition function as
 
 .. math::
    Z &= \int d\phi \left<\phi\left| e^{ -\hat H / T } \right|\phi\right>\\
-     &= \int \left[d\phi \right] e^{ - \frac 1T S_E(\phi)}
+     &= \int \left[d\phi \right] e^{ - S_E(\phi)}
    :label:
 
 The quantum statistical model in 3 dimensions corresponds to a classical statistical model
@@ -1285,12 +1285,14 @@ gives a very general method:
    works well. The parameter C is tunable.
 
 .. math::
-   \phi_x \to \phi + C \Delta
+   \phi'_x = \phi + C \Delta
    :label:
 
 3. accept or reject the change according to the metropolis probability.
 
-
+.. math::
+   W_f(\phi_x \to \phi'_x) = min\left( 1, e^{- [ S(\phi'_x) - S(\phi_x) ]} \right )
+   :label:
 
 
 Fourier Transforms
