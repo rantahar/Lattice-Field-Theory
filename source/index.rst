@@ -2645,7 +2645,7 @@ When :math:`a\to 0` the doublers become infinitely massive and decouple from the
 **The Chiral Symmetry**
 
 The second derivative term in the action breaks the chiral symmetries, :math:`\textrm{U(1)}_A`
-and :math:`\textrm{SU(N_f)}_A` even when :math:`a\to 0`.
+and :math:`\textrm{SU}(N_f)_A` even when :math:`a\to 0`.
 Effectively the mass gets and additive renormalization,
 
 .. math::
