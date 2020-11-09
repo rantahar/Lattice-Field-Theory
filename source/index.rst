@@ -2304,21 +2304,21 @@ First let's just see what happens when we try to do this the most
 straightforward way. The action of a free fermion field is
 
 .. math::
-   S = \int dx \sum_\mu \bar\chi(x) \gamma_\mu \partial_\mu \chi(x) - m\bar\chi(x)\chi(x)
+   S = \int dx \sum_\mu \bar\psi(x) \gamma_\mu \partial_\mu \psi(x) - m\bar\psi(x)\psi(x)
    :label:
 
-The fields :math:`\chi` and :math:`\bar\chi` consist of Grassmann numbers.
+The fields :math:`\psi` and :math:`\bar\psi` consist of Grassmann numbers.
 The defining so feature of Grassmann numbers is that for any two of them, say
-:math:`\chi` and :math:`\psi`,
+:math:`\psi` and :math:`\psi`,
 
 .. math::
-   \chi\psi = -\psi\chi
+   \psi\psi = -\psi\psi
    :label:
 From this we find
 
 .. math::
-   &\chi\chi = 0\\
-   &f(\chi) = f_1 + f_2\chi
+   &\psi\psi = 0\\
+   &f(\psi) = f_1 + f_2\psi
    :label:
 for any analytic function f.
 
@@ -2329,7 +2329,7 @@ the anticommutation relation
    \{\gamma_\mu,\gamma_\nu\} = 2 g_{\mu,\nu} = 2
    :label:
 In 4 dimensions they are :math:`4\times 4` matrices.
-The fields :math:`\chi` are actually length 4 vectors in the same vector space.
+The fields :math:`\psi` are actually length 4 vectors in the same vector space.
 Since we are using the Euclidean metric, the gamma matrices may be different from the
 ones you are used to. We could derive them from the Minkowsky space gamma matrices by
 
@@ -2375,8 +2375,8 @@ derivative. This will cause us some significant trouble.
 In the previous sections we have introduced the discrete derivatives
 
 .. math::
-   \Delta_\mu \chi(x) &= \frac 1a \left[ \chi(x+a\hat\mu) - \chi(x) \right]\\
-   \Delta^*_\mu \chi(x) &= \frac 1a \left[ \chi(x) - \chi(x-a\hat\mu) \right]
+   \Delta_\mu \psi(x) &= \frac 1a \left[ \psi(x+a\hat\mu) - \psi(x) \right]\\
+   \Delta^*_\mu \psi(x) &= \frac 1a \left[ \psi(x) - \psi(x-a\hat\mu) \right]
    :label:
 Plugging either the forward or the backward derivative in directly would not work, since 
 the resulting action would not be reflection invariant. This would lead to unitarity
@@ -2385,7 +2385,7 @@ violations and cause significant problems.
 Instead, we can take the symmetric combination of the two,
 
 .. math::
-   \frac 12 (\Delta_\mu + \Delta^*_\mu) \chi(x) = \frac 1{2a} \left[ \chi(x+a\hat\mu) - \chi(x-a\hat\mu) \right]
+   \frac 12 (\Delta_\mu + \Delta^*_\mu) \psi(x) = \frac 1{2a} \left[ \psi(x+a\hat\mu) - \psi(x-a\hat\mu) \right]
    :label:
 This is reflection invariant, preserves unitarity and approaches the derivative in the continuum limit.
 It is not enough, though. Looking at the form above, perhaps you can already see the problem we
@@ -2394,8 +2394,8 @@ will run into.
 With this derivative, the action is
 
 .. math::
-   S = a^4\sum_x \left [ \sum_\mu \bar\chi_x \gamma_\mu \frac{ \chi_{x+\mu} - \chi_{x-\mu} }{2a}
-       - m\bar\chi_x\chi_x \right ]
+   S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \gamma_\mu \frac{ \psi_{x+\mu} - \psi_{x-\mu} }{2a}
+       - m\bar\psi_x\psi_x \right ]
    :label:
 
 
@@ -2407,51 +2407,51 @@ Grassmann numbers we need to do a bit of Grassmann algebra.
 First, we define the derivative operator as similarly to standard numbers as possible:
 
 .. math::
-   \partial_\chi \chi = 1, \textrm{  } \partial_\chi \psi = 0, \textrm{  } \partial_\chi c = 0,
+   \partial_\psi \psi = 1, \textrm{  } \partial_\psi \psi = 0, \textrm{  } \partial_\psi c = 0,
    :label:
 
-where :math:`\chi` and :math:`\bar\chi` are Grassman numbers and :math`c` is a complex number.
+where :math:`\psi` and :math:`\bar\psi` are Grassman numbers and :math`c` is a complex number.
 
 The integral is defined identically,
 
 .. math::
-   \int d\chi \chi = 1 , \textrm{  } \int d\chi \psi = 0 \textrm{ and } \int d\chi c = 0
+   \int d\psi \psi = 1 , \textrm{  } \int d\psi \psi = 0 \textrm{ and } \int d\psi c = 0
    :label:
 While this may seem a bit unusual, the Grassmann integral follows the most important standard
 properties of an integral. It is a linear operation, an integral over a total derivative vanishes
-and After an integral over :math:`\chi` the expression no longer depends
-on :math:`\chi`.
+and After an integral over :math:`\psi` the expression no longer depends
+on :math:`\psi`.
 
 Now the generating function for propagators and other N-point functions is
 
 .. math::
-   Z[\eta,\bar\eta] = \int d\bar\chi d\chi e^{-S + \sum_x \bar\eta_x \chi  + \sum_x \bar\chi_x \eta_x},
+   Z[\eta,\bar\eta] = \int d\bar\psi d\psi e^{-S + \sum_x \bar\eta_x \psi  + \sum_x \bar\psi_x \eta_x},
    :label:
 
 where the sources :math:`\eta` and :math:`\bar\eta` are Grassmann fields.
 Note that the exponential of a Grassmann number is (from the Taylor expansion)
 
 .. math::
-   e^{\chi} = 1 + \chi
+   e^{\psi} = 1 + \psi
    :label:
 
 and so 
 
 .. math::
-   e^{\bar\eta_x \chi + \bar\chi_x \eta_x} = 1 + \bar\eta_x \chi + \bar\chi_x \eta_x 
-   + \frac 12 \bar\eta_x \chi\bar\chi_x \eta_x
+   e^{\bar\eta_x \psi + \bar\psi_x \eta_x} = 1 + \bar\eta_x \psi + \bar\psi_x \eta_x 
+   + \frac 12 \bar\eta_x \psi\bar\psi_x \eta_x
    :label:
 
 In general
 
 .. math::
-   \int d\chi d\eta e^{\sum_{ij} \eta_i M_{ij} \chi_j} = det(M)
+   \int d\psi d\eta e^{\sum_{ij} \eta_i M_{ij} \psi_j} = det(M)
    :label:
 
 By filling in the squares and performing a change of integration variable, we find
 
 .. math::
-   Z[\eta,\bar\eta] = det(M) \int d\bar\chi d\chi e^{ \sum_{x,y} \bar\eta_x M_{x,y} \eta_y}
+   Z[\eta,\bar\eta] = det(M) \int d\bar\psi d\psi e^{ \sum_{x,y} \bar\eta_x M_{x,y} \eta_y}
    :label:
 where the fermion matrix :math:`M` is
 
@@ -2495,13 +2495,13 @@ This is usually more than you would like.
 The root of the problem is in the action with the naively symmetric derivative
 
 .. math::
-   S = a^4\sum_x \left [ \sum_\mu \bar\chi_x \gamma_\mu \frac{ \chi_{x+\mu} - \chi_{x-\mu} }{2a}
-       - m\bar\chi_x\chi_x \right ]
+   S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \gamma_\mu \frac{ \psi_{x+\mu} - \psi_{x-\mu} }{2a}
+       - m\bar\psi_x\psi_x \right ]
    :label:
 
 To put it simply (too simply for the interacting case), the derivative term only connects the
-field :math:`\bar\chi` at even sites to :math:`\chi` at odd sites, and 
-:math:`\bar\chi` at odd sites to :math:`\chi` at even sites.
+field :math:`\bar\psi` at even sites to :math:`\psi` at odd sites, and 
+:math:`\bar\psi` at odd sites to :math:`\psi` at even sites.
 There are 2 disconnected fields to each direction.
 
 There are several other fermion discretizations that fix the double problem to an extent.
@@ -2530,8 +2530,8 @@ global symmetries of the original action.
 Again, the full action is
 
 .. math::
-   S = a^4\sum_x \left [ \sum_\mu \bar\chi_x \gamma_\mu \frac{ \chi_{x+\mu} - \chi_{x-\mu} }{2a}
-       - m\bar\chi_x\chi_x \right ]
+   S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \gamma_\mu \frac{ \psi_{x+\mu} - \psi_{x-\mu} }{2a}
+       - m\bar\psi_x\psi_x \right ]
    :label:
 
 
@@ -2551,7 +2551,7 @@ is a symmetry of the action and the partition function. Results in conservation 
    &\bar\psi \to \bar\psi e^{i\theta\gamma_5}
    :label:
 is a symmetry of the action and on the lattice also the measure.
-In continuum this is **not** as symmetry of the measure :math:`d\bar\chi d\chi`.
+In continuum this is **not** as symmetry of the measure :math:`d\bar\psi d\psi`.
 Since it is not a symmetry of the partition function, it does not result in a conserved quantity.
 The violations appear at higher loop order.
 
@@ -2569,8 +2569,8 @@ flavors as a single vector
    :label:
 
 .. math::
-   S = a^4\sum_x \left [ \sum_\mu \bar\chi_x \gamma_\mu \frac{ \chi_{x+\mu} - \chi_{x-\mu} }{2a}
-       - m\bar\chi_x\chi_x \right ]
+   S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \gamma_\mu \frac{ \psi_{x+\mu} - \psi_{x-\mu} }{2a}
+       - m\bar\psi_x\psi_x \right ]
    :label:
 
 - :math:`\textrm{SU}(N_f)_V`
@@ -2601,8 +2601,8 @@ Wilson Fermions
 Wilson fermions remove the doublers by adding a second derivative term
 
 .. math::
-   S = a^4\sum_x \left [ \sum_\mu \bar\chi_x \gamma_\mu \frac{ \chi_{x+\mu} - \chi_{x-\mu} }{2a}
-       - m\bar\chi_x\chi_x - a\frac r2 \chi_x \sum_\mu \frac{ 2\chi_{x} - \chi_{x+\mu} - \chi_{x-\mu} }{2a^2} \right ]
+   S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \gamma_\mu \frac{ \psi_{x+\mu} - \psi_{x-\mu} }{2a}
+       - m\bar\psi_x\psi_x - a\frac r2 \psi_x \sum_\mu \frac{ 2\psi_{x} - \psi_{x+\mu} - \psi_{x-\mu} }{2a^2} \right ]
    :label:
 
 The parameter :math:`r` is an adjustable constant. Since the second derivative is multiplied by a,
@@ -2651,6 +2651,13 @@ Effectively the mass gets and additive renormalization,
 .. math::
    \bar m = m_0 + \delta m
    :label:
+
+
+
+
+
+
+
 
 
 
