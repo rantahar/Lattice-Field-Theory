@@ -2641,18 +2641,43 @@ is
 When :math:`a\to 0` the doublers become infinitely massive and decouple from the theory.
 
 
-**The Chiral Symmetry**
-
-The second derivative term in the action breaks the chiral symmetries, :math:`\textrm{U(1)}_A`
-and :math:`\textrm{SU}(N_f)_A` even when :math:`a\to 0`.
-Effectively the mass gets and additive renormalization,
+**The standard choice** for the Wilson parameter is :math:`r=1`. We then find
 
 .. math::
-   \bar m = m_0 + \delta m
+   S = a^4\sum_x  \left [ \sum_\mu \bar\psi_x \frac{ 1-\gamma_\mu}{2a} \psi_{x+\mu} - \sum_\mu \bar\psi_x \frac{ 1+\gamma_\mu}{2a} \psi_{x-\mu} - M\bar\psi_x\psi_x \right ],
+   :label:
+where :math:`M = m+\frac 4a`
+
+This is a particularly useful form of he action because the since the derivative terms contain projections,
+
+.. math::
+   &p_\mu^\pm = \frac{ 1\pm \gamma_\mu }{2}.\\
+   &(p^\pm_\mu)^2 = p^\pm_\mu \\ 
+   &p^+_\mu p^-_\mu = p^-_\mu p^+_\mu = 0 \\ 
+   &p^+_\mu + p^-_\mu = 1
    :label:
 
 
+**The Chiral Symmetry**
 
+The second derivative term :math:`\psi_{x} \Box_{x,y} \psi_{y}` in the action breaks the chiral symmetries,
+:math:`\textrm{U(1)}_A` and :math:`\textrm{SU}(N_f)_A`, even at :math:`m\to 0`.
+Effectively the mass gets and additive renormalization,
+
+.. math::
+   m_{phys} = m_0 + \delta m.
+   :label:
+The bare mass needs to be tuned to find the intended physical mass.
+
+
+**Gauge fields** are added as parallel transports in the derivative,
+
+.. math::
+   S = a^4\sum_x  \left [ \sum_\mu \bar\psi_x U_{x,\mu} \frac{ 1-\gamma_\mu}{2a} \psi_{x+\mu} 
+      - \sum_\mu \bar\psi_x U^\dagger_{x-\hat\mu,\mu} \frac{ 1+\gamma_\mu}{2a} \psi_{x-\mu} - M\bar\psi_x\psi_x \right ],
+   :label:
+
+If the gauge interaction is :math:`SU(N)`, the spinors acquire a new color index in addition to the spinor index.
 
 
 
