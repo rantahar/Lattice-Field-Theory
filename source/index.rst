@@ -2168,7 +2168,7 @@ propagator of a state of two static charged particles.
 At large :math:`T` this should behave exponentially,
 
 .. math::
-   W_{RT} \to C e^{-V(R) T} \textrm{ as } T \to infty
+   W_{RT} \to C e^{-V(R) T} \textrm{ as } T \to \infty
    :label:
 and indeed it generally does.
 
