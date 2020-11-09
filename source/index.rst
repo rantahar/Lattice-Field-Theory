@@ -2304,7 +2304,7 @@ First let's just see what happens when we try to do this the most
 straightforward way. The action of a free fermion field is
 
 .. math::
-   S = \int dx \sum_\mu \bar\psi(x) \gamma_\mu \partial_\mu \psi(x) - m\bar\psi(x)\psi(x)
+   S = \int dx \sum_\mu \bar\psi(x) \gamma_\mu \partial_\mu \psi(x) + m\bar\psi(x)\psi(x)
    :label:
 
 The fields :math:`\psi` and :math:`\bar\psi` consist of Grassmann numbers.
@@ -2354,8 +2354,8 @@ and
 
 .. math::
    &\gamma_5 = -\gamma_0\gamma_1\gamma_2\gamma_3 = \begin{pmatrix}
-   0 & i\sigma_k\\
-   -i\sigma_k & 0
+   I & 0\\
+   0 & -I
    \end{pmatrix}
    :label:
 
@@ -2456,20 +2456,20 @@ By filling in the squares and performing a change of integration variable, we fi
 where the fermion matrix :math:`M` is
 
 .. math::
-   M_{x,y} = \sum_\mu\gamma_\mu \frac{ \delta_{y,x+\mu} - \delta_{y,x-\mu} }{2a} - m
+   M_{x,y} = \sum_\mu\gamma_\mu \frac{ \delta_{y,x+\mu} - \delta_{y,x-\mu} }{2a} + m
    :label:
 and
 
 .. math::
-   M^{-1}_{x,y} &= \frac{1}{ \sum_\mu\gamma_\mu ( \delta_{y,x+\mu} - \delta_{y,x-\mu} )/2a - m } \\
-   &= \int \frac{d^4p}{(2\pi)^4} \frac{1}{ \sum_\mu i\gamma_\mu \sin(p_\mu a)/a - m } e^{ip\cdot x}\\
-   &= \int \frac{d^4p}{(2\pi)^4} \frac{\sum_\mu i\gamma_\mu \sin(p_\mu a)/a + m}{ -\sum_\mu \sin(p_\mu a)^2/a^2 + m^2 } e^{ip\cdot x}.
+   M^{-1}_{x,y} &= \frac{1}{ \sum_\mu\gamma_\mu ( \delta_{y,x+\mu} - \delta_{y,x-\mu} )/2a + m } \\
+   &= \int \frac{d^4p}{(2\pi)^4} \frac{1}{ \sum_\mu i\gamma_\mu \sin(p_\mu a)/a + m } e^{ip\cdot x}\\
+   &= \int \frac{d^4p}{(2\pi)^4} \frac{-\sum_\mu i\gamma_\mu \sin(p_\mu a)/a + m}{ \sum_\mu \sin(p_\mu a)^2/a^2 + m^2 } e^{ip\cdot x}.
    :label:
 
 From here we can read the momentum space propagator,
 
 .. math::
-   S(p) = a \frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) + am}{ \sum_\mu \sin(p_\mu a)^2 + a^2m^2 }
+   S(p) = -a \frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) - am}{ \sum_\mu \sin(p_\mu a)^2 + a^2m^2 }
    :label:
 
 It clearly approaches the continuum propagator as :math:`a\to0`. The lattice momentum is
@@ -2591,7 +2591,6 @@ is a symmetry of the action and the partition function. Results in conservation 
 is a symmetry of the action and the partition function. This is not broken by the measure.
 The conserved quantity is known as parity.
 
-Naive lattice 
 
 
 
@@ -2611,13 +2610,13 @@ it has higher dimension than the action in general and formally vanishes in the 
 In momentum space, this fermion matrix is
 
 .. math::
-   M_{x,y} = \int \frac{d^4p}{(2\pi)^4} \left (\frac 1a \sum_\mu i\gamma_\mu \sin(p_\mu a) - m
+   M_{x,y} = \int \frac{d^4p}{(2\pi)^4} \left (\frac 1a \sum_\mu i\gamma_\mu \sin(p_\mu a) + m
     - \frac 1a r \sum_\mu \left( cos(ap_\mu) -1 \right) \right ) e^{ip\cdot x}.
    :label:
 and the propagator
 
 .. math::
-   S(p) = a\frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) + am + r \sum_\mu \left( cos(ap_\mu) -1 \right)}{ \sum_\mu \sin(p_\mu a)^2/ + \left [ am + r \sum_\mu \left( cos(ap_\mu) -1 \right)\right ]^2 }
+   S(p) = a\frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) - am + r \sum_\mu \left( cos(ap_\mu) -1 \right)}{ \sum_\mu \sin(p_\mu a)^2/ + \left [ am + r \sum_\mu \left( cos(ap_\mu) -1 \right)\right ]^2 }
    :label:
 
 So there is a :math:`p`-dependent correction to the mass. This will give the doublers a non-zero
@@ -2625,12 +2624,12 @@ mass.
 As :math:`p \to 0`,
 
 .. math::
-   S(p) = a\frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) + am }{ \sum_\mu \sin(p_\mu a)^2 + \left [ am \right ]^2 }
+   S(p) = a\frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) - am }{ \sum_\mu \sin(p_\mu a)^2 + \left [ am \right ]^2 }
    :label:
 The double at :math:`p \to (\pi/a,0,0,0)` has
 
 .. math::
-   S(p) = a\frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) + \left[am + 2r \right] }{ \sum_\mu \sin(p_\mu a)^2 + \left [ am + 2r \right ]^2 }
+   S(p) = a\frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) - \left[am + 2r \right] }{ \sum_\mu \sin(p_\mu a)^2 + \left [ am + 2r \right ]^2 }
    :label:
 
 In fact every direction with a :math:`\pi/a` yields an additional :math:`2r`. The mass of a doubler
