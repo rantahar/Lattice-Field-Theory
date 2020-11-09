@@ -2278,6 +2278,22 @@ the correct thing.
 Fermions
 ========
 
+The Standard Model of particle physics consists of fermions, gauge bosons and the Higgs field,
+which is a scalar boson field. What we call matter is generally made up of fermions, although
+it's mass in fact arises from the binding energy of the neutral bound states of the strong
+interaction.
+
+Properly modeling fermions is essential for the complex phenomenology of strong interactions,
+but fermions are also conceptually more complicated than bosonic fields and present some unique
+challenges for lattice discretization.
+
+In this section we will review the properties and the path integral describtion of fermions,
+describe the most important complications created by simulating fermionic theories on the
+lattice and the most common solutions. The intention is that you become familiar with two
+of the most common fermion discretizations and are able to look up the details. We will also
+discuss important measurements constructed from the fermion fields.
+
+
 The problem with naive Fermions
 -------------------------------
 
@@ -2557,7 +2573,7 @@ flavors as a single vector
        - m\bar\chi_x\chi_x \right ]
    :label:
 
-- :math:`\textrm{SU(N_f)}_V`
+- :math:`\textrm{SU}(N_f)_V`
 
 .. math::
    &\psi \to e^{if_a\tau_a} \psi\\
@@ -2566,7 +2582,7 @@ flavors as a single vector
 is a symmetry of the action and the partition function. Results in conservation flavor number.
 
 
-- :math:`\textrm{SU(N_f)}_A`, if :math:`m=0`, 
+- :math:`\textrm{SU}(N_f)_A`, if :math:`m=0`, 
 
 .. math::
    &\psi \to e^{if_a\tau_a\gamma_5} \psi\\
