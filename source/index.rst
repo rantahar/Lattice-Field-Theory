@@ -25,7 +25,7 @@ with a gauge interaction.
 
 
 Learning Objectives
-==================
+===================
 
 The course has two main objectives: to learn enough about lattice methods to put them into practical use and to become familiar with common methods used in studies of Standard Model physics.
 
@@ -103,6 +103,7 @@ and the energy of the whole system is
 .. math::
    E=-J\sum_{<ij>}\mathbf{s}_{i}\mathbf{s}_{j}.
    :label:
+
 The sum over :math:`<ij>` here counts pairs of neighbors. If the spins are
 coupled to a magnetic field :math:`\mathbf{H}`, with the magnetic momentum
 :math:`\gamma`, the energy is
@@ -144,6 +145,7 @@ are either :math:`+1` or :math:`-1`. The partition function then is
 .. math::
    Z =\sum_{s_{i}=\pm1}e^{-\beta\sum_{<ij>}s_{i}s_{j}+h\cdot\sum_{i}s_{i}}.
    :label:
+
 Here we use dimensionless couplings, :math:`\beta=\frac{J}{kT}` and
 :math:`h=\frac{\gamma H}{kT}`.
 
@@ -220,6 +222,7 @@ So the probability of choosing a positive spin is
 .. math::
    P_+ = \frac{ P(1) }{ P(1) + P(-1) }
    :label:
+
 and for a negative spin
 
 .. math::
@@ -398,6 +401,7 @@ This can also be expressed as a derivative of the partition function with respec
 .. math::
    <M> = \frac{1}{V} \frac{\partial}{\partial h} \log(Z).
    :label:
+
 So the field :math:`h` functions as a source for the magnetization.
 
 Similarly the energy is 
@@ -431,6 +435,7 @@ Other interesting observables include
    &C(\mathbf{x}-\mathbf{y}) = <s_{\mathbf{x}} s_{\mathbf{y}}> - <s_{\mathbf{x}}><s_{\mathbf{y}}>, \\
    &\lim_{|\mathbf{x} - \mathbf{y}|\to\infty} C(\mathbf{x}-\mathbf{y}) = e^{-|\mathbf{x} - \mathbf{y}|/\xi},
    :label:
+
 where :math:`\xi` is the correlation length.
 
 Deriving this from the partition function requires introducing an :math:`\mathbf{x}`-dependent source :math:`h_\mathbf{x}`
@@ -447,7 +452,7 @@ Deriving this from the partition function requires introducing an :math:`\mathbf
 
 
 Transfer matrices (Example of an exact solution)
------------
+------------------------------------------------
 
 Consider the 1D Ising model:
 
@@ -478,6 +483,7 @@ We'll define the :math:`2\times2` transfer matrix
 .. math::
    T_{s,s'} = e^{\beta s s' + \frac 12 h(s+s')}.
    :label:
+
 Now the partition function can be written as
 
 .. math::
@@ -498,6 +504,7 @@ Writing the matrix explicitly,
    e^{-\beta} & e^{\beta-h} 
    \end{matrix} \right )
    :label:
+
 We can evaluate the trace by diagonalizing :math:`T`:
 
 .. math::
@@ -525,6 +532,7 @@ In the thermodynamic limit, :math:`L\to\infty`,
 .. math::
    \left(\frac{\lambda_-}{\lambda_+}\right)^L \to 0
    :label:
+   
 and 
 
 .. math::
@@ -555,7 +563,7 @@ So at :math:`h=0` the magnetization is zero, which is what we expect. At large :
 
 
 Phase transitions
------------
+-----------------
 
 
 **Global symmetries**
@@ -566,6 +574,7 @@ The action
 .. math::
    S = -\beta \sum_{<ij>} s_i \cdot s_j - h\cdot \sum_i s_i
    :label:
+
 has global symmetries when :math:`h=0`. There are transformations :math:`M` that can be applied to all spins without changing the action. More precisely, :math:`S(s)` and :math:`ds` remain constant when
 
 .. math::
@@ -574,58 +583,58 @@ has global symmetries when :math:`h=0`. There are transformations :math:`M` that
 
 - **Ising:**
 
-
-.. math::
-   s_i\to -s_i
-   :label:
+  .. math::
+     s_i\to -s_i
+     :label:
 
 - **Potts Model:**
 
+  .. math::
+     s_i\to (s_i+1)\bmod N_s
+     :label:
 
-.. math::
-   s_i\to (s_i+1)\bmod N_s
-   :label:
-(and other permutations)
+  (and other permutations)
 
 
 - **O(N) Model:**
 
+  .. math::
+     s_i\to Ms_i,
+     :label:
 
-.. math::
-   s_i\to Ms_i,
-   :label:
-where :math:`M` is a :math:`N\times N` matrix with
+  where :math:`M` is a :math:`N\times N` matrix with
 
-.. math::
-   M^T M = I.
-   :label:
-So M is an orthogonal matrix: :math:`M^{-1} = M^T`. It belongs to the group of :math:`N\times N` orthogonal matrices, :math:`M\in O(N)`
+  .. math::
+     M^T M = I.
+     :label:
 
-The interaction term is invariant since
+  So M is an orthogonal matrix: :math:`M^{-1} = M^T`. It belongs to the group of :math:`N\times N` orthogonal matrices, :math:`M\in O(N)`
 
-.. math::
-   s_i \cdot s_j = (s_i)_\alpha (s_j)\alpha = \to M_{\alpha,\beta} (s_i)_\beta  M_{\beta,\gamma} (s_j)\gamma \\
-   = s_i M^T M s_j = s_i s_j
-   :label:
-
-If :math:`h\neq 0`, the symmetry is "broken":
-
-.. math::
-   h \cdot s_i \to (h)_\alpha M_{\alpha,\beta} (s_i)_\beta \neq h \cdot s_i
-   :label:
-
-We also need to check the integration measure :math:`ds`:
-
-.. math::
-   &\int_{|s_i|=1} d^Vs_i = \int d^Vs_i \delta(|s_i|-1)\\
-   &\to \int d^Vs'_i \delta(|s'_i|-1) =
-   \int d^Vs_i \left \| \frac{ds'}{ds} \right \| \delta(|Ms'_i|-1)
-   \\
-   &= \int d^Vs_i | \det(M) | \delta(|Ms'_i|-1)\\
-   &= \int d^Vs_i \delta(|Ms'_i|-1)
-   :label:
-
-So the measure is also invariant, and the model is invariant at :math:`h\neq 0`.
+ The interaction term is invariant since
+ 
+ .. math::
+    s_i \cdot s_j = (s_i)_\alpha (s_j)\alpha = \to M_{\alpha,\beta} (s_i)_\beta  M_{\beta,\gamma} (s_j)\gamma \\
+    = s_i M^T M s_j = s_i s_j
+    :label:
+ 
+ If :math:`h\neq 0`, the symmetry is "broken":
+ 
+ .. math::
+    h \cdot s_i \to (h)_\alpha M_{\alpha,\beta} (s_i)_\beta \neq h \cdot s_i
+    :label:
+ 
+ We also need to check the integration measure :math:`ds`:
+ 
+ .. math::
+    &\int_{|s_i|=1} d^Vs_i = \int d^Vs_i \delta(|s_i|-1)\\
+    &\to \int d^Vs'_i \delta(|s'_i|-1) =
+    \int d^Vs_i \left \| \frac{ds'}{ds} \right \| \delta(|Ms'_i|-1)
+    \\
+    &= \int d^Vs_i | \det(M) | \delta(|Ms'_i|-1)\\
+    &= \int d^Vs_i \delta(|Ms'_i|-1)
+    :label:
+ 
+ So the measure is also invariant, and the model is invariant at :math:`h\neq 0`.
 
 
 **Symmetry breaking**
@@ -636,16 +645,19 @@ Consider the model at :math:`h=0` and finite :math:`V`. Since the model has a gl
 .. math::
    s_i \to M s_i = -s_i (-I \in O(N)).
    :label:
+   
 However the magnetization
 
 .. math::
    <M> = \frac{\int [ds] \sum_i s_i e^{-S}}{Z}
    :label:
+
 is not symmetric,
 
 .. math::
    <M> \to -<M>.
    :label:
+
 Therefore we always have
 
 .. math::
@@ -662,6 +674,7 @@ The symmetry is spontaneously broken if
 .. math::
    \lim_{h\to 0} \left[ \lim_{V\to\infty} <M> \right ] \neq 0
    :label:
+
 The order of the limits is important here. If the limit :math:`h\to0` is taken too quickly the magnetization will approach :math:`0`.
 
 - The 1D Ising model the symmetry is *not* spontaneously broken. 
@@ -679,77 +692,79 @@ The order of the limits is important here. If the limit :math:`h\to0` is taken t
 In many models we have a broken symmetry at :math:`\beta > \beta_c` and a restored symmetry at :math:`\beta < \beta_c`. This means there is a phase transition at :math:`\beta=\beta_c`
 
  - **First order**
- One or more of the first derivatives of the free energy
- 
-.. math::
-   F=-\frac{1}{\beta}\log(Z)
-   :label:
-is discontinuous:
-
-.. math::
-   <E> = \frac{\partial}{\partial\beta} \beta F
-   :label:
-
-.. math::
-   <M> = -\frac 1V \frac{\partial}{\partial h} \beta F
-   :label:
-
-
-
-.. raw:: html
-
-   <img src="_static/transition_1.svg">
+   One or more of the first derivatives of the free energy
+    
+   .. math::
+      F=-\frac{1}{\beta}\log(Z)
+      :label:
+   
+   is discontinuous:
+   
+   .. math::
+      <E> = \frac{\partial}{\partial\beta} \beta F
+      :label:
+   
+   .. math::
+      <M> = -\frac 1V \frac{\partial}{\partial h} \beta F
+      :label:
 
 
-.. raw:: latex
 
-   \includegraphics[width=0.6\linewidth]{transition_1.eps}
-
-
-The jump in energy is known as the latent heat
-
-.. math::
-   \frac 1V \Delta E = \lim_{\beta\to_-\beta_c}<E> - \lim_{\beta\to_+\beta_c}<E> = \frac{E_- - E_+}{V}
-   :label:
-
-How does this work on the lattice? The transition is not instantaneous,
-but gets smoothed over a small span of temperatures.
-The derivative of the energy in fact grows with the volume.
-
-.. math::
-   \chi = \frac 1V \left<(E-<E>)^2\right> 
-   :label:
-At :math:`\beta=\beta_c`, :math:`<E>\approx \frac 12 (E_+ + E_-)`, so
-
-.. math::
-   \chi \approx \frac 1V \frac{\Delta E^2}{4}
-   = V \frac 14 \left( \frac{\Delta E}{V} \right)^2 \sim V
-   :label:
-
-In a first order transition the two phases can coexist, such as ice and water. The average energy density in this state is between the two phases.
+   .. raw:: html
+   
+      <img src="_static/transition_1.svg">
+   
+   
+   .. raw:: latex
+   
+      \includegraphics[width=0.6\linewidth]{transition_1.eps}
+   
+   
+   The jump in energy is known as the latent heat
+   
+   .. math::
+      \frac 1V \Delta E = \lim_{\beta\to_-\beta_c}<E> - \lim_{\beta\to_+\beta_c}<E> = \frac{E_- - E_+}{V}
+      :label:
+   
+   How does this work on the lattice? The transition is not instantaneous,
+   but gets smoothed over a small span of temperatures.
+   The derivative of the energy in fact grows with the volume.
+   
+   .. math::
+      \chi = \frac 1V \left<(E-<E>)^2\right> 
+      :label:
+   
+   At :math:`\beta=\beta_c`, :math:`<E>\approx \frac 12 (E_+ + E_-)`, so
+   
+   .. math::
+      \chi \approx \frac 1V \frac{\Delta E^2}{4}
+      = V \frac 14 \left( \frac{\Delta E}{V} \right)^2 \sim V
+      :label:
+   
+   In a first order transition the two phases can coexist, such as ice and water. The average energy density in this state is between the two phases.
 
 
  - **Second order**
-
-No discontinuity in the first derivative of the free energy, 
-but there is a discontinuity in the second derivative.
-This is the case in spin models.
-The derivative of magnetization
-
-.. math::
-   \frac{\partial}{\partial_h}<M> \neq 0
-   :label:
-
-is discontinuous.
-
-.. raw:: html
-
-   <img src="_static/transition_2.svg">
-
-
-.. raw:: latex
-
-   \includegraphics[width=0.6\linewidth]{transition_2.eps}
+   
+   No discontinuity in the first derivative of the free energy, 
+   but there is a discontinuity in the second derivative.
+   This is the case in spin models.
+   The derivative of magnetization
+   
+   .. math::
+      \frac{\partial}{\partial_h}<M> \neq 0
+      :label:
+   
+   is discontinuous.
+   
+   .. raw:: html
+   
+      <img src="_static/transition_2.svg">
+   
+   
+   .. raw:: latex
+   
+      \includegraphics[width=0.6\linewidth]{transition_2.eps}
 
 
 
@@ -780,15 +795,15 @@ It allows us to construct lattice models of continuous systems.
 More on this later.
 
  - Potts model in 2D (Including Ising)
-  Has a phase transition at :math:`\beta=\log(1+\sqrt(q))`. 
-  It is second order when :math:`q\leq 4` and first order otherwise.
-  This is a discrete symmetry, in 2D continuous symmetries do not break (Mermin-Wagner-Coleman theorem).
+   Has a phase transition at :math:`\beta=\log(1+\sqrt(q))`. 
+   It is second order when :math:`q\leq 4` and first order otherwise.
+   This is a discrete symmetry, in 2D continuous symmetries do not break (Mermin-Wagner-Coleman theorem).
 
  - O(N) model in 2D
-  No symmetry breaking transition due to Mermin-Wagner-Coleman. 
+   No symmetry breaking transition due to Mermin-Wagner-Coleman. 
 
  - XY model in 2D
-  Has a special Berezinskii–Kosterlitz–Thouless transition, :math:`\infty` order with symmetry restored on both sides.
+   Has a special Berezinskii–Kosterlitz–Thouless transition, :math:`\infty` order with symmetry restored on both sides.
 
  - O(N) in 3D
    Has a 2nd order transition. The critical exponents have been determined numerically.
@@ -830,12 +845,14 @@ Let's consider a scalar field theory is Minkowsky spacetime (the field :math:`\p
 .. math::
    S = \int d^3 dt \mathcal L(\phi,\partial_t \phi) = \int d^3 dt \left [ \frac 12 \partial_\mu \phi \partial^\mu\phi - V(\phi) \right ]
    :label:
+
 The classical equations of motion are found by minimizing the action, which leads to the 
 Euler-Lagrange equation
 
 .. math::
    \partial_\mu \frac{\delta L}{\delta(\partial_\mu \phi)} - \frac{\delta L}{\delta \phi} = 0.
    :label:
+
 In this case we find the Klein-Gordon equation
 
 .. math::
@@ -866,6 +883,7 @@ Here the Hamilton operator is
 .. math::
    \hat H \ket{\phi,\pi} = H(\phi,\pi) \ket{\phi,\pi}.
    :label:
+
 The expectation value of a measurable that depends on the fields :math:`\phi` and :math:`\pi`
 is
 
@@ -894,11 +912,13 @@ We can formally solve the Schrödinger equation to find the time evolution opera
 .. math::
    U(t)=e^{\frac{i}{\hbar}\hat H t}.
    :label:
+
 In this representation, we can define a partition function analogically to classical statistics,
 
 .. math::
    Z = \textrm{Tr} e^{\frac{i}{\hbar}\hat H t} = \int d\phi \left<\phi\left| e^{\frac{i}{\hbar} \hat H t} \right|\phi\right>.
    :label:
+
 From here we could derive the Feynman path integral representation by 
 evolving the a field configuration :math:`\bra{\phi,\pi}` by small time steps :math:`\delta t` and 
 taking the limit :math:`\delta t\to 0`. Here we will skip the derivation and simply introduce the result.
@@ -944,6 +964,7 @@ Now, since the fields are defined at all space-time locations, the integral meas
 .. math::
    \prod_x d\phi(x) 
    :label:
+
 is not well defined and needs to be regularized. This is a general problem with functional integrals.
 Lattice field theory is a conceptually simple renormalization method:
 we divide the volume into a lattice of discrete points :math:`x\in aZ^4` and study a system with
@@ -973,11 +994,13 @@ In equilibrium at a finite temperature :math:`T`, a quantum field theory follows
 .. math::
    Z = \textrm{Tr} e^{-\hat H/T} = \int d\phi \left<\phi\left| e^{-\hat H/T} \right|\phi\right>.
    :label:
+
 This is formally similar to the real time partition function above, with the replacement
 
 .. math::
    \tau = it = 1/T
    :label:
+
 and is equivalent to quantum field theory in *Euclidean* spacetime.
 The Hamiltonian and the Hilbert space remain unchanged.
 
@@ -1101,16 +1124,19 @@ Earlier we used the "transfer matrix" :math:`T`,
 .. math::
    T_{\phi_{i+1},\phi_i} = \Braketmid{ \phi_{i+1} }{ e^{-a_\tau \hat H} }{ \phi_i } 
    :label:
+
 We can write the partition function using the transfer matrix as
 
 .. math::
    Z = \int \left [ d\phi \right ] e^{S_E} = Tr \left( T^{N_\tau} \right)
    :label:
+
 Now diagonalizing the transfer matrix :math:`T` and labeling the eigenvalues as :math:`\lambda_0, \lambda_1,\dots`,
 
 .. math::
    Z = \sum_i \lambda_i^{N_\tau} = \lambda_0^{N_\tau} \left[ 1 + O((\lambda_1/\lambda_0)^{N_\tau}) + \dots \right]
    :label:
+
 Note that the eigenvalues :math:`\lambda_i` are equal to :math:`exp(E_i)`, where :math:`E_i` are the eigenvalues of :math:`\hat H`.
 So :math:`\lambda_0` corresponds to the lowest energy state, or the vacuum :math:`|0>`.
 
@@ -1120,11 +1146,13 @@ The two point function (with :math:`i>j`) in the path integral and operator repr
    <\phi_i \phi_j> = \frac 1Z \int\left[ d\phi \right] \phi_i \phi_j e^{-S_E} 
    = \frac 1Z Tr\left( T^{N_\tau-(i-j)} \hat\phi T^{i-j} \hat\phi  \right) 
    :label:
+
 Introducing a time dependent operator
 
 .. math::
    \hat \phi(\tau) = e^{\tau\hat H} \hat\phi e^{-\tau\hat H}
    :label:
+
 In the limit :math:`N_\tau\to\infty` (and because :math:`a_\tau(i-j) = \tau_i-\tau_j`),
 
 .. math::
@@ -1137,6 +1165,7 @@ Finally, if including also negative time separation :math:`i-j`, we have
 .. math::
    <\phi_i \phi_j> =\Braketmid{ 0 }{ \mathcal T \left[ \hat\phi(\tau_i) \hat\phi(\tau_j) \right] }{ 0 },
    :label:
+
 where :math:`\mathcal T` is the time ordering operator.
 
 
@@ -1173,6 +1202,7 @@ It is also useful for calculating certain more complicated observables, such as 
 
 We do computation on a lattice with a finite number of points, so a finite volume and finite lattice spacing.
 In order to obtain results in a continuum model, we need to take two limits in order:
+
  - :math:`V \to \infty`: the *thermodynamic* limit
  - :math:`a \to 0`: the *continuum* limit
 
@@ -1224,6 +1254,7 @@ so that
 .. math::
    \sum_y \Box_{x,y} \phi_y = -\Delta^2\phi = \sum_\mu \frac {1}{a^2} \left( 2\phi_x - \phi_{x-\hat\mu} - \phi_{x+\hat\mu} \right)
    :label:
+
 where :math:`\hat\mu` is a basis vector of length :math:`a` and :math:`x` and :math:`y` are vectors,
 :math:`x_\mu = an_\mu`
 Using these definitions, we can write the lattice action as
@@ -1604,6 +1635,7 @@ it into one, we would need to calculate
 .. math::
    C = \int dV f(x),
    :label:
+
 which is exactly the problem we are trying to solve.
 
 In lattice simulations though, this is exactly what we do. 
@@ -1728,7 +1760,7 @@ Here are three common choices for update ordering:
 
 
 Cluster and Worm Algorithm
-------------
+--------------------------
 
 Local updates are not the only option. The most efficient method for
 simulating the Ising model is a cluster algorithm. The Wolff cluster 
@@ -1839,6 +1871,8 @@ As above, this can be turned into a local symmetry by adding a gauge field
 
 .. math::
    U_{x,\mu} = e^{i aA_{x,\mu}}.
+   :label:
+
 Note the factor :math:`a` in the exponential. The field :math:`A` can be
 identified with the vector potential and should have the units of energy.
 
@@ -1874,6 +1908,7 @@ parallel transport. This also works for longer chains, for example,
 .. math::
    \phi^*_{(0,0,0,0)}U_{(0,0,0,0),0}U_{(1,0,0,0),1}U_{(1,1,0,0),0}\phi_{(2,1,0,0)}
    :label:
+
 is invariant.
 
 In continuum the parallel transport is the line integral
@@ -1881,6 +1916,7 @@ In continuum the parallel transport is the line integral
 .. math::
    e^{i \int_x^y A_{\mu}(x) \cdot dr},
    :label:
+
 where :math:`A_\mu` is the vector potential, the integral runs along a contour
 from :math:`x` to :math:`y` and :math:`dr` is the line element along this contour.
 
@@ -1944,6 +1980,7 @@ This is where the coupling comes in: we would usually write the covariant deriva
 .. math::
    D_\mu = \partial_\mu +i gA_\mu
    :label:
+
 This would lead to the parallel transport
 
 .. math::
@@ -2090,21 +2127,26 @@ option:
  1. Loop over direction :math:`\mu`.
  2. Choose a site :math:`x`.
  3. Do a metropolis step:
+   
    1. Calculate the sum of "staples",
 
    .. math::
       S_{x,\mu} = \sum_{\nu\neq\mu} U_{x+\mu,\nu} U^*_{x+\nu, \mu} U^*_{x,\nu}
       :label:
+
    2. Calculate the initial action 
 
       .. math::
          S_1 = Re U_{x,\mu} S_{x,\mu}
+         :label:
+
    3. Suggest the change 
    
       .. math::
          A'_{x,\mu} &= \left . A_{x,\mu} + C x \right |_{mod(2\pi)},\\
          U_{x,\mu} &= e^{iA_{x,\mu}} = \cos(A_{x,\mu}) + i \sin(A_{x,\mu})
          :label:
+
       (Here :math:`a=1`)
 
    4. Accept with the propability
@@ -2112,6 +2154,7 @@ option:
       .. math::
          W_f(\phi_x \to \phi'_x) = min\left( 1, e^{- [ S(\phi'_x) - S(\phi_x) ]} \right )
          :label:
+
 
 
 If you are also simulating a scalar matter field, you need to derivative term in the action,
@@ -2170,6 +2213,7 @@ At large :math:`T` this should behave exponentially,
 .. math::
    W_{RT} \to C e^{-V(R) T} \textrm{ as } T \to \infty
    :label:
+
 and indeed it generally does.
 
 The Wilson loops allows us to probe wether a gauge theory is confining.
@@ -2314,12 +2358,14 @@ The defining so feature of Grassmann numbers is that for any two of them, say
 .. math::
    \psi\psi = -\psi\psi
    :label:
+
 From this we find
 
 .. math::
    &\psi\psi = 0\\
    &f(\psi) = f_1 + f_2\psi
    :label:
+
 for any analytic function f.
 
 The matrices :math:`\gamma_\mu` are a set of Hermitean matrices that follow
@@ -2328,6 +2374,7 @@ the anticommutation relation
 .. math::
    \{\gamma_\mu,\gamma_\nu\} = 2 g_{\mu,\nu} = 2
    :label:
+
 In 4 dimensions they are :math:`4\times 4` matrices.
 The fields :math:`\psi` are actually length 4 vectors in the same vector space.
 Since we are using the Euclidean metric, the gamma matrices may be different from the
@@ -2350,6 +2397,7 @@ A common choice is to use
    1 & 0
    \end{pmatrix}
    :label:
+
 and
 
 .. math::
@@ -2364,6 +2412,7 @@ The Dirac equation in a kind of a square root of the Schrödinger equation in th
 .. math::
    (\gamma_\mu \partial_\mu - m)(\gamma_\nu \partial_\nu + m) = (\partial_\mu \partial_\mu + m^2) 
    :label:
+
 It applies to a particle transforming in the spin :math:`1/2` representation of the Lorentz group.
 
 From the point of view of discretization, however, the significant property is that there is only one
@@ -2378,6 +2427,7 @@ In the previous sections we have introduced the discrete derivatives
    \Delta_\mu \psi(x) &= \frac 1a \left[ \psi(x+a\hat\mu) - \psi(x) \right]\\
    \Delta^*_\mu \psi(x) &= \frac 1a \left[ \psi(x) - \psi(x-a\hat\mu) \right]
    :label:
+
 Plugging either the forward or the backward derivative in directly would not work, since 
 the resulting action would not be reflection invariant. This would lead to unitarity
 violations and cause significant problems.
@@ -2387,6 +2437,7 @@ Instead, we can take the symmetric combination of the two,
 .. math::
    \frac 12 (\Delta_\mu + \Delta^*_\mu) \psi(x) = \frac 1{2a} \left[ \psi(x+a\hat\mu) - \psi(x-a\hat\mu) \right]
    :label:
+
 This is reflection invariant, preserves unitarity and approaches the derivative in the continuum limit.
 It is not enough, though. Looking at the form above, perhaps you can already see the problem we
 will run into.
@@ -2417,6 +2468,7 @@ The integral is defined identically,
 .. math::
    \int d\psi \psi = 1 , \textrm{  } \int d\psi \psi = 0 \textrm{ and } \int d\psi c = 0
    :label:
+
 While this may seem a bit unusual, the Grassmann integral follows the most important standard
 properties of an integral. It is a linear operation, an integral over a total derivative vanishes
 and After an integral over :math:`\psi` the expression no longer depends
@@ -2453,11 +2505,13 @@ By filling in the squares and performing a change of integration variable, we fi
 .. math::
    Z[\eta,\bar\eta] = det(M) \int d\bar\psi d\psi e^{ \sum_{x,y} \bar\eta_x M_{x,y} \eta_y}
    :label:
+
 where the fermion matrix :math:`M` is
 
 .. math::
    M_{x,y} = \sum_\mu\gamma_\mu \frac{ \delta_{y,x+\mu} - \delta_{y,x-\mu} }{2a} + m
    :label:
+
 and
 
 .. math::
@@ -2480,11 +2534,13 @@ The difference is quite significant. Remember that the lattice momenta cover the
 .. math::
    -\frac \pi a < p_\mu \leq \frac \pi a
    :label:
+
 Unlike the bosonic momentum, fermion lattice momentum repeats values inside the Brillouin zone
 
 .. math::
    \hat p_\mu(p_\mu) = \hat p_\mu\left (p_\mu + \frac \pi 2 \hat\mu \right )
    :label:
+
 So for each low-momentum mode with a small :math:`p_\mu` there is a second low-momentum mode
 at :math:`p_\mu+\frac \pi 2 \hat\mu`. In total there are :math:`2^D = 16` low-momentum states.
 These states are known as fermion **doublers**.
@@ -2541,6 +2597,7 @@ Again, the full action is
    &\psi \to e^{i\theta} \psi\\
    &\bar\psi \to \bar\psi e^{-i\theta}
    :label:
+
 is a symmetry of the action and the partition function. Results in conservation of fermion number.
 
 
@@ -2550,6 +2607,7 @@ is a symmetry of the action and the partition function. Results in conservation 
    &\psi \to e^{i\theta\gamma_5} \psi\\
    &\bar\psi \to \bar\psi e^{i\theta\gamma_5}
    :label:
+
 is a symmetry of the action and on the lattice also the measure.
 In continuum this is **not** as symmetry of the measure :math:`d\bar\psi d\psi`.
 Since it is not a symmetry of the partition function, it does not result in a conserved quantity.
@@ -2573,12 +2631,14 @@ flavors as a single vector
        - m\bar\psi_x\psi_x \right ]
    :label:
 
+
 - :math:`\textrm{SU}(N_f)_V`
 
 .. math::
    &\psi \to e^{if_a\tau_a} \psi\\
    &\bar\psi \to \bar\psi e^{-if_a\tau_a} 
    :label:
+
 is a symmetry of the action and the partition function. Results in conservation flavor number.
 
 
@@ -2588,6 +2648,7 @@ is a symmetry of the action and the partition function. Results in conservation 
    &\psi \to e^{if_a\tau_a\gamma_5} \psi\\
    &\bar\psi \to \bar\psi e^{if_a\tau_a\gamma_5} 
    :label:
+
 is a symmetry of the action and the partition function. This is not broken by the measure.
 The conserved quantity is known as parity.
 
@@ -2613,6 +2674,7 @@ In momentum space, this fermion matrix is
    M_{x,y} = \int \frac{d^4p}{(2\pi)^4} \left (\frac 1a \sum_\mu i\gamma_\mu \sin(p_\mu a) + m
     - \frac 1a r \sum_\mu \left( cos(ap_\mu) -1 \right) \right ) e^{ip\cdot x}.
    :label:
+
 and the propagator
 
 .. math::
@@ -2626,6 +2688,7 @@ As :math:`p \to 0`,
 .. math::
    S(p) = a\frac{\sum_\mu i\gamma_\mu \sin(p_\mu a) - am }{ \sum_\mu \sin(p_\mu a)^2 + \left [ am \right ]^2 }
    :label:
+
 The double at :math:`p \to (\pi/a,0,0,0)` has
 
 .. math::
@@ -2638,6 +2701,7 @@ is
 .. math::
    m_{doubler} = m + \frac {2N}a r
    :label:
+
 When :math:`a\to 0` the doublers become infinitely massive and decouple from the theory.
 
 
@@ -2646,6 +2710,7 @@ When :math:`a\to 0` the doublers become infinitely massive and decouple from the
 .. math::
    S = a^4\sum_x  \left [ \sum_\mu \bar\psi_x \frac{ 1-\gamma_\mu}{2a} \psi_{x+\mu} - \sum_\mu \bar\psi_x \frac{ 1+\gamma_\mu}{2a} \psi_{x-\mu} - M\bar\psi_x\psi_x \right ],
    :label:
+
 where :math:`M = m+\frac 4a`
 
 This is a particularly useful form of he action because the since the derivative terms contain projections,
@@ -2667,6 +2732,7 @@ Effectively the mass gets and additive renormalization,
 .. math::
    m_{phys} = m_0 + \delta m.
    :label:
+
 The bare mass needs to be tuned to find the intended physical mass.
 
 
