@@ -2491,7 +2491,7 @@ and so
 
 .. math::
    e^{\bar\eta_x \psi + \bar\psi_x \eta_x} = 1 + \bar\eta_x \psi + \bar\psi_x \eta_x 
-   + \frac 12 \bar\eta_x \psi\bar\psi_x \eta_x
+   + \bar\eta_x \psi\bar\psi_x \eta_x
    :label:
 
 In general
