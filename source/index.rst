@@ -2200,9 +2200,9 @@ down in time (as an antiparticle) to :math:`x+(0,R)` and finally back to :math:`
 to annihilate. This can be described by the operator
 
 .. math::
-   W_{RT} &= \int [d\phi_{(0,0)} d\phi_{(R,T)}] \phi^\dagger_{(0,0)} \prod_{x=(0,R)}^{(0,0)} U_{x,\hat x}^\dagger \prod_{x=(T,R)}^{(0,R)} U_{x,\hat t}^\dagger \phi_{(T,R)} \\
-   &\times \phi^\dagger_{(T,R)} \phi_{(0,0)} \prod_{x=(T,0)}^{(T,R)} U_{x,\hat x} \prod_{x=(0,0)}^{(T,0)} U_{x,\hat t} \phi_{(0,0)}\\
-   &= Tr \prod_{x=(0,R)}^{(0,0)} U_{x,\hat x}^\dagger \prod_{x=(T,R)}^{(0,R)} U_{x,\hat t}^\dagger \prod_{x=(T,0)}^{(T,R)} U_{x,\hat x} \prod_{x=(0,0)}^{(T,0)} U_{x,\hat t}.
+   W_{RT} &= \int [d\phi_{(0,0)} d\phi_{(R,T)}] \phi^\dagger_{(0,0)} \prod_{x=(0,R)}^{(0,0)} U_{x,\hat x} \prod_{x=(T,R)}^{(0,R)} U_{x,\hat t} \phi_{(T,R)} \\
+   &\times \phi^\dagger_{(T,R)} \phi_{(0,0)} \prod_{x=(T,0)}^{(T,R)} U_{x,\hat x}^\dagger \prod_{x=(0,0)}^{(T,0)} U_{x,\hat t}^\dagger \phi_{(0,0)}\\
+   &= Tr \prod_{x=(0,R)}^{(0,0)} U_{x,\hat x} \prod_{x=(T,R)}^{(0,R)} U_{x,\hat t} \prod_{x=(T,0)}^{(T,R)} U_{x,\hat x}^\dagger \prod_{x=(0,0)}^{(T,0)} U_{x,\hat t}^\dagger.
    :label:
 
 This is known as a Wilson loop. Since it is a closed loop, it is a gauge invariant observable.
