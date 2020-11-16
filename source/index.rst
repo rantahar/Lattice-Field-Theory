@@ -2716,12 +2716,25 @@ where :math:`M = m+\frac 4a`
 This is a particularly useful form of he action because the since the derivative terms contain projections,
 
 .. math::
-   &p_\mu^\pm = \frac{ 1\pm \gamma_\mu }{2}.\\
-   &(p^\pm_\mu)^2 = p^\pm_\mu \\ 
-   &p^+_\mu p^-_\mu = p^-_\mu p^+_\mu = 0 \\ 
-   &p^+_\mu + p^-_\mu = 1
+   &P_\mu^\pm = \frac{ 1\pm \gamma_\mu }{2}.\\
+   &(P^\pm_\mu)^2 = P^\pm_\mu \\ 
+   &P^+_\mu P^-_\mu = P^-_\mu P^+_\mu = 0 \\ 
+   &P^+_\mu + P^-_\mu = 1
    :label:
 
+These reduce the number of elements in the projected vector by a factor of two, reducing the amount of
+multiplication required to ecaluate the action and the amount data that
+would need to be communicated to other processors in a multiprocessor setup.
+
+Another standard choice is to rescale the fields by :math:`\sqrt(M)` so that the action becomes
+
+.. math::
+   S &= a^4\sum_x  \left [\kappa \sum_\mu \bar \frac 1a \psi_x P_\mu^- \psi_{x+\mu} - \kappa \sum_\mu \bar \frac 1a \psi_x  P_\mu^+ \psi_{x-\mu} - \bar\psi_x\psi_x \right ], \\
+   \kappa &= \frac 1{2M} = \frac 1{2m+8/a}
+   :label:
+
+From this form it is clear that at large mass, or small :math:`\kappa`, we can expand the partition function in terms of the
+derivative terms, connecting individual sites to their neighbours.
 
 **The Chiral Symmetry**
 
@@ -2747,21 +2760,256 @@ If the gauge interaction is :math:`SU(N)`, the spinors acquire a new color index
 
 
 
+**Discretization Errors**
+
+The naive fermion action was correct up to errors of :math:`O(a^2)`, except of course for the doublers.
+In quantum field theory, any term that is allowed by symmetries will appear in the action due to renormalization,
+but there are no terms that would not break the symmetries at order :math:`a`.
+
+Since we added a term that does break some of the symmetries, any other terms that fit the new symmetry structure
+are allowed. To get back to a model that is correct at order :math:`a`, we should add all the terms that are made
+possible by the broken symmetry and tune their couplings to cancel the quantum effects.
+
+So the actual expectation value of the action is a linear combination of the following five possible
+order :math:`a`: terms
+
+ 1. :math:`O_1 = m^2 \bar \psi \psi`
+
+    Already in the action, but the coupling :math:`m` will get quantum corrections.
+
+ 2. :math:`O_2 = m\bar \psi \gamma_\mu D_\mu \psi`
+    
+    Also in the action, renormalization can be interpreted as a renormalization of the fields.
+
+ 3. :math:`O_3 = \bar\psi \gamma_\mu D_\mu \gamma_\nu D_\nu \psi = \bar\psi \Box \psi`
+    
+    This is the Wilson term. If we only care about on-shell quantities (and we do), renormalization of this term
+    can be absorbed into the mass term.
+
+ 4. :math:`O_4 = \bar\psi \left [ \gamma_\mu D_\mu, \gamma_\nu D_\nu\right] \psi \sim \bar\psi \sigma_{\mu\nu} F_{\mu\nu} \psi`
+    
+    This one is new. Here :math:`\sigma_{\mu\nu} = -\frac i2 \left [\gamma_\mu,\gamma_\nu\right ]`. Renormalization of this one
+    cannot be completely absorbed to the terms that are already present in the action.
+
+ 5. :math:`O_5 = m Tr \left ( F_{\mu\nu}F_{\mu\nu} \right )`
+    
+    A renormalization of the gauge action.
+
+
+There are many more terms at higher orders, but these are the only ones at order :math:`a`. Since only
+:math:`O_4` is not already in the action (up to renormalization of existing fields and parameters), it needs to be
+added and we need to find a suitable coefficient for it.
+
+Operator :math:`O_4` is also known as the Sheikholeslami-Wohler operator or the clover operator. The latter is due
+to the fact that the field strength :math:`F_{\mu\nu}` is usually evaluated by taking an average of plaquettes
+around a given site. The diagram representing this in 2 dimensions has four 'leaves', just like clovers usually do not.
+
+It turns out that the clover coefficient :math:`c_{SW} = 1` at small coupling. At higher coupling it is generally
+larger than one.
+
+So it is sufficient to add one more term to the lattice action a find the value of it's coefficient to build an order
+:math:`a` improved lattice action. Notice, though, that when calculating the expectation value of an operator,
+:math:`\ev{O}`, the measurement may still have order :math:`a` effects if the operator :math:`O` itself does.
+The operator can be improved following the same process as for the action.
+
+The process of finding all operators that mix with the action and measurable operators to a given order and setting
+their coefficients is known as Symanzik improvement. This is not a small task and the results are known only for a
+small set of models and observables.
 
 
 
 
--   Wilson
 
-    -   Symmetries
+Staggered (Kogut-Susskind) Fermions
+-----------------------------------
 
-    -   O(a) improvement?
+Staggered fermions are a second common solution to the doubling problem. As you will see, they are conceptually more
+complicated than Wilson fermions, but are easier to implement in practice.
 
--   Staggered
+As a reminder, the naive fermion action was
 
-    -   Symmetries, benefits and limitations
+.. math::
+   S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \gamma_\mu \frac{ U_{x,\mu} \psi_{x+\hat\mu} - U^\dagger_{x-\hat\mu,\mu} \psi_{x-\hat\mu} }{2a} - m\bar\psi_x\psi_x  \right ]
+   :label:
 
--   Measuring propagators
+Staggered fermions do not actually remove the doublers, but rather build the dirac and flavor degrees of freedom out of them.
+In the action above, we can perform the replacement
+
+.. math::
+   \psi_x &\to T_x \psi_x \\
+   \bar\psi_x &\to \bar\psi_x T_x^\dagger, \\
+   T_x &= \gamma_0^{x_0} \gamma_1^{x_1} \gamma_2^{x_2} \gamma_3^{x_3}, \textrm{ } T^\dagger_x T_x = 1
+   :label:
+
+This leaves the mass term :math:`\bar\psi_x\psi_x` unchanged, but in the derivative term we have
+
+.. math::
+   T_x \gamma_\mu T_{x+\hat\mu} = (-1)^{x_0+x_1+\dots+x_{\mu-1}} = (-1)^{\sum_{\nu=0}^{\mu-1}x_{\nu}} = \eta_{x,\mu}
+   :label:
+
+The naive action becomes
+
+.. math::
+   S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \eta_{x,\mu} \frac{ U_{x,\mu} \psi_{x+\hat\mu} - U^\dagger_{x-\hat\mu,\mu} \psi_{x-\hat\mu} }{2a} - m\bar\psi_x\psi_x  \right ]
+   :label:
+
+We have replaced the :math:`\gamma`-matrices with a set of numbers :math:`\eta_{x,\mu} = \pm1` that depend on location and direction.
+The derivatives now link each Dirac index to the same Dirac index at all directions, making the different Dirac indexes fully equivalent.
+
+Now we can simply drop 3 of the 4 Dirac indexes, just keeping one two Grassman numbers :math:`\bar\psi` and :math:`\psi` at each
+site. This reduces the number of independent degrees of freedom by 4.
+Now there are only 4 doubles left (4 spinor indexes, 4 flavors = 16 doubles). These doubler-flavours are usually referred to as
+tastes.
+
+
+**Symmetries**
+
+This time we did not add any new terms that would break symmetries, but we did remove the spinor degreese of freedom.
+So it is not very surprising that the symmetries related to these indexes are broken.
+
+What remains is a remnant symmetry related to the axial vector symmetry, :math:`\textrm{U(1)}_A`.
+
+.. math::
+   \psi &\to e^{i\Gamma_5} \psi,\\
+   \bar\psi &\to \bar\psi e^{i\Gamma_5},\\
+   \Gamma_5 &= (-1)^{\sum_\mu x_{\mu}}
+   :label:
+
+This remnant still protects the mass from additive renormalization. The symmetry is broken at nonzero mass, so
+zero mass remains a special point. Renormalization never breaks global symmetries.
+
+
+**Staggering the fermions**
+
+So far I have not given any reason for calling these fermions staggered. We have only dropped some degrees of freedom,
+not reconstructed the original model in the continuum.
+
+We cannot in fact use the doublers at each site. They are described by only two Grassmann fields and cannot be disentangled.
+Instead we use the :math:`2^D` sites on each :math:`2\times2\times2\times2` hypercube.
+
+Numbering the sites on a hypercube by :math:`\alpha`, we can recast the fields as
+
+.. math::
+   \psi^\alpha \to \Psi^\beta_a,
+   :label:
+
+where :math:`\beta` is the Dirac index and :math:`a` the taste index. In the absence of a gauge field we can fully disentangle
+the Dirac and taste indexes and write the action (with :math:`b=2a`) as
+
+.. math::
+   S = b^4\sum_x \bar\Psi \left [ \sum_\mu (\gamma_\mu \otimes 1) \Delta_\mu 
+     + \frac b2 (\gamma_\mu\otimes\gamma_\mu^*\gamma_5) \Delta_\mu^2 + 2m (1\otimes 1) \right ] \Psi
+   :label:
+
+To be precise,
+
+.. math::
+   \Psi^\alpha_a = \frac 18 \sum_{y\in hypercube} T^{\alpha a}_y \psi_y
+   :label:
+
+The inverse transform is
+
+.. math::
+   \psi_{2x+y} = 2Tr\left[T^\dagger_y\Psi_x\right]
+   :label:
+
+So the different indexes of a continuum fermion are actually constructed out of the fields on a minimal hypercube,
+not out of the doublers. The doublers are still necessary to ensure we have the correct number of degrees of freedom
+(or, in fact, a factor of 4 too many).
+
+**Note** that introducing gauge fields complicates the transformation. The order :math:`a` term receives a contribution
+relative to the gauge coupling. This still works in the continuum limit, since there $g\to 0$.
+
+
+
+**Rooting**
+
+The rooting trick is sometimes used to reduce the number of staggered tastes. For :math:`N_f` degenerate fermions
+
+.. math::
+   Z = \int d\bar\psi d\psi e^{-\sum_f\bar\psi^f M \psi^f} = det \left( M \right )^{N_f} 
+   :label:
+
+assuming :math:`M` describes a single fermion. Since the staggered matrix :math:`M_{stg}` describes four, maybe
+
+.. math::
+   Z = det \left( M_{stg} \right )^{1/2} = \int d\bar\psi d\psi e^{-\frac 12 \bar\psi M_{stg} \psi}
+   :label:
+
+describes 2?
+
+This issue is not completely settled, but the rooting trick is often used and is safe in most cases.
+
+
+Simulating Grassmann fields
+---------------------------
+
+Running calculations of Grassmann numbers on a computer is very non-trivial. On would need to track wether each existing
+Grassmann number is present or absent in each term when multiplying. This would require a bit per Grassmann number.
+The memory requirement of a lattice simulation would be completely untractable.
+
+It is possible often to expand the exponential out and perform the Grassmann integral analytically, leading to a
+*dual representation*. These exist for many models and are quite efficient, strongly interacting fermions are notably
+hard to rewrite in this way.
+
+Instead we usually use the bosonization trick. Given that we simulate 2 degerate fermion flavors, we write the
+action as
+
+.. math::
+   Z = \int d\bar\psi d\psi e^{-\bar\psi M^\dagger M \psi} = det \left( M \right ) = \frac 1N \int \chi e^{-\chi^\dagger (M^\dagger M)^{-1} \chi}.
+   :label:
+
+The pseudofermion fields :math:`\chi` here are just normal complex numbers. This is already more tracktable, eventhough the inverse is
+not limited to nearest neighbour interactions.
+
+In fact it is surpisingly easy to draw configurations of the pseudofermion fields. Since the action is gaussian in :math:`\chi`, we
+can draw from a gaussian distribution. First we draw an intermediate field :math:`\psi` from a simple gaussian distribution,
+
+.. math::
+   P(\psi) = e^{-\psi^\dagger \psi}.
+   :label:
+
+Next we transform this into
+
+.. math::
+   \chi = M^\dagger \psi
+   :label:
+
+Then the distribution of the field field :math:`\chi` is
+
+.. math::
+   P(\chi) = e^{-\chi^\dagger (M^\dagger M)^{-1} \chi}.
+   :label:
+
+as intended.
+
+This trick also gives the initial action of the fermion field cheaply, :math:`S=\psi^\dagger \psi`. If we update a
+different field, such as the gauge field, we need to actually calculate the inverse.
+
+There are several useful methods for calculating the inverse. General methods take O(N^3) computing time, but since
+the fermion matrix is very sparce other methods can be much faster. The conjugate gradient method is probably the
+most common and works as long as the fermion matrix in Hermitean.
+
+A common trick is to invert the Hermitean matrix :math:`M M^\dagger` and multiply by :math:`M^\dagger` at the end
+to get :math:`M^{-1}`. If using Wilson fermions, the combination :math:`\gamma_5 M` is Hermitean and
+:math:`\gamma_5(\gamma_5M)^{-1}=M^{-1}`.
+
+
+Propagators
+-----------
+
+The fermion propagator is 
+
+.. math::
+   P_{xy} &= \partial_{J_x} \partial_{J_y} \frac 1Z \int d\bar\psi \psi e^{a^4\sum_{x,y} \bar\psi_x M_{x,y} \psi_y + \bar\psi_x \eta_y + \bar \eta_x \psi_y  } \\
+   & = \ev{ M^{-1} }_{xy}
+   :label:
+
+This can be obtained directly from lattice simulations if the inverse :math:`M^{-1}` can be calculated.
+This is naturally quite expensive, but the methods mentioned above do work.
+
+- Mesons
+
 
 Hybrid Monte-Carlo
 ==================
