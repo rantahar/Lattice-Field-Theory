@@ -2353,10 +2353,10 @@ straightforward way. The action of a free fermion field is
 
 The fields :math:`\psi` and :math:`\bar\psi` consist of Grassmann numbers.
 The defining so feature of Grassmann numbers is that for any two of them, say
-:math:`\psi` and :math:`\psi`,
+:math:`\psi` and :math:`\bar\psi`,
 
 .. math::
-   \psi\psi = -\psi\psi
+   \bar\psi\psi = -\psi\bar\psi
    :label:
 
 From this we find
