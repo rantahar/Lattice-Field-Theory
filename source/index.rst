@@ -2567,9 +2567,9 @@ some of the symmetries of the continuum model. The symmetries can be restored in
 limit, but they will be broken in the discrete model.
 
 The following three are incompatible:
-- local action
-- chiral symmetry
-- absence of doublers
+ - local action
+ - chiral symmetry
+ - absence of doublers
 
 In these notes we will cover Wilson fermions and Staggered fermions. Wilson fermions are
 conceptually simpler and we will start with them. Other possiblities you may want to look
