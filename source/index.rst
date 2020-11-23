@@ -3112,10 +3112,48 @@ noisy compared to the connected part, especially at large distances. Fortunately
 
 
 
-
-
 Hybrid Monte-Carlo
 ==================
+
+The last missing piece in a program simulating the strong interaction, QCD, is an efficient method for updating the
+gauge field. The method you already know, a local update of one of the link matrices, works, but in the presence of
+a fermion field this requires inverting the fermion matrix for each update step. The inversion is computationally intensive,
+it generally takes :math:`O(N^3)` and the fermion matrix grows with :math:`V^2`. Even though the matrix is sparse and
+the conjugate gradient method quite efficient, this is still slow going.
+
+The Hybrid Monte-Carlo method updates all gauge matrices at the same time. We first run a molecular dynamics trajectory
+that conserves the action (up to some integration errors) and then accept or reject with the usual metropolis step.
+
+The molecular dynamics trajectory follows classical equations of motion, with the conserved energy replaced by the action.
+Normally each field would have a momentum term in the action for each field. In order to use this method, we will add
+one in for the gauge field. As detailed above, the fermion fields can be updated more easily.
+
+The actual dynamic gauge field is the vector potential (although it is possible to formulate this in terms of the 
+SU(N) matrices, this does not avoid calculating the exponential later). For each :math:`A_{x,\mu,a}` we add a momentum
+:math:`\Pi_{x,\mu,a}`. The partition function is then 
+
+.. math::
+   Z = \int dU d\Pi d\bar\phi e^{S_{gauge} - \bar\phi^\dagger \frac 1{M^\dagger M}\phi + \frac 12 \sum_{x,\mu,a} \Pi_{x,\mu,a}^2}
+   :label:
+
+Notice that the partition dynamics of the theory do not change by the addition of the momentum field. It has no interactions
+with the other fields and adding it is equivalent to multiplying the partition function with a constant.
+
+Now find the classical equation of motion for the fields :math:`U` and :math:`\Pi`:
+
+.. math::
+   \partial_s U_{x,\mu,a} &= \frac{\partial S}{\partial \Pi_{x,\mu,a}} = \Pi_{x,\mu,a}\\
+   \partial_s \Pi_{x,\mu,a} &= - \frac{\partial S}{\partial U_{x,\mu,a} } 
+   = - \frac{\partial S_{gauge}}{\partial U_{x,\mu,a} } - \frac{\partial S_{fermion}}{\partial U_{x,\mu,a} }
+   :label:
+
+In order to calculate the derivatives of the gauge and fermion terms in the action we need the gauge derivative
+
+.. math::
+   \frac{\partial U}{\partial U_{x,\mu,a} } =
+   \frac{\partial U}{\partial U_{x,\mu,a} } 
+   :label:
+
 
 -   The other problem with fermions, updating the gauge field
 
