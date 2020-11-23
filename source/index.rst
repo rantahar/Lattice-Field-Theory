@@ -2995,8 +2995,8 @@ to get :math:`M^{-1}`. If using Wilson fermions, the combination :math:`\gamma_5
 :math:`\gamma_5(\gamma_5M)^{-1}=M^{-1}`.
 
 
-Propagators
------------
+Measurements
+------------
 
 The fermion propagator is 
 
@@ -3008,7 +3008,75 @@ The fermion propagator is
 This can be obtained directly from lattice simulations if the inverse :math:`M^{-1}` can be calculated.
 This is naturally quite expensive, but the methods mentioned above do work.
 
-- Mesons
+While the fermion propagator can be used to calculate the renormalized fermion mass, in practice this is not often done. 
+Instead, the chiral symmetry, broken or not, provides enables more efficient fermion mass measurements. With staggered
+fermions the remnant of the chiral symmetry forces the actual renormalized mass to zero when :math:`m=0` so  that
+
+.. math::
+   \bar m = c_m m_0
+   :label:
+
+This is usually sufficient and there is not reason for actually calculating the mass.
+
+With Wilson fermions the situation is more complicated, since the fermion mass is not protected by a symmetry
+and can have additive renormalization. Nevertheless the mass is related to the chiral symmetry and we can is it
+here. Specifically, we use the Ward identity
+
+.. math::
+   \ev{\partial_\mu \bar\psi_x \gamma_\mu \gamma_5 \tau_a \psi_x O(y)} = 2 m \ev{\bar\psi_x \gamma_\mu \gamma_5 \tau_a \psi_x O(y)}
+   :label:
+
+for :math:`x \neq y`. This relation is also known as the partially conserved axial current relation (PCAC) and so
+mass :math:`m` here is known as the PCAC-mass. The axial current is conserved when :math:`m=0`, which implies
+chiral symmetry (at least in continuum), so the PCAC-mass does is free of additive renormalization.
+
+
+Other important measuremnts include the masses of bound states of fermions. Lattice QCD has been very succesful in
+producing ab-initio calculation of these masses, something that is not easy in perturbation theory. In order to find
+the mass of a bound state, we calculate the correlation function of an operator :math:`O(x)` with the same quantum
+numbers as the intended state. For example for the scalar meson :math:`\sigma` we could use
+
+.. math::
+   O(x) = \bar\psi_x\psi_x \textrm{ (} P(x-y) = \ev{\bar\psi_x\psi_x \bar\psi_y\psi_y}.
+   :label:
+
+The correlation function corresponds to the propacator
+
+.. math::
+   \ev{O(x)O(y)} = \Braketmid{0}{\hat O^\dagger(x) \hat O(y)}{0} = \Braketmid{0}{ \hat\psi^\dagger_x\hat\psi_x \hat\psi^\dagger_y\psi_y}{0}.
+   :label:
+
+The operator will first create a combination of energy eigenstates :math:`\hat\Lambda_i` with the quantum numbers
+of the operator at site :math:`x`. These will then annihilate at :math:`y`. As before, we can decompose the propagator
+as
+
+.. math::
+   \ev{O(x)O(y)} = e^{-\sum_i E_i |x-y|} \to e^{-m_\sigma t} \textrm{ when } {|x-y|\to\infty}
+   :label:
+
+Where now the lowest energy state of the bound state with the smallest mass is the zero momentum :math:`\sigma`-particle.
+
+We can construct many other bound states similarly:
+
+ 1. Pseudoscalar flavour singlet (:math:`\eta`) 
+
+ .. math::
+    O(x) = \bar\psi_x\gamma_5\psi_x.
+    :label:
+
+
+ 2. Pseudoscalar flavour triplet (:math:`\pi_a`) 
+
+ .. math::
+    O_a(x) = \bar\psi_x\gamma_5\sigma_a\psi_x.
+    :label:
+
+
+ 3. Vector flavour siglet (:math:`??`) 
+
+ .. math::
+    O_\mu(x) = \bar\psi_x\gamma_\mu\psi_x.
+    :label:
 
 
 Hybrid Monte-Carlo
