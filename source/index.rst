@@ -2579,8 +2579,8 @@ into include twisted mass, Ginsparg-Wilson, Domain-wall and Overlap fermions.
 
 **Symmetries**
 
-The Nielsen-Ninomiya theorem states that the wilson fermions must break some symmetries on
-the lattice. Before we go on to common solutions to the double problem, let's look at the
+The Nielsen-Ninomiya theorem states that the lattice fermions without doublers must break some
+global symmetries. Before we go on to common solutions to the double problem, let's look at the
 global symmetries of the original action.
 
 Again, the full action is
@@ -2662,7 +2662,7 @@ Wilson fermions remove the doublers by adding a second derivative term
 
 .. math::
    S = a^4\sum_x \left [ \sum_\mu \bar\psi_x \gamma_\mu \frac{ \psi_{x+\mu} - \psi_{x-\mu} }{2a}
-       - m\bar\psi_x\psi_x - a\frac r2 \psi_x \sum_\mu \frac{ 2\psi_{x} - \psi_{x+\mu} - \psi_{x-\mu} }{2a^2} \right ]
+       - m\bar\psi_x\psi_x - a\frac r2 \bar\psi_x \sum_\mu \frac{ 2\psi_{x} - \psi_{x+\mu} - \psi_{x-\mu} }{2a^2} \right ]
    :label:
 
 The parameter :math:`r` is an adjustable constant. Since the second derivative is multiplied by a,
@@ -2723,14 +2723,14 @@ This is a particularly useful form of he action because the since the derivative
    :label:
 
 These reduce the number of elements in the projected vector by a factor of two, reducing the amount of
-multiplication required to ecaluate the action and the amount data that
+multiplication required to evaluate the action and the amount data that
 would need to be communicated to other processors in a multiprocessor setup.
 
-Another standard choice is to rescale the fields by :math:`\sqrt(M)` so that the action becomes
+Another standard choice is to rescale the fields by :math:`\sqrt{M}` so that the action becomes
 
 .. math::
-   S &= a^4\sum_x  \left [\kappa \sum_\mu \bar \frac 1a \psi_x P_\mu^- \psi_{x+\mu} - \kappa \sum_\mu \bar \frac 1a \psi_x  P_\mu^+ \psi_{x-\mu} - \bar\psi_x\psi_x \right ], \\
-   \kappa &= \frac 1{2M} = \frac 1{2m+8/a}
+   S &= a^4\sum_x  \left [\kappa \sum_\mu \bar \psi_x \frac 1a \psi_x P_\mu^{-} \psi_{x+\mu} - \kappa \sum_\mu \bar \psi_x \frac 1a \psi_x  P_\mu^{+} \psi_{x-\mu} - \bar\psi_x\psi_x \right ] \\
+   \kappa &= \frac {1}{2M} = \frac {1}{2m+8/a}
    :label:
 
 From this form it is clear that at large mass, or small :math:`\kappa`, we can expand the partition function in terms of the
@@ -2917,8 +2917,8 @@ So the different indexes of a continuum fermion are actually constructed out of 
 not out of the doublers. The doublers are still necessary to ensure we have the correct number of degrees of freedom
 (or, in fact, a factor of 4 too many).
 
-**Note** that introducing gauge fields complicates the transformation. The order :math:`a` term receives a contribution
-relative to the gauge coupling. This still works in the continuum limit, since there $g\to 0$.
+**Note** that introducing gauge fields complicates the transformation. The order :math:`b` term receives a contribution
+relative to the gauge coupling. This still works in the continuum limit, since there :math:`g\to 0`.
 
 
 
@@ -2983,8 +2983,9 @@ Then the distribution of the field field :math:`\chi` is
 
 as intended.
 
-This trick also gives the initial action of the fermion field cheaply, :math:`S=\psi^\dagger \psi`. If we update a
-different field, such as the gauge field, we need to actually calculate the inverse.
+This trick also gives the initial action of the fermion field cheaply, :math:`S=\psi^\dagger \psi`. When updating other
+fields, such as the gauge field, we need to calculate the difference in the fermion action. This gives the initial action,
+but we still need to calculate the action after the update.
 
 There are several useful methods for calculating the inverse. General methods take O(N^3) computing time, but since
 the fermion matrix is very sparce other methods can be much faster. The conjugate gradient method is probably the
@@ -3023,7 +3024,7 @@ and can have additive renormalization. Nevertheless the mass is related to the c
 here. Specifically, we use the Ward identity
 
 .. math::
-   \ev{\partial_\mu \bar\psi_x \gamma_\mu \gamma_5 \tau_a \psi_x O(y)} = 2 m \ev{\bar\psi_x \gamma_\mu \gamma_5 \tau_a \psi_x O(y)}
+   \partial_\mu \ev{\bar\psi_x \gamma_\mu \gamma_5 \tau_a \psi_x O(y)} = 2 m \ev{\bar\psi_x \gamma_\mu \gamma_5 \tau_a \psi_x O(y)}
    :label:
 
 for :math:`x \neq y`. This relation is also known as the partially conserved axial current relation (PCAC) and so
@@ -3037,16 +3038,16 @@ the mass of a bound state, we calculate the correlation function of an operator 
 numbers as the intended state. For example for the scalar meson :math:`\sigma` we could use
 
 .. math::
-   O(x) = \bar\psi_x\psi_x \textrm{ (} P(x-y) = \ev{\bar\psi_x\psi_x \bar\psi_y\psi_y}.
+   O(x) = \bar\psi_x\psi_x \textrm{,  } P(x-y) = \ev{\bar\psi_x\psi_x \bar\psi_y\psi_y}.
    :label:
 
-The correlation function corresponds to the propacator
+The correlation function corresponds to the propagator
 
 .. math::
-   \ev{O(x)O(y)} = \Braketmid{0}{\hat O^\dagger(x) \hat O(y)}{0} = \Braketmid{0}{ \hat\psi^\dagger_x\hat\psi_x \hat\psi^\dagger_y\psi_y}{0}.
+   \ev{O(x)O(y)} = \Braketmid{0}{\hat O^\dagger(x) \hat O(y)}{0} = \Braketmid{0}{ \hat\psi^\dagger_x\hat\psi_x \hat\psi^\dagger_y\hat\psi_y}{0}.
    :label:
 
-The operator will first create a combination of energy eigenstates :math:`\hat\Lambda_i` with the quantum numbers
+The operator will first create a combination of energy eigenstates with the quantum numbers
 of the operator at site :math:`x`. These will then annihilate at :math:`y`. As before, we can decompose the propagator
 as
 
@@ -3072,11 +3073,45 @@ We can construct many other bound states similarly:
     :label:
 
 
- 3. Vector flavour siglet (:math:`??`) 
+ 3. Vector flavour singlet (:math:`\omega`) 
 
  .. math::
     O_\mu(x) = \bar\psi_x\gamma_\mu\psi_x.
     :label:
+
+
+ 4. Vector flavour triplet (:math:`\omega`) 
+
+ .. math::
+    O_{a,\mu}(x) = \bar\psi_x\gamma_\mu \sigma_a\psi_x.
+    :label:
+
+and so on...
+
+These operators are still written in terms of Grassmann numbers. In order to calculate the
+expectation values, we need to integrate out the fermion fields analytically.
+This is similar to the propagator calculations in the previous chapters, where we saw that 
+
+
+.. math::
+   \ev{\bar\psi_x \psi_y } &= \frac 1Z \int dU d\bar\psi d\psi \bar\psi_x \psi_y e^{-\bar\psi M(U) \psi - S_{gauge}} \\
+   &= \frac 1Z \int dU \left ( M(U)^-1 \right )_{xy} e^{- S_{gauge}}
+   :label:
+
+Now we can combine each :math:`\bar\psi` with each :math:`\psi` separately, leading to two terms:
+
+.. math::
+   \ev{\bar\psi_x \psi_y } &= \frac 1Z \int dU d\bar\psi d\psi \bar\psi_x\Gamma \psi_x \bar\psi_y\Gamma \psi_y e^{-\bar\psi M(U) \psi - S_{gauge}} \\
+   &= \frac 1Z \int dU Tr \left [ \Gamma \left ( M(U)^-1 \right )_{xy} \Gamma \left ( M(U)^-1 \right )_{yx} \right ] e^{- S_{gauge}} \\
+   &+ \frac 1Z \int dU Tr \left [ \Gamma \left ( M(U)^-1 \right )_{xx} \right ] Tr \left [ \Gamma \left ( M(U)^-1 \right )_{yy}\right ] e^{- S_{gauge}} 
+   :label:
+
+The second part is known as the **disconnected contribution** or the **disconnected diagram**. This is because the two traces
+are taken separately and are not connected by a fermion propagator. The disconnected contribution is statistically
+noisy compared to the connected part, especially at large distances. Fortunately, it is zero in for all triplet mesons.
+
+
+
 
 
 Hybrid Monte-Carlo
