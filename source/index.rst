@@ -3136,7 +3136,7 @@ This update satisfies detailed balance if
  c) the trajectory maintains the distribution of the momentum (true for hamiltonian equations of motion)
  d) and the integration errors are sufficiently symmetric.
 
-The third point results from the second as long as the step size is small, but in practice
+The last point results from the second as long as the step size is small, but in practice
 it is good to check that
 
 .. math::
