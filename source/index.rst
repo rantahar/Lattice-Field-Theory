@@ -3121,43 +3121,156 @@ a fermion field this requires inverting the fermion matrix for each update step.
 it generally takes :math:`O(N^3)` and the fermion matrix grows with :math:`V^2`. Even though the matrix is sparse and
 the conjugate gradient method quite efficient, this is still slow going.
 
-The Hybrid Monte-Carlo method updates all gauge matrices at the same time. We first run a molecular dynamics trajectory
-that conserves the action (up to some integration errors) and then accept or reject with the usual metropolis step.
+The Hybrid Monte-Carlo method updates all gauge matrices at the same time.
+It consists of 3 steps:
 
-The molecular dynamics trajectory follows classical equations of motion, with the conserved energy replaced by the action.
-Normally each field would have a momentum term in the action for each field. In order to use this method, we will add
-one in for the gauge field. As detailed above, the fermion fields can be updated more easily.
+ 1. Draw random fermion and momentum fields (momentum introduced below)
+ 2. Run a molecular dynamics trajectory, which changes all fields but conserves action up to
+    integration errors
+ 3. Accept or reject with the Metropolis propabitity
 
-The actual dynamic gauge field is the vector potential (although it is possible to formulate this in terms of the 
-SU(N) matrices, this does not avoid calculating the exponential later). For each :math:`A_{x,\mu,a}` we add a momentum
-:math:`\Pi_{x,\mu,a}`. The partition function is then 
+This update satisfies detailed balance if
 
-.. math::
-   Z = \int dU d\Pi d\bar\phi e^{S_{gauge} - \bar\phi^\dagger \frac 1{M^\dagger M}\phi + \frac 12 \sum_{x,\mu,a} \Pi_{x,\mu,a}^2}
-   :label:
+ a) the first step satisfies detailed balance (trivial if drawing form a Gaussian distribution)
+ b) the trajectory is time-reversible
+ c) and the integration errors are sufficiently symmetric.
 
-Notice that the partition dynamics of the theory do not change by the addition of the momentum field. It has no interactions
-with the other fields and adding it is equivalent to multiplying the partition function with a constant.
-
-Now find the classical equation of motion for the fields :math:`U` and :math:`\Pi`:
+The third point results from the second as long as the step size is small, but in practice
+it is good to check that
 
 .. math::
-   \partial_s U_{x,\mu,a} &= \frac{\partial S}{\partial \Pi_{x,\mu,a}} = \Pi_{x,\mu,a}\\
-   \partial_s \Pi_{x,\mu,a} &= - \frac{\partial S}{\partial U_{x,\mu,a} } 
-   = - \frac{\partial S_{gauge}}{\partial U_{x,\mu,a} } - \frac{\partial S_{fermion}}{\partial U_{x,\mu,a} }
+   \ev{e^{-\delta S}} = 1
    :label:
+
+
+Updating the gauge field with molecular dynamics
+------------------------------------------------
+
+The molecular dynamics trajectory follows classical equations of motion, with the
+conserved energy replaced by the action.
+
+The actual dynamic gauge field is the vector potential (although it is possible to formulate this
+in terms of the SU(N) matrices, this does not avoid calculating the exponential later).
+In order to run derive classical equations of motion, we first need to add a momentum field
+:math:`\Pi_{x,\mu,a}` for each :math:`A_{x,\mu,a}`.
+The partition function is then 
+
+.. math::
+   Z = \int dU d\Pi d\bar\phi e^{S_{gauge} - \bar\phi^\dagger \frac 1{M_f}\phi + \frac 12 \sum_{x,\mu,a} \Pi_{x,\mu,a}^2}
+   :label:
+
+Notice that the dynamics of the theory do not change by the addition of the momentum field.
+It has no interactions with the other fields and adding it is equivalent to multiplying the
+partition function with a constant.
+
+Now find the classical equation of motion for the vector potential :math:`A` andhe momentum
+:math:`\Pi`:
+
+.. math::
+   \partial_s A_{x,\mu,a} &= \frac{\partial S}{\partial \Pi_{x,\mu,a}} = \Pi_{x,\mu,a}\\
+   \partial_s \Pi_{x,\mu,a} &= - \frac{\partial S}{\partial A_{x,\mu,a} } 
+   = - \frac{\partial S_{gauge}}{\partial A_{x,\mu,a} } - \frac{\partial S_{fermion}}{\partial A_{x,\mu,a} }
+   :label:
+
+
+We need to integrate this equation numerically. Since this is a part of a metropolis update,
+the integration needs to be reversible. In other words, the integration  steps need to be
+symplectic. The simplest method is called the leapfrog update
+
+.. math::
+   &\textrm{1) } A_{x,\mu,a}(s+0.5\Delta) = A_{x,\mu,a}(s) + 0.5\Delta \Pi_{x,\mu,a}\\
+   &\textrm{2) } \Pi_{x,\mu,a}(s+\Delta) = \Pi_{x,\mu,a}(s) - \Delta \frac{\partial S}{\partial A_{x,\mu,a} }\\
+   &\textrm{3) } A_{x,\mu,a}(s+\Delta) = A_{x,\mu,a}(s+0.5\Delta) + 0.5\Delta \Pi_{x,\mu,a}(s+\Delta s)
+   :label:
+
+We run this update :math:`N` times to reach the the new field :math:`A_{x,\mu,a}(N\Delta)`.
+This will result in an integration error :math:`\delta S = S(N\Delta) - S(0)` of order
+:math:`O(\Delta)`.
+
+Higher order integrators are also used. Whether they are more efficient depends on the
+tradeoff between the acceptance rate, which the integration errors decrease, and the
+computational cost of additional evaluations of the derivative.
+
+The gauge update steps as written above directly update the vector potential, but the field
+we usually store is the parallel transport :math:`U_{x,\mu}`. Since the update size
+:math:`\Delta` should be small, we can use
+
+.. math::
+   U_{x,\mu}(s+0.5\Delta) &= U_{x,\mu}(s) \times e^{i 0.5\Delta \sum_a \Pi_{x,\mu,a} \lambda_a } \\
+   &\approx e^{i \sum_a \left ( A_{x,\mu,a}(s) + 0.5\Delta \Pi_{x,\mu,a} \right ) \lambda_a }
+   :label:
+
+This requires calculating the exponential on the left, but even a second order Taylor expansion
+results in errors of order :math:`O(\Delta)` in the action. We usually use a significantly
+higher order expansion to keep the matrix in the SU(N) group.
+
+
+Gauge Derivatives
+-----------------
 
 In order to calculate the derivatives of the gauge and fermion terms in the action we need the gauge derivative
 
 .. math::
-   \frac{\partial U}{\partial U_{x,\mu,a} } =
-   \frac{\partial U}{\partial U_{x,\mu,a} } 
+   \frac{\partial U_{x,\mu}}{\partial A_{x,\mu,a} } = \frac{\partial e^{i\sum_a A_{x,\mu,a} \lambda_a}}{\partial A_{x,\mu,a} }
+   = i\lambda_a e^{i\sum_a A_{x,\mu,a} \lambda_a} = i\lambda_a U_{x,\mu}
    :label:
 
 
--   The other problem with fermions, updating the gauge field
+Since the action is a real number, we can always take the real part of its trace and cycle through
+any term until :math:`U_{x,\mu}` is in front. Then
 
--   Molecular dynamics
+.. math::
+   \frac{\partial S_{gauge}}{\partial A_{x,\mu,a} } 
+   &= \beta \sum_{\nu\neq\mu} ReTr\left [ i\lambda_a U_{x,\mu} U_{x+\mu,\nu} U^\dagger_{x+\nu,\mu} U^\dagger_{x,\nu}  \right] \\
+   &- \beta \sum_{\nu\neq\mu} ReTr\left [ i\lambda_a U^\dagger_{x,\mu} U^\dagger_{x-\nu,\nu} U_{x-\nu,\mu} U_{x-\nu+\mu,\nu} \right] \\
+   &= \beta \sum_{\nu\neq\mu} ReTr\left [ i\lambda_a U_{x,\mu} U_{x+\mu,\nu} U^\dagger_{x+\nu,\mu} U^\dagger_{x,\nu}  \right] \\
+   &+ \beta \sum_{\nu\neq\mu} ReTr\left [ i\lambda_a U_{x,\mu} U^\dagger_{x-\nu+\mu,\nu} U^\dagger_{x-\nu,\mu} U_{x-\nu,\nu} \right] \\
+   &= \sum_{\nu\neq\mu} ReTr\left [ i\lambda_a  \beta \left ( U_{x,\mu} U_{x+\mu,\nu} U^\dagger_{x+\nu,\mu} U^\dagger_{x,\nu} + U_{x,\mu} U^\dagger_{x-\nu+\mu,\nu} U^\dagger_{x-\nu,\mu} U_{x-\nu,\nu} \right ) \right]
+   :label:
+
+We reorder the elements in the action so that the given matrix is on the left,
+multiply by the given generator and take the imaginary part of the trace.
+
+We also need the derivative of the fermion actions
+
+.. math::
+   \frac{\partial S_{fermion}}{\partial A_{x,\mu,a} } 
+   = \frac{\partial \chi^\dagger \frac 1{M_f} \chi}{\partial A_{x,\mu,a} } 
+   = -\chi^\dagger \frac 1{M_f} \frac{\partial M_f }{\partial A_{x,\mu,a}} \frac 1{M_f} \chi
+   :label:
+
+With staggered fermions, denoting :math:`\psi = \frac 1{M_f} \chi`, this would be
+
+.. math::
+   \frac{\partial S_{staggered}}{\partial A_{x,\mu,a} } 
+   &= ReTr\left [ i\lambda_a \eta_{x,\mu} \left ( U_{x,\mu} \frac{1}{2a} \psi_{x+\hat\mu} \psi^\dagger_x - U^\dagger_{x,\mu} \frac{1}{2a} \psi_x \psi^\dagger_{x+\hat\mu} \right) \right] \\
+   &= ReTr\left [ i\lambda_a \eta_{x,\mu} U_{x,\mu} \left ( \frac{1}{2a} \psi_{x+\hat\mu} \psi^\dagger_x + \frac{1}{2a} \psi_x \psi^\dagger_{x+\hat\mu} \right) \right]
+   :label:
+
+For Wilson fermions with two flavors
+
+.. math::
+   \frac{\partial S_{Wilson}}{\partial A_{x,\mu,a} } 
+   &= \frac{\partial \chi^\dagger \frac 1{M^\dagger M} \chi}{\partial A_{x,\mu,a} } \\
+   &= -\chi^\dagger \frac 1{M^\dagger M} \left (\frac{\partial M^\dagger }{\partial A_{x,\mu,a}}M + M^\dagger\frac{\partial M }{\partial A_{x,\mu,a}} \right ) \frac 1{M^\dagger M} \chi
+   :label:
+
+Denoting :math:`\psi = \frac 1{M^\dagger M} \chi`, and :math:`\phi = M\psi` the Wilson fermion action is
+
+.. math::
+   \frac{\partial S_{Wilson}}{\partial A_{x,\mu,a} } 
+   &= ReTr\left [ i\lambda_a \left ( U_{x,\mu} \frac{- 1+ \gamma_\mu}{2a} \psi_{x+\hat\mu} \phi^\dagger_x - U^\dagger_{x,\mu} \frac{1+\gamma_\mu}{2a} \psi_x \phi^\dagger_{x+\hat\mu} \right) \right] \\
+   &- ReTr\left [ i\lambda_a \left ( U^\dagger_{x,\mu} \frac{-1+ \gamma_\mu}{2a} \phi_x \psi^\dagger_{x+\hat\mu} - U_{x,\mu} \frac{1+\gamma_\mu}{2a} \phi_{x+\hat\mu} \psi^\dagger_x \right) \right]
+   :label:
+
+
+
+
+
+
+
+
+
 
 -   Conjugate gradient
 
