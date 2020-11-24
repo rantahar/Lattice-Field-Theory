@@ -3133,7 +3133,8 @@ This update satisfies detailed balance if
 
  a) the first step satisfies detailed balance (trivial if drawing form a Gaussian distribution)
  b) the trajectory is time-reversible
- c) and the integration errors are sufficiently symmetric.
+ c) the trajectory maintains the distribution of the momentum (true for hamiltonian equations of motion)
+ d) and the integration errors are sufficiently symmetric.
 
 The third point results from the second as long as the step size is small, but in practice
 it is good to check that
