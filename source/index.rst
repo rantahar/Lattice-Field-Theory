@@ -3152,8 +3152,10 @@ conserved energy replaced by the action.
 
 The actual dynamic gauge field is the vector potential (although it is possible to formulate this
 in terms of the SU(N) matrices, this does not avoid calculating the exponential later).
-In order to run derive classical equations of motion, we first need to add a momentum field
-:math:`\Pi_{x,\mu,a}` for each :math:`A_{x,\mu,a}`.
+Classical equations of motion conserve the energy by adjusting the field and its conjugate momentum
+in opposite directions. 
+To use this trick, we need to add momentum field 
+:math:`\Pi_{x,\mu,a}` for each vector potential :math:`A_{x,\mu,a}`.
 The partition function is then 
 
 .. math::
@@ -3164,7 +3166,7 @@ Notice that the dynamics of the theory do not change by the addition of the mome
 It has no interactions with the other fields and adding it is equivalent to multiplying the
 partition function with a constant.
 
-Now find the classical equation of motion for the vector potential :math:`A` andhe momentum
+Now find the classical equation of motion for the vector potential :math:`A` and the momentum
 :math:`\Pi`:
 
 .. math::
@@ -3270,9 +3272,5 @@ Denoting :math:`\psi = \frac 1{M^\dagger M} \chi`, and :math:`\phi = M\psi` the 
 
 
 
-
-
-
--   Conjugate gradient
 
 
