@@ -2461,7 +2461,7 @@ First, we define the derivative operator as similarly to standard numbers as pos
    \partial_\psi \psi = 1, \textrm{  } \partial_\psi \psi = 0, \textrm{  } \partial_\psi c = 0,
    :label:
 
-where :math:`\psi` and :math:`\bar\psi` are Grassman numbers and :math`c` is a complex number.
+where :math:`\psi` and :math:`\bar\psi` are Grassman numbers and :math:`c` is a complex number.
 
 The integral is defined identically,
 
