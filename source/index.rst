@@ -2416,7 +2416,7 @@ The Dirac equation in a kind of a square root of the Schrödinger equation in th
 It applies to a particle transforming in the spin :math:`1/2` representation of the Lorentz group.
 
 From the point of view of discretization, however, the significant property is that there is only one
-derivative. This will cause us some significant trouble.
+derivative. This will cause us some trouble.
 
 
 **Naive discretization**
@@ -2430,7 +2430,8 @@ In the previous sections we have introduced the discrete derivatives
 
 Plugging either the forward or the backward derivative in directly would not work, since 
 the resulting action would not be reflection invariant. This would lead to unitarity
-violations and cause significant problems.
+violations, making the theory truly problematic. And since the symmetries would be different, even in
+continuum, the continuum limit would not be correct.
 
 Instead, we can take the symmetric combination of the two,
 
